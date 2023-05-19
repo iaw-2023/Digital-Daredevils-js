@@ -1,11 +1,11 @@
 import React from 'react';
-import ListaCategorias from '../components/Categorias';
+import ListaProductos from '../components/Productos';
 
 const About = () => {
   return (
     <div>
-      <h1>categorias!</h1>
-      <ListaCategorias />
+      <h1>productos!</h1>
+      <ListaProductos />
     </div>
   );
 };
