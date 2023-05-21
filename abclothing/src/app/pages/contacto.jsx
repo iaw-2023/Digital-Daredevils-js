@@ -9,6 +9,8 @@ const ContactWrapper = styled.div`
   align-items: center;
   margin-top: 50px;
   padding: 20px;
+  color:black;
+  font-size: 20px;
 `;
 
 
@@ -16,6 +18,7 @@ const Title = styled.h1`
   font-size: 48px;
   margin-bottom: 20px;
   text-align: center;
+  color:black;
 `;
 
 
@@ -39,7 +42,7 @@ const TextArea = styled.textarea`
 
 const Button = styled.button`
   padding: 10px 20px;
-  background-color: #0077ff;
+  background-color: #000000;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -48,7 +51,7 @@ const Button = styled.button`
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    background-color: #0060cb;
+    background-color: #9C9C9C;
   }
 `;
 

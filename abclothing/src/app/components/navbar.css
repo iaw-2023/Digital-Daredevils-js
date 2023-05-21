@@ -1,11 +1,17 @@
 .navbar {
   width: 100%;
   height: 80px;
-  background-color: rgb(19, 19, 19);
+  background-color: #65665c;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 50px;
+}
+
+.logo {
+  flex: 6;
+  display: flex;
+  justify-content: center;
 }
 
 .logo a {
@@ -20,11 +26,10 @@
   transition: all 0.2s ease-in-out;
 }
 
-
 .links {
-  margin-right: 50px;
+  flex: 1;
   display: flex;
-  align-items: center;
+  justify-content: flex-start;
 }
 
 .links a {
@@ -36,11 +41,36 @@
 }
 
 .links a:hover {
-  color: dodgerblue; 
+  color: #9C9C9C; 
   transform: scale(1.1);
 }
 
 .active-link {
+  color: #9C9C9C !important; 
+  transform: scale(1.1);
+}
+
+
+.carrito {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.carrito a {
+  text-decoration: none;
+  color: white;
+  margin-left: 20px;
+  font-size: 25px;
+  transition: all 0.2s ease-in-out;
+}
+
+.carrito a:hover {
+  color: dodgerblue; 
+  transform: scale(1.1);
+}
+
+.active-carrito {
   color: dodgerblue !important; 
   transform: scale(1.1);
 }
@@ -51,9 +81,7 @@
 }
 
 #NavTitle {
-    text-align: center;
-    font-size: 35px;
-    background-image: linear-gradient(to right, #00ffcc, #0066ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  text-align: center;
+  font-size: 40px;
+  color: black;
 }
