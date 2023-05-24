@@ -12,15 +12,17 @@ export const Shop = () => {
         <h1>HighLights</h1>
       </div>
 
-      <div className="productos">
+      
         {loading ? (
-          <p>Loading...</p>
+          <div className="loading">Loading...</div>
         ) : (
-          Object.values(productos).map((product) => (
-            <Producto data={product} key={product.id} />
-          ))
+          <div className="productos">
+            {Object.values(productos).map((product) => (
+              <Producto data={product} key={product.id} />
+            ))}
+          </div>
         )}
       </div>
-    </div>
+    
   );
 };
