@@ -3,6 +3,8 @@ import { ShopContext } from "../../context/shop-context";
 import { ItemCarrito } from "./itemCarrito";
 import { useNavigate } from "react-router-dom";
 import "./carrito.css";
+import axios from 'axios';
+import { PRODUCTOS_API_ENDPOINT } from '../../ApiConstants';
 
 export const Carrito = () => {
   const { itemsCarrito, getTotalCarrito, checkout } = useContext(ShopContext);
@@ -12,24 +14,20 @@ export const Carrito = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulating an asynchronous operation to fetch the productos data
-    setTimeout(() => {
-      // Assuming your LISTAPRODUCTOS is fetched asynchronously
-      const fetchedProductos = getProductsFromServer();
-      setProductos(fetchedProductos);
-      setIsLoading(false);
-    }, 2000);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(PRODUCTOS_API_ENDPOINT);
+        setProductos(response.data.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching productos:', error);
+        setIsLoading(false);
+      }
+    };
+  
+    fetchData();
   }, []);
-
-  const getProductsFromServer = () => {
-    // Replace this with your logic to fetch the productos data from the server
-    return Promise.resolve([
-      // Example data
-      { id: 1, name: "Product 1" },
-      { id: 2, name: "Product 2" },
-      { id: 3, name: "Product 3" },
-    ]);
-  };
+  
 
   return (
     <div className="carrito">

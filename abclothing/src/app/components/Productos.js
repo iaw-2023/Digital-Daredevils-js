@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
-const PRODUCTOS_API_ENDPOINT = 'https://digital-daredevils-laravel-digitaldaredevils.vercel.app/restApi/productos/';
+import { PRODUCTOS_API_ENDPOINT } from '../ApiConstants';
 
 export const LISTAPRODUCTOS = () => {
   const [productos, setProductos] = useState([]);
