@@ -18,7 +18,6 @@ export const ProductDetails = () => {
     if (!producto) {
       return <div>Producto no encontrado</div>;
     }
-    console.log(producto);
     // If the product exists, render its details
     const { modelo, marca, imagen_ruta, precio, talle } = producto;
     return (
