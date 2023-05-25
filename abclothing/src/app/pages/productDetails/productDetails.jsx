@@ -10,8 +10,10 @@ import "./productDetails.css";
 export const ProductDetails = () => {
   const { id } = useParams();
   const { agregarAlCarrito, itemsCarrito } = useContext(ShopContext);
-
-  const cantidadItemsCarrito = itemsCarrito[id];
+  let cantidadItemsCarrito = 0;
+  if (itemsCarrito){
+    cantidadItemsCarrito = itemsCarrito[id];
+  }
   const { loading, producto } = PRODUCTOBYID(id);
   
   if (loading) {
