@@ -4,8 +4,11 @@ import { Link, useLocation } from "react-router-dom";
 import "./RigthNav.css";
 
 const Ul = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-flow: row nowrap;
   display: none;
-  @media (max-width: 768px) {
+  @media (max-width: 799px) {
     display: flex;
     align-items: center;
     flex-flow: column nowrap;
