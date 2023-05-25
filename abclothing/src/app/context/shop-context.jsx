@@ -26,7 +26,7 @@ export const ShopContextProvider = (props) => {
 
   useEffect(() => {
     const fetchItemsCarrito = async () => {
-      const carritoDefault = await getCarritoDefault();
+      const carritoDefault = getCarritoDefault();
       setItemsCarrito(carritoDefault);
       setLoading(false);
     };
@@ -40,15 +40,8 @@ export const ShopContextProvider = (props) => {
     for (const item in itemsCarrito) {
       if (itemsCarrito[item] > 0) {
         const { loadingProductoById, infoItem } = PRODUCTOBYID(parseInt(item));
-
-        if (loadingProductoById) {
-          console.log("LOADING PRODUCTOBYID en shop-context");
-        }
-        else {
-          console.log('Respuesta de la API en shop-context:', infoItem);
-          if (infoItem && infoItem.precio) {
-            cantidadTotal += itemsCarrito[item] * infoItem.precio;
-          }
+        if (!loadingProductoById && infoItem) {
+          cantidadTotal += itemsCarrito[item] * infoItem.precio;
         }
       }
     }
@@ -77,7 +70,7 @@ export const ShopContextProvider = (props) => {
   };
 
   const contextValue = {
-    itemsCarrito,
+    itemsCarrito, 
     agregarAlCarrito,
     actualizarCantidadItemsCarrito,
     quitarDelCarrito,

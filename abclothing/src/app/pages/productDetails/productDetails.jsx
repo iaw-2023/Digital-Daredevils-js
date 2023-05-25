@@ -14,8 +14,8 @@ export const ProductDetails = () => {
   if (itemsCarrito){
     cantidadItemsCarrito = itemsCarrito[id];
   }
+
   const { loading, producto } = PRODUCTOBYID(id);
-  
   if (loading) {
     return <p>Loading in productDetails.jsx...</p>;
   }
