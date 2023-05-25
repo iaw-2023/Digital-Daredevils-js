@@ -39,7 +39,7 @@ export const Carrito = () => {
       ) : (
         <div className="carrito">
           {productos.map((producto) => {
-            if (itemsCarrito[producto.id] !== 0) {
+            if (itemsCarrito && itemsCarrito[producto.id] !== 0) {
               return <ItemCarrito data={producto} key={producto.id} />;
             }
           })}

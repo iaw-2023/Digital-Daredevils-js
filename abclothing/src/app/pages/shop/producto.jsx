@@ -5,7 +5,10 @@ import { ShopContext } from "../../context/shop-context";
 export const Producto = (props) => {
   const { id, modelo, precio, imagen_ruta } = props.data;
   const { agregarAlCarrito, itemsCarrito } = useContext(ShopContext);
-  const cantidadItemsCarrito = itemsCarrito[id];
+  let cantidadItemsCarrito = 0;
+  if (itemsCarrito) {
+    cantidadItemsCarrito = itemsCarrito[id];
+  }
 
   return (
     <div className="producto">

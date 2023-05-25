@@ -14,7 +14,7 @@ export const Shop = () => {
 
       
         {loading ? (
-          <div className="loading">Loading...</div>
+          <div className="loading">Loading in shop.jsx...</div>
         ) : (
           <div className="productos">
             {Object.values(productos).map((product) => (

@@ -30,3 +30,30 @@ export const LISTAPRODUCTOS = () => {
     productos
   };
 };
+
+export const PRODUCTOBYID = (id) => {
+  const [producto, setProducto] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(PRODUCTOS_API_ENDPOINT + id);
+        if (response.data) {
+          setProducto(response.data);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error('Error al obtener información del producto:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  return {
+    loading,
+    producto
+  };
+};
