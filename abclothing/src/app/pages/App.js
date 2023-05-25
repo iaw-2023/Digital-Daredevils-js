@@ -19,7 +19,7 @@ function App(){
             <Route path="/" element={<Shop />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/carrito" element={<Carrito />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/productos/:id" element={<ProductDetails />} />
           </Routes>
           <footer>
             <p>Created by Digital Daredevils</p>
