@@ -8,15 +8,8 @@
   padding: 0 50px;
 }
 
-.logo {
-  flex: 6;
-  display: flex;
-  justify-content: center;
-}
-
 .logo a {
   text-decoration: none;
-  color: white;
   font-size: 32px;
   font-weight: bold;
 }
@@ -25,11 +18,10 @@
   transform: scale(1.05);
   transition: all 0.2s ease-in-out;
 }
-
-.links {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
+.links{
+  @media(max-width: 799px){
+    display: none;
+  }
 }
 
 .links a {
@@ -38,6 +30,7 @@
   margin-left: 20px;
   font-size: 25px;
   transition: all 0.2s ease-in-out;
+  
 }
 
 .links a:hover {
@@ -50,28 +43,20 @@
   transform: scale(1.1);
 }
 
-
-.carrito {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-
 .carrito a {
   text-decoration: none;
   color: white;
-  margin-left: 20px;
   font-size: 25px;
   transition: all 0.2s ease-in-out;
 }
 
 .carrito a:hover {
-  color: dodgerblue; 
+  color: #9C9C9C; 
   transform: scale(1.1);
 }
 
 .active-carrito {
-  color: dodgerblue !important; 
+  color: #9C9C9C !important; 
   transform: scale(1.1);
 }
 
@@ -84,4 +69,7 @@
   text-align: center;
   font-size: 40px;
   color: black;
+  @media(max-width: 799px){
+    font-size:30px;
+  }
 }
