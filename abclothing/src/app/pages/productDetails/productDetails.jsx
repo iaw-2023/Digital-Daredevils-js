@@ -9,9 +9,8 @@ export const ProductDetails = () => {
   const { agregarAlCarrito, itemsCarrito } = useContext(ShopContext);
 
   const cantidadItemsCarrito = itemsCarrito[id];
-  console.log("juan");
-  const { loading, producto } = PRODUCTOBYID(producto => producto.id === Number(id));
-  console.log(producto);
+  const { loading, producto } = PRODUCTOBYID(id);
+  
   if (loading) {
     return <p>Loading in productDetails.jsx...</p>;
   }
