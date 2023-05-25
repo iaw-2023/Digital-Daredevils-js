@@ -1,7 +1,10 @@
+"use client";
+
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../../context/shop-context";
 import { PRODUCTOBYID } from '../../components/Productos';
+import Image from 'next/image';
 import "./productDetails.css";
 
 export const ProductDetails = () => {
@@ -23,7 +26,7 @@ export const ProductDetails = () => {
     return (
       <div className="product-container">
         <div className="product-image-container">
-          <img src={imagen_ruta} alt={modelo} className="product-image" />
+          <Image src={imagen_ruta} alt={modelo} className="product-image" />
         </div>
         <div className="product-details-container">
           <h1 className="product-name">{modelo}</h1>

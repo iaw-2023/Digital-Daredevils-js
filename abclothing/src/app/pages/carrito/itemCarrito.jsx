@@ -1,5 +1,9 @@
+"use client";
+
 import React, { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
+import Image from 'next/image';
+
 
 export const ItemCarrito = (props) => {
   const { id, modelo, talle, precio, imagen_ruta } = props.data;
@@ -8,7 +12,12 @@ export const ItemCarrito = (props) => {
 
   return (
     <div className="itemCarrito">
-      <img src={imagen_ruta} />
+      <Image
+              src={imagen_ruta}
+              alt={modelo}
+              width={350}
+              height={420}
+      />
       <div className="description">
         <p>
           <b>{modelo}</b>

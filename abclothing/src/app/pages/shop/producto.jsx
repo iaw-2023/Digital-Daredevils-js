@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ShopContext } from "../../context/shop-context";
+import Image from 'next/image';
 
 export const Producto = (props) => {
   const { id, modelo, precio, imagen_ruta } = props.data;
@@ -13,7 +16,12 @@ export const Producto = (props) => {
   return (
     <div className="producto">
       <Link to={`/productos/${id}`} className="product-link">
-        <img src={imagen_ruta} />
+        <Image
+              src={imagen_ruta}
+              alt={modelo}
+              width={350}
+              height={420}
+        />
         <div className="description">
           <p>
             <b>{modelo}</b>

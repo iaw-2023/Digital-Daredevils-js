@@ -8,6 +8,7 @@ import { Contacto } from "./contacto";
 import { Carrito } from "./carrito/carrito";
 import { ProductDetails } from "./productDetails/productDetails";
 import { ShopContextProvider } from "../context/shop-context";
+import Image from 'next/image';
 
 function App(){
   return (
@@ -24,7 +25,13 @@ function App(){
           <footer>
             <p>Created by Digital Daredevils</p>
             <a href="https://github.com/iaw-2023/Digital-Daredevils-js/">
-            <img className="github-logo" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub logo" />
+            <Image
+              src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+              alt="GitHub logo"
+              className="github-logo"
+              width={500}
+              height={500}
+            />
             </a>
           </footer>
         </Router>

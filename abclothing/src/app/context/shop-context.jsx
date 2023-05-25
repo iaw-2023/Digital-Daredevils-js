@@ -40,6 +40,7 @@ export const ShopContextProvider = (props) => {
     for (const item in itemsCarrito) {
       if (itemsCarrito[item] > 0) {
         const { loadingProductoById, infoItem } = PRODUCTOBYID(parseInt(item));
+
         if (loadingProductoById) {
           console.log("LOADING PRODUCTOBYID en shop-context");
         }
