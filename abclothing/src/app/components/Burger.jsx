@@ -4,20 +4,23 @@ import RightNav from './RightNav';
 
 const StyledBurger = styled.div`
   
+width: 2rem;
+height: 2rem;
+position: fixed;
+top: 27px;
+right: 20px;
+z-index: 20;
   display: none;
 
   @media (max-width: 799px) {
-    width: 2rem;
-    height: 2rem;
-    position: fixed;
-    align-items: center;
-    right: 20px;
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
+    
   }
 
   div {
+    
     width: 2rem;
     height: 0.25rem;
     background-color: ${({ open }) => open ? '#ccc' : '#333'};
@@ -39,6 +42,7 @@ const StyledBurger = styled.div`
     }
   }
 `;
+
 
 const Burger = () => {
   const [open, setOpen] = useState(false)
