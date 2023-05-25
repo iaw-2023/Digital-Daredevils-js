@@ -26,7 +26,13 @@ export const ProductDetails = () => {
     return (
       <div className="product-container">
         <div className="product-image-container">
-          <Image src={imagen_ruta} alt={modelo} className="product-image" />
+          <Image
+              src={imagen_ruta}
+              alt={modelo}
+              className="product-image"
+              width={350}
+              height={420}
+          />
         </div>
         <div className="product-details-container">
           <h1 className="product-name">{modelo}</h1>
