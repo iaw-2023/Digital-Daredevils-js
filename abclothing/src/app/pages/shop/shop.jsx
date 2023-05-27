@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { LISTAPRODUCTOS } from "../../components/Productos";
 import { Producto } from "./producto";
 import "./shop.css";
-import { PRODUCTOS_API_ENDPOINT} from "../../ApiConstants";
+import { PRODUCTOS_API_ENDPOINT } from "../../ApiConstants";
 
 export const Shop = () => {
   const [productos, setProductos] = useState(null);
@@ -10,19 +10,14 @@ export const Shop = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  const [nextPageUrl, setNextPageUrl] = useState(null);
-  const [prevPageUrl, setPrevPageUrl] = useState(null);
 
   useEffect(() => {
     const fetchProductos = async () => {
       try {
         setLoading(true);
-        const response = await LISTAPRODUCTOS();
+        const response = await LISTAPRODUCTOS(currentPage);
         setProductos(response.data);
-        setCurrentPage(response.current_page);
         setLastPage(response.last_page);
-        setNextPageUrl(response.next_page_url);
-        setPrevPageUrl(response.prev_page_url);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -31,23 +26,73 @@ export const Shop = () => {
     };
 
     fetchProductos();
-  }, []);
+  }, [currentPage]);
+
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const renderPageLinks = () => {
     const pageLinks = [];
-    for (let i = 1; i <= lastPage; i++) {
+    const pageRange = 2; // Number of pages to show before and after the current page
+    const totalPages = lastPage;
+  
+    // Calculate the starting and ending page numbers to display
+    let startPage = Math.max(currentPage - pageRange, 1);
+    let endPage = Math.min(currentPage + pageRange, totalPages);
+  
+    // Add First Page link
+    if (startPage > 1) {
       pageLinks.push(
-        <a
-          key={i}
-          href={`${PRODUCTOS_API_ENDPOINT}?page=${i}`}
-          className={currentPage === i ? "active" : ""}
-        >
+        <a key={1} href="#" onClick={() => handlePageClick(1)}>
+          1
+        </a>
+      );
+      if (startPage > 2) {
+        pageLinks.push(<span key="ellipsis-start">... </span>);
+      }
+    }
+  
+    // Add page links before the current page
+    for (let i = startPage; i < currentPage; i++) {
+      pageLinks.push(
+        <a key={i} href="#" onClick={() => handlePageClick(i)}>
           {i}
         </a>
       );
     }
+  
+    // Add current page link
+    pageLinks.push(
+      <a key={currentPage} href="#" onClick={() => handlePageClick(currentPage)} className="active">
+        {currentPage}
+      </a>
+    );
+  
+    // Add page links after the current page
+    for (let i = currentPage + 1; i <= endPage; i++) {
+      pageLinks.push(
+        <a key={i} href="#" onClick={() => handlePageClick(i)}>
+          {i}
+        </a>
+      );
+    }
+  
+    // Add Last Page link
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        pageLinks.push(<span key="ellipsis-end">...</span>);
+      }
+      pageLinks.push(
+        <a key={totalPages} href="#" onClick={() => handlePageClick(totalPages)}>
+          {totalPages}
+        </a>
+      );
+    }
+  
     return pageLinks;
   };
+  
 
   return (
     <div className="shop">

@@ -2,8 +2,8 @@
 
 import { PRODUCTOS_API_ENDPOINT } from '../ApiConstants';
 
-export async function LISTAPRODUCTOS() {
-  const response = await fetch(PRODUCTOS_API_ENDPOINT);
+export async function LISTAPRODUCTOS(page) {
+  const response = await fetch(PRODUCTOS_API_ENDPOINT + "?page=" + page);
   return response.json();
 }
 
