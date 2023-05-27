@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ShopContext } from "../../context/shop-context";
 import Image from 'next/image';
 
 export const Producto = (props) => {
   const { id, modelo, precio, imagen_ruta } = props.data;
-  const { agregarAlCarrito, itemsCarrito } = useContext(ShopContext);
+  const { loadingCarrito, agregarAlCarrito, itemsCarrito } = useContext(ShopContext);
   let cantidadItemsCarrito = 0;
-  if (itemsCarrito) {
+
+  if (!loadingCarrito && itemsCarrito !== undefined) {
     cantidadItemsCarrito = itemsCarrito[id];
   }
 

@@ -1,47 +1,44 @@
 "use client";
+
 import { createContext, useState, useEffect } from "react";
 import { LISTAPRODUCTOS } from "../components/Productos";
 import { PRODUCTOBYID } from "../components/Productos";
 
 export const ShopContext = createContext(null);
 
-const getCarritoDefault = () => {
-  const { loading, productos } = LISTAPRODUCTOS();
-  const carrito = {};
-
-  if (loading) {
-    console.log("cargando en carritoDefault");
-  }
-  else {
-    for (let i = 1; i < productos.length + 1; i++) {
-      carrito[i] = 0;
-    }
-  }
-  return carrito;
-};
-
 export const ShopContextProvider = (props) => {
-  const [itemsCarrito, setItemsCarrito] = useState(null);
-  const [loading, setLoading] = useState(true);
-
+  const [loadingCarrito, setLoadingCarrito] = useState(true);
+  const [itemsCarrito, setItemsCarrito] = useState({});
+  const carrito = {};
   useEffect(() => {
-    const fetchItemsCarrito = async () => {
-      const carritoDefault = getCarritoDefault();
-      setItemsCarrito(carritoDefault);
-      setLoading(false);
+    const fetchProductos = async () => {
+      try {
+        setLoadingCarrito(true);
+        const response = await LISTAPRODUCTOS();
+        const productos = response.data;
+        for (let i = 1; i <= productos.length + 1; i++) {
+          carrito[i] = 0;
+        }
+        setItemsCarrito(carrito);
+        setLoadingCarrito(false);
+      } catch (error) {
+        setLoadingCarrito(false);
+        console.error(error);
+      }
     };
 
-    fetchItemsCarrito();
+    fetchProductos();
   }, []);
-
-  const getTotalCarrito = () => {
+  
+  const getTotalCarrito = async () => {
     let cantidadTotal = 0;
-
-    for (const item in itemsCarrito) {
-      if (itemsCarrito[item] > 0) {
-        const { loadingProductoById, infoItem } = PRODUCTOBYID(parseInt(item));
-        if (!loadingProductoById && infoItem) {
-          cantidadTotal += itemsCarrito[item] * infoItem.precio;
+    if (!loadingCarrito && itemsCarrito !== undefined){
+      for (const item in itemsCarrito) {
+        if (itemsCarrito[item] > 0) {
+          const producto = await PRODUCTOBYID(parseInt(item));
+          if (producto) {
+            cantidadTotal += itemsCarrito[item] * producto.precio;
+          }
         }
       }
     }
@@ -49,28 +46,33 @@ export const ShopContextProvider = (props) => {
   };
 
   const agregarAlCarrito = (itemId) => {
-    if (itemsCarrito){
+    if (!loadingCarrito && itemsCarrito !== undefined){
       setItemsCarrito((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-    }
-    else {
-      setItemsCarrito((prev) => ({ ...prev, [itemId]: 1 }));
     }
   };
 
   const quitarDelCarrito = (itemId) => {
-    setItemsCarrito((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    if (!loadingCarrito && itemsCarrito !== undefined){
+      setItemsCarrito((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    }
   };
 
   const actualizarCantidadItemsCarrito = (nuevaCantidad, itemId) => {
-    setItemsCarrito((prev) => ({ ...prev, [itemId]: nuevaCantidad }));
+    if (!loadingCarrito && itemsCarrito !== undefined){
+      setItemsCarrito((prev) => ({ ...prev, [itemId]: nuevaCantidad }));
+    }
   };
 
   const checkout = () => {
-    setItemsCarrito(getCarritoDefault());
+    if (!loadingCarrito && itemsCarrito !== undefined){
+      // TODO:
+      //setItemsCarrito(itemsCarrito);
+    }
   };
 
   const contextValue = {
-    itemsCarrito, 
+    itemsCarrito,
+    loadingCarrito,
     agregarAlCarrito,
     actualizarCantidadItemsCarrito,
     quitarDelCarrito,

@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+"use client";
+
+import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../../context/shop-context";
 import { ItemCarrito } from "./itemCarrito";
 import { useNavigate } from "react-router-dom";
@@ -6,12 +8,37 @@ import { LISTAPRODUCTOS } from '../../components/Productos';
 import "./carrito.css";
 
 export const Carrito = () => {
-  const { itemsCarrito, getTotalCarrito, checkout } = useContext(ShopContext);
-  const totalCarrito = getTotalCarrito();
+  const { loadingCarrito, itemsCarrito, getTotalCarrito, checkout } = useContext(ShopContext);
   const navigate = useNavigate();
 
-  const { loading, productos } = LISTAPRODUCTOS();
-  if (loading) {
+  const [productos, setProductos] = useState(null);
+  const [productosLoading, setProductosLoading] = useState(true);
+  const [totalCarrito, setTotalCarrito] = useState(0); // Initialize with 0
+  const [totalCarritoLoading, setTotalCarritoLoading] = useState(true); // New loading state
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setProductosLoading(true);
+        const response = await LISTAPRODUCTOS();
+        setProductos(response.data);
+        setProductosLoading(false);
+
+        setTotalCarritoLoading(true);
+        const total = await getTotalCarrito();
+        setTotalCarrito(total);
+        setTotalCarritoLoading(false);
+      } catch (error) {
+        setProductosLoading(false);
+        setTotalCarritoLoading(false);
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []); 
+
+  if (productosLoading || totalCarritoLoading) {
     return <h1>Loading...</h1>;
   }
   else {
@@ -21,12 +48,12 @@ export const Carrito = () => {
           <h1>Prendas en el carrito</h1>
         </div>
           <div className="carrito">
-            {productos.map((producto) => {
-              if (itemsCarrito && itemsCarrito[producto.id] !== 0) {
-                console.log("item actual: ", producto.id, ", cantidad: ", itemsCarrito[producto.id]);
-                return <ItemCarrito data={producto} key={producto.id} />;
-              }
-            })}
+            {!loadingCarrito && itemsCarrito !== undefined ?
+              productos.map((producto) => {
+                if (itemsCarrito[producto.id] != 0) {
+                  return <ItemCarrito data={producto} key={producto.id} />;
+                }
+            }) : null}
           </div>
 
         {totalCarrito > 0 ? (

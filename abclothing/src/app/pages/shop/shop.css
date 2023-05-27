@@ -85,3 +85,30 @@
     text-decoration: none;
     
   }
+
+  .pageLinks {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .pageLinks a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-right: 4px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pageLinks a.active {
+    background-color: #333;
+    color: #fff;
+  }
+
+  .shopContent {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+  }

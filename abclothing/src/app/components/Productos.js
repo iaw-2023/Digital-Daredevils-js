@@ -1,59 +1,13 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { PRODUCTOS_API_ENDPOINT } from '../ApiConstants';
 
-export const LISTAPRODUCTOS = () => {
-  const [productos, setProductos] = useState([]);
-  const [loading, setLoading] = useState(true);
+export async function LISTAPRODUCTOS() {
+  const response = await fetch(PRODUCTOS_API_ENDPOINT);
+  return response.json();
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(PRODUCTOS_API_ENDPOINT);
-        if (response.data && response.data.data) {
-          setProductos(response.data.data);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.error('Error al obtener información del producto:', error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return {
-    loading,
-    productos
-  };
-};
-
-export const PRODUCTOBYID = (id) => {
-  const [producto, setProducto] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(PRODUCTOS_API_ENDPOINT + id);
-        if (response.data) {
-          setProducto(response.data);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.error('Error al obtener información del producto:', error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [id]);
-
-  return {
-    loading,
-    producto
-  };
-};
+export async function PRODUCTOBYID(id) {
+  const response = await fetch(PRODUCTOS_API_ENDPOINT + "/" + id);
+  return response.json();
+}

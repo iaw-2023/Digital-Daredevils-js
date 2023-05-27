@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../../context/shop-context";
 import { PRODUCTOBYID } from '../../components/Productos';
@@ -9,13 +9,35 @@ import "./productDetails.css";
 
 export const ProductDetails = () => {
   const { id } = useParams();
-  const { agregarAlCarrito, itemsCarrito } = useContext(ShopContext);
+  const { loadingCarrito, agregarAlCarrito, itemsCarrito } = useContext(ShopContext);
+  
+  const [producto, setProducto] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        setLoading(true);
+        const response = await PRODUCTOBYID(id);
+        setProducto(response);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.error(error);
+      }
+    };
+
+    fetchProductos();
+  }, []);
+
+
   let cantidadItemsCarrito = 0;
-  if (itemsCarrito){
+
+  if (!loadingCarrito && itemsCarrito !== undefined){
     cantidadItemsCarrito = itemsCarrito[id];
   }
-
-  const { loading, producto } = PRODUCTOBYID(id);
+  
   if (loading) {
     return <p>Loading in productDetails.jsx...</p>;
   }
