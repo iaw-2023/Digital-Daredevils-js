@@ -41,6 +41,12 @@
   padding: 0 20px;
   overflow-wrap: break-word;
 }
+.itemCarrito:hover {
+  transform: scale(1.02);
+  transition: 0.2s ease-in;
+  cursor: pointer;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4); /* Agregar sombra al hacer hover */
+}
 
 .contador {
   display: flex;
