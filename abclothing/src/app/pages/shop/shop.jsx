@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { LISTAPRODUCTOS } from "../../components/Productos";
 import { Producto } from "./producto";
 import "./shop.css";
-import { PRODUCTOS_API_ENDPOINT } from "../../ApiConstants";
 
 export const Shop = () => {
   const [productos, setProductos] = useState(null);

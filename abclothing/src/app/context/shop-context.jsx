@@ -1,12 +1,15 @@
 "use client";
 
 import { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { LISTAPRODUCTOS } from "../components/Productos";
 import { PRODUCTOBYID } from "../components/Productos";
+import { GENERARPEDIDO } from "../components/Pedidos";
 
 export const ShopContext = createContext(null);
 
 export const ShopContextProvider = (props) => {
+  const navigate = useNavigate();
   const [loadingCarrito, setLoadingCarrito] = useState(true);
   const [itemsCarrito, setItemsCarrito] = useState({});
   const carrito = {};
@@ -63,11 +66,33 @@ export const ShopContextProvider = (props) => {
     }
   };
 
-  const checkout = () => {
-    if (!loadingCarrito && itemsCarrito !== undefined){
-      // TODO:
-      //setItemsCarrito(itemsCarrito);
+  const checkout = async () => {
+    if (!loadingCarrito && itemsCarrito !== undefined) {
+      const pedidoRequest = {
+        cliente: "juancito@gmail.com",
+        fecha: new Date().toISOString(),
+        productos: Object.entries(itemsCarrito)
+          .filter(([itemId, quantity]) => quantity > 0)
+          .map(([itemId, quantity]) => ({ id: parseInt(itemId), cantidad: quantity })),
+      };
+      try {
+        const pedidoResponse = await GENERARPEDIDO(pedidoRequest);
+        resetCart();
+        navigate("/");
+        // agregar feedback alert pedido creado (toast? :D)
+      } catch (error) {
+        console.error("Error creating pedido:", error.message);
+        // agregar feedback alert pedido fallido (toast? :D)
+      }
     }
+  };
+
+  const resetCart = () => {
+    const nuevoCarrito = Object.assign({}, itemsCarrito);
+    for (const item in itemsCarrito) {
+      nuevoCarrito[item] = 0;
+    }
+    setItemsCarrito(nuevoCarrito);
   };
 
   const contextValue = {

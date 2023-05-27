@@ -13,8 +13,8 @@ import Image from 'next/image';
 function App(){
   return (
     <div className="App">
-      <ShopContextProvider>
-        <Router>
+      <Router>
+        <ShopContextProvider>
           <Navbar />
           <Routes>
             <Route path="/" element={<Shop />} />
@@ -34,8 +34,8 @@ function App(){
             />
             </a>
           </footer>
-        </Router>
-      </ShopContextProvider>
+        </ShopContextProvider>
+      </Router>
     </div>
   );
 }
