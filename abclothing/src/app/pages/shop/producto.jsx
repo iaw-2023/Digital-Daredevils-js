@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ShopContext } from "../../context/shop-context";
 import Image from 'next/image';
 
 export const Producto = (props) => {
-  const { id, modelo, precio, imagen_ruta } = props.data;
+  const { id, modelo, precio, talle, imagen_ruta } = props.data;
   const { loadingCarrito, agregarAlCarrito, itemsCarrito } = useContext(ShopContext);
   let cantidadItemsCarrito = 0;
 
@@ -27,7 +27,8 @@ export const Producto = (props) => {
           <p>
             <b>{modelo}</b>
           </p>
-          <p> ${precio}</p>
+          <p><b>Precio:</b> ${precio}</p>
+          <p><b>Talle:</b> {talle}</p>
         </div>
       </Link>
       <button className="agregarAlCarritoBttn" onClick={() => agregarAlCarrito(id)}>

@@ -1,22 +1,27 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { LISTAPRODUCTOS } from "../../components/Productos";
+import { PRODUCTOSBYQUERY } from "../../components/Productos";
 import { Producto } from "./producto";
+import { useLocation } from "react-router-dom";
 import "./shop.css";
 
-export const Shop = () => {
+export const ShopSearch = () => {
   const [productos, setProductos] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
 
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get("query");
+
   useEffect(() => {
     const fetchProductos = async () => {
       try {
         setLoading(true);
-        const response = await LISTAPRODUCTOS(currentPage);
+        const response = await PRODUCTOSBYQUERY(searchQuery);
         setProductos(response.data);
         setLastPage(response.last_page);
         setLoading(false);
@@ -27,7 +32,7 @@ export const Shop = () => {
     };
 
     fetchProductos();
-  }, [currentPage]);
+  }, [currentPage, searchQuery]);
 
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -103,12 +108,16 @@ export const Shop = () => {
       ) : (
         <div className="shopContent">
           <div className="shopTitle">
-            <h1>Highlights</h1>
+            <h1>Resultados para '{searchQuery}'</h1>
           </div>
           <div className="productos">
-            {Object.values(productos).map((product) => (
-              <Producto data={product} key={product.id} />
-            ))}
+            {Object.values(productos).length === 0 ? (
+              <h1>No se encontraron productos para su búsqueda.</h1>
+            ) : (
+              Object.values(productos).map((product) => (
+                <Producto data={product} key={product.id} />
+              ))
+            )}
           </div>
         </div>
       )}

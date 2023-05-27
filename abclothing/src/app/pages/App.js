@@ -8,7 +8,7 @@ import { Contacto } from "./contacto";
 import { Carrito } from "./carrito/carrito";
 import { ProductDetails } from "./productDetails/productDetails";
 import { ShopContextProvider } from "../context/shop-context";
-import Image from 'next/image';
+import { ShopSearch } from "./shop/shopSearch";
 
 function App(){
   return (
@@ -18,6 +18,7 @@ function App(){
           <Navbar />
           <Routes>
             <Route path="/" element={<Shop />} />
+            <Route path="/shopSearch" element={<ShopSearch />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/carrito" element={<Carrito />} />
             <Route path="/productos/:id" element={<ProductDetails />} />

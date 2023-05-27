@@ -48,6 +48,10 @@
     font-size: 15px;
   }
   
+  .producto .description p {
+    margin: 4px 0;
+  }  
+  
   .producto:hover {
     transform: scale(1.05);
     transition: 0.2s ease-in;
