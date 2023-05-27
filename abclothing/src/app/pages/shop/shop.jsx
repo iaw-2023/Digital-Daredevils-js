@@ -95,13 +95,14 @@ export const Shop = () => {
 
   return (
     <div className="shop">
-      <div className="shopTitle">
-        <h1>HighLights</h1>
-      </div>
+      
       {loading ? (
-        <div className="loading">Loading...</div>
+        <div className="loading-shop">Loading...</div>
       ) : (
         <div className="shopContent">
+          <div className="shopTitle">
+            <h1>HighLights</h1>
+          </div>
           <div className="productos">
             {Object.values(productos).map((product) => (
               <Producto data={product} key={product.id} />

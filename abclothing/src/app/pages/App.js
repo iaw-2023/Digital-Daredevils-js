@@ -23,15 +23,8 @@ function App(){
             <Route path="/productos/:id" element={<ProductDetails />} />
           </Routes>
           <footer>
-            <p>Created by Digital Daredevils</p>
             <a href="https://github.com/iaw-2023/Digital-Daredevils-js/">
-            <Image
-              src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-              alt="GitHub logo"
-              className="github-logo"
-              width={500}
-              height={500}
-            />
+            <p>Created by Digital Daredevils</p>
             </a>
           </footer>
         </ShopContextProvider>

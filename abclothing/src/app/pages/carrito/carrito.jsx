@@ -39,15 +39,21 @@ export const Carrito = () => {
   }, []); 
 
   if (productosLoading || totalCarritoLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="carrito">
+        <div className="loading-carrito">
+          Loading...
+        </div>
+      </div>  
+      );
   }
   else {
     return (
       <div className="carrito">
-        <div>
-          <h1>Prendas en el carrito</h1>
-        </div>
           <div className="carrito">
+          <div className="title">
+            Prendas en el carrito
+          </div>
             {!loadingCarrito && itemsCarrito !== undefined ?
               productos.map((producto) => {
                 if (itemsCarrito[producto.id] != 0) {

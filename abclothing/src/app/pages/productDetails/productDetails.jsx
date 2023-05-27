@@ -49,26 +49,28 @@ export const ProductDetails = () => {
     const { modelo, marca, imagen_ruta, precio, talle } = producto;
     return (
       <div className="product-container">
-        <div className="product-image-container">
-          <Image
-              src={imagen_ruta}
-              alt={modelo}
-              className="product-image"
-              width={350}
-              height={420}
-          />
-        </div>
-        <div className="product-details-container">
-          <h1 className="product-name">{modelo}</h1>
-          <div className="product-details">
-            <p><b>Marca:</b> {marca}</p>
-            <p><b>Modelo:</b> {modelo}</p>
-            <p><b>Talle:</b> {talle}</p>
-            <p><b>Precio:</b> ${precio}</p>
-  
-            <button className="agregarAlCarritoBttn" onClick={() => agregarAlCarrito(id)}>
-              Agregar al carrito {cantidadItemsCarrito > 0 && <> ({cantidadItemsCarrito})</>}
-            </button>
+        <div className="item">
+          <div className="product-image-container">
+            <Image
+                src={imagen_ruta}
+                alt={modelo}
+                className="product-image"
+                width={350}
+                height={420}
+            />
+          </div>
+          <div className="product-details-container">
+            <h1 className="product-name">{modelo}</h1>
+            <div className="product-details">
+              <p><b>Marca:</b> {marca}</p>
+              <p><b>Modelo:</b> {modelo}</p>
+              <p><b>Talle:</b> {talle}</p>
+              <p><b>Precio:</b> ${precio}</p>
+    
+              <button className="agregarAlCarritoBttn" onClick={() => agregarAlCarrito(id)}>
+                Agregar al carrito {cantidadItemsCarrito > 0 && <> ({cantidadItemsCarrito})</>}
+              </button>
+            </div>
           </div>
         </div>
       </div>

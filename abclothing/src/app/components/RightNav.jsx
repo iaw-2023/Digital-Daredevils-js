@@ -14,7 +14,7 @@ const Ul = styled.ul`
     position: fixed;
     transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
     top: 0;
-    right: 0;
+    right:0;
     height: 100vh;
     width: 200px;
     padding-top: 80px;

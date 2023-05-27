@@ -7,7 +7,6 @@ const ContactWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
   padding: 20px;
   color:black;
   font-size: 20px;
@@ -16,6 +15,7 @@ const ContactWrapper = styled.div`
 
 const Title = styled.h1`
   font-size: 48px;
+  margin-top: 90px;
   margin-bottom: 20px;
   text-align: center;
   color:black;

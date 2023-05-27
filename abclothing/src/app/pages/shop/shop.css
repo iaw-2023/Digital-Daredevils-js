@@ -2,18 +2,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 25px;
     text-align: center;
-    font-size: 30px;
+    font-size: 50px;
     color: black;
     
   }
-.loading{
+.loading-shop{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 25px;
-  text-align: center;
+
   font-size: 50px;
   color: black;
 }
@@ -23,8 +21,9 @@
     height: auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Ajusta los valores según tus necesidades */
-
     place-items: center;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
   }
   
   .producto {
@@ -107,8 +106,7 @@
     color: #fff;
   }
 
-  .shopContent {
-    margin-top: 20px;
+  .shop{
     border-top: 1px solid #ccc;
-    padding-top: 20px;
+    padding-top: 120px;
   }
