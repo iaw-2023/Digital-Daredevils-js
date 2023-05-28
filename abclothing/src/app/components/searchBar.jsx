@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Box, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import "./searchBar.css";
 
 function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
@@ -21,7 +20,7 @@ function SearchBar() {
   };
 
   return (
-    <Box className="search-bar" borderRadius={"md"} pos="relative">
+    <Box borderRadius={"md"} pos="relative">
       <InputGroup className="input-group">
         <InputLeftElement children={<BsSearch color="gray.300" />} />
         <Input

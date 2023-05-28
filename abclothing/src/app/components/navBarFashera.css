@@ -1,0 +1,78 @@
+.navbar-container {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #f7f4f4;
+  width: 100%;
+  box-shadow: 0px 7px 7px -5px rgba(170, 159, 170, 0.2);
+  color:black;
+}
+
+.navbar-top {
+  display: none;
+}
+
+
+.logo {
+  min-width: 6rem;
+}
+
+.menu {
+  min-width: 30%;
+  width: 90%;
+  display: none;
+}
+
+.search-bar {
+  min-width: 30%;
+  width: 90%;
+  display: none;
+}
+
+.user-icons {
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.heart-icon,
+.bag-icon {
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.bag-count {
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -5px;
+  right: -12px;
+  width: 20px;
+  height: 20px;
+  color: beige;
+  border-radius: 50%;
+  background-color: #0b0b0b;
+}
+
+.search-bar {
+  padding: 8px;
+  width: 90%;
+  margin: auto;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .navbar-top {
+    display: block;
+  }
+
+  .menu,
+  .search-bar {
+    display: block;
+  }
+}
+
+.active-navbar {
+  color: #9C9C9C !important; 
+  transform: scale(1.1);
+}
