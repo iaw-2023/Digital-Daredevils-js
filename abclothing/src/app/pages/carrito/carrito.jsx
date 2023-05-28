@@ -36,7 +36,7 @@ export const Carrito = () => {
     };
 
     fetchData();
-  }, []); 
+  }, [itemsCarrito]); 
 
   if (productosLoading || totalCarritoLoading) {
     return (
