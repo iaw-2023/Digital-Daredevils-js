@@ -1,6 +1,6 @@
 import React from "react";
 import { LISTACATEGORIAS } from '.Categorias';
-import { Categoria } from './CategoriaItem';
+import { Categoria } from './Categoria';
 
 export const List = () => {
   const { loading, categorias } = LISTACATEGORIAS();

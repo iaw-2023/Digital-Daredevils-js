@@ -13,8 +13,8 @@ export const Carrito = () => {
 
   const [productos, setProductos] = useState(null);
   const [productosLoading, setProductosLoading] = useState(true);
-  const [totalCarrito, setTotalCarrito] = useState(0); // Initialize with 0
-  const [totalCarritoLoading, setTotalCarritoLoading] = useState(true); // New loading state
+  const [totalCarrito, setTotalCarrito] = useState(0); 
+  const [totalCarritoLoading, setTotalCarritoLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -2,7 +2,7 @@
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Navbar } from "../components/navbarFashera";
+import { Navbar } from "../components/navBar";
 import { Shop } from "./shop/shop";
 import { Contacto } from "./contacto";
 import { Carrito } from "./carrito/carrito";

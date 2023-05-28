@@ -20,7 +20,7 @@ import HomeMenu from "./HomeMenu";
 import SearchBar from "./searchBar";
 import SideBar from "./Sidebar";
 import { ShopContext } from "../context/shop-context";
-import "./navBarFashera.css";
+import "./navBar.css";
 
 export const Navbar = () => {
   const location = useLocation();
@@ -54,11 +54,6 @@ export const Navbar = () => {
                   height={{ base: "2rem", md: "100%" }}
                 />
               </Box>
-            </Link>
-            <Link to="/contacto" className={location.pathname === "/contacto" ? "active-link" : ""}>
-                <Box className="menu" display={{ base: "none", lg: "block" }}>
-                    Contacto
-                </Box>
             </Link>
             <Box  
               minWidth={"30%"}
