@@ -8,6 +8,14 @@ import { GENERARPEDIDO } from "../components/Pedidos";
 
 export const ShopContext = createContext(null);
 
+export const inicializarItemsAfectados = (carrito, productos) => {
+  for (const producto of productos) {
+    carrito[producto.id] = 0;
+  }
+  return carrito;
+};
+
+
 export const ShopContextProvider = (props) => {
   const navigate = useNavigate();
   const [loadingCarrito, setLoadingCarrito] = useState(true);
@@ -19,9 +27,7 @@ export const ShopContextProvider = (props) => {
         setLoadingCarrito(true);
         const response = await LISTAPRODUCTOS();
         const productos = response.data;
-        for (let i = 1; i <= productos.length + 1; i++) {
-          carrito[i] = 0;
-        }
+        inicializarItemsAfectados(carrito, productos);
         setItemsCarrito(carrito);
         setLoadingCarrito(false);
       } catch (error) {
