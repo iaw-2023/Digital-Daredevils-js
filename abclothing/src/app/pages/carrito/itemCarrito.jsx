@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 export const ItemCarrito = (props) => {
   const { id, modelo, talle, precio, imagen_ruta } = props.data;
-  const { itemsCarrito, agregarAlCarrito, quitarDelCarrito, actualizarCantidadItemsCarrito } =
+  const { productosCarrito, agregarAlCarrito, quitarDelCarrito, actualizarCantidadItemsCarrito } =
     useContext(ShopContext);
 
   return (
@@ -22,15 +22,15 @@ export const ItemCarrito = (props) => {
         <p>
           <b>{modelo}</b>
         </p>
-        <p> Precio: ${precio.toLocaleString()}</p>
+        <p> Precio: ${precio ? precio.toLocaleString() : null}</p>
         <p> Talle: {talle}</p>
         <div className="contador">
-          <button onClick={() => quitarDelCarrito(id)}> - </button>
+          <button onClick={() => quitarDelCarrito(props.data)}> - </button>
           <input
-            value={itemsCarrito[id]}
+            value={productosCarrito[id].amount}
             onChange={(e) => actualizarCantidadItemsCarrito(Number(e.target.value), id)}
           />
-          <button onClick={() => agregarAlCarrito(id)}> + </button>
+          <button onClick={() => agregarAlCarrito(props.data)}> + </button>
         </div>
       </div>
     </div>

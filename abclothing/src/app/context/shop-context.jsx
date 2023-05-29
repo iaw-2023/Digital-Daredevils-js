@@ -1,85 +1,67 @@
 "use client";
 
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LISTAPRODUCTOS } from "../components/Productos";
-import { PRODUCTOBYID } from "../components/Productos";
 import { GENERARPEDIDO } from "../components/Pedidos";
 
 export const ShopContext = createContext(null);
 
-export const inicializarItemsAfectados = (carrito, productos) => {
-  for (const producto of productos) {
-    carrito[producto.id] = 0;
-  }
-  return carrito;
-};
-
-
 export const ShopContextProvider = (props) => {
   const navigate = useNavigate();
-  const [loadingCarrito, setLoadingCarrito] = useState(true);
-  const [itemsCarrito, setItemsCarrito] = useState({});
-  const carrito = {};
-  useEffect(() => {
-    const fetchProductos = async () => {
-      try {
-        setLoadingCarrito(true);
-        const response = await LISTAPRODUCTOS();
-        const productos = response.data;
-        inicializarItemsAfectados(carrito, productos);
-        setItemsCarrito(carrito);
-        setLoadingCarrito(false);
-      } catch (error) {
-        setLoadingCarrito(false);
-        console.error(error);
-      }
-    };
 
-    fetchProductos();
-  }, []);
+  const [productosCarrito, setProductosCarrito] = useState({});
   
   const getTotalCarrito = async () => {
     let cantidadTotal = 0;
-    if (!loadingCarrito && itemsCarrito !== undefined){
-      for (const item in itemsCarrito) {
-        if (itemsCarrito[item] > 0) {
-          const producto = await PRODUCTOBYID(parseInt(item));
-          if (producto) {
-            cantidadTotal += itemsCarrito[item] * producto.precio;
-          }
-        }
+    if (productosCarrito !== undefined){
+      for (const itemId in productosCarrito) {
+        const { amount, precio } = productosCarrito[itemId];
+        cantidadTotal += amount * precio;
       }
     }
     return cantidadTotal;
   };
 
-  const agregarAlCarrito = (itemId) => {
-    if (!loadingCarrito && itemsCarrito !== undefined){
-      setItemsCarrito((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+  const agregarAlCarrito = (producto) => {
+    const { id } = producto;
+    if (productosCarrito !== undefined) {
+      setProductosCarrito((prev) => ({
+        ...prev,
+        [id]: { ...producto, amount: prev[id]?.amount + 1 || 1 },
+      }));
     }
   };
 
-  const quitarDelCarrito = (itemId) => {
-    if (!loadingCarrito && itemsCarrito !== undefined){
-      setItemsCarrito((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-    }
-  };
+ 
 
+  const quitarDelCarrito = (producto) => {
+    const nuevaCantidad = producto.amount - 1;
+    actualizarCantidadItemsCarrito(nuevaCantidad, producto.id);
+  };
+  
+  
   const actualizarCantidadItemsCarrito = (nuevaCantidad, itemId) => {
-    if (!loadingCarrito && itemsCarrito !== undefined){
-      setItemsCarrito((prev) => ({ ...prev, [itemId]: nuevaCantidad }));
+    if (productosCarrito !== undefined) {
+      setProductosCarrito((prev) => {
+        const updatedCarrito = { ...prev };
+        updatedCarrito[itemId].amount = nuevaCantidad;
+        return updatedCarrito;
+      });
     }
   };
+
 
   const checkout = async () => {
-    if (!loadingCarrito && itemsCarrito !== undefined) {
+    if (itemsCarrito !== undefined) {
       const pedidoRequest = {
         cliente: "juancito@gmail.com",
         fecha: new Date().toISOString(),
-        productos: Object.entries(itemsCarrito)
-          .filter(([itemId, quantity]) => quantity > 0)
-          .map(([itemId, quantity]) => ({ id: parseInt(itemId), cantidad: quantity })),
+        productos: Object.entries(productosCarrito)
+          .filter(([itemId, producto]) => producto.amount > 0)
+          .map(([itemId, producto]) => ({
+            id: parseInt(itemId),
+            cantidad: producto.amount,
+          })),
       };
       try {
         const pedidoResponse = await GENERARPEDIDO(pedidoRequest);
@@ -94,16 +76,11 @@ export const ShopContextProvider = (props) => {
   };
 
   const resetCart = () => {
-    const nuevoCarrito = Object.assign({}, itemsCarrito);
-    for (const item in itemsCarrito) {
-      nuevoCarrito[item] = 0;
-    }
-    setItemsCarrito(nuevoCarrito);
-  };
+    setProductosCarrito({});
+  };  
 
   const contextValue = {
-    itemsCarrito,
-    loadingCarrito,
+    productosCarrito,
     agregarAlCarrito,
     actualizarCantidadItemsCarrito,
     quitarDelCarrito,

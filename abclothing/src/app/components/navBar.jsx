@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -23,13 +23,13 @@ import { ShopContext } from "../context/shop-context";
 import "./navBar.css";
 
 export const Navbar = () => {
-  const location = useLocation();
-  const { loadingCarrito, itemsCarrito } = useContext(ShopContext);
+  const { productosCarrito } = useContext(ShopContext);
 
-  if (loadingCarrito){
+  if (!productosCarrito){
     return <h1>Loading in navbar wtf...</h1>;
   }
   else {
+    const totalCarrito = Object.values(productosCarrito).reduce((total, producto) => total + producto.amount, 0);
     return (
         <Box className="navbar-container">
           <Flex
@@ -102,9 +102,7 @@ export const Navbar = () => {
                     <BsBag fontSize={"1.3rem"} />
                   </Text>
                   <Box className="bag-count" justify="center" align="center">
-                    <Text>
-                      {Object.values(itemsCarrito).reduce((total, quantity) => total + quantity, 0)}
-                    </Text>
+                    <Text>{totalCarrito}</Text>
                   </Box>
                 </Flex>
               </Link>

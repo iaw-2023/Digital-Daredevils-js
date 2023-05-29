@@ -7,11 +7,11 @@ import Image from 'next/image';
 
 export const Producto = (props) => {
   const { id, modelo, precio, talle, imagen_ruta } = props.data;
-  const { loadingCarrito, agregarAlCarrito, itemsCarrito } = useContext(ShopContext);
+  const { productosCarrito, agregarAlCarrito } = useContext(ShopContext);
   let cantidadItemsCarrito = 0;
 
-  if (!loadingCarrito && itemsCarrito !== undefined) {
-    cantidadItemsCarrito = itemsCarrito[id];
+  if (productosCarrito && productosCarrito[id]) {
+    cantidadItemsCarrito = productosCarrito[id].amount;
   }
 
   return (
@@ -31,7 +31,7 @@ export const Producto = (props) => {
           <p><b>Talle:</b> {talle}</p>
         </div>
       </Link>
-      <button className="agregarAlCarritoBttn" onClick={() => agregarAlCarrito(id)}>
+      <button className="agregarAlCarritoBttn" onClick={() => agregarAlCarrito(props.data)}>
         Agregar al carrito {cantidadItemsCarrito > 0 && <> ({cantidadItemsCarrito})</>}
       </button>
     </div>

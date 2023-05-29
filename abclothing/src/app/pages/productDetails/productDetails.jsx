@@ -9,14 +9,14 @@ import "./productDetails.css";
 
 export const ProductDetails = () => {
   const { id } = useParams();
-  const { loadingCarrito, agregarAlCarrito, itemsCarrito } = useContext(ShopContext);
+  const { agregarAlCarrito, productosCarrito } = useContext(ShopContext);
   
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
-    const fetchProductos = async () => {
+    const fetchProducto = async () => {
       try {
         setLoading(true);
         const response = await PRODUCTOBYID(id);
@@ -28,14 +28,14 @@ export const ProductDetails = () => {
       }
     };
 
-    fetchProductos();
+    fetchProducto();
   }, []);
 
 
   let cantidadItemsCarrito = 0;
 
-  if (!loadingCarrito && itemsCarrito !== undefined){
-    cantidadItemsCarrito = itemsCarrito[id];
+  if (productosCarrito && productosCarrito[id]) {
+    cantidadItemsCarrito = productosCarrito[id].amount;
   }
   
   if (loading) {
@@ -67,7 +67,7 @@ export const ProductDetails = () => {
               <p><b>Talle:</b> {talle}</p>
               <p><b>Precio:</b> ${precio}</p>
     
-              <button className="agregarAlCarritoBttn" onClick={() => agregarAlCarrito(id)}>
+              <button className="agregarAlCarritoBttn" onClick={() => agregarAlCarrito(producto)}>
                 Agregar al carrito {cantidadItemsCarrito > 0 && <> ({cantidadItemsCarrito})</>}
               </button>
             </div>
