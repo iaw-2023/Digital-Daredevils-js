@@ -1,0 +1,17 @@
+.categoria {
+    text-align: center;
+    font-size: 1.5rem;
+    transition: 0.5s ease;
+  }
+  
+  .categoria:hover {
+    border-bottom-width: 4px;
+    border-bottom-color: #f89f17;
+    color: pink.600;
+    font-size: 1.7rem;
+    -webkit-transform: scale(1.04);
+    -ms-transform: scale(1.02);
+    transform: scale(1.02);
+    transition: 0.5s ease;
+  }
+  

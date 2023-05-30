@@ -1,9 +1,9 @@
 import React from "react";
-import { LISTACATEGORIAS } from '.Categorias';
+import { CATEGORIAS } from './Categorias';
 import { Categoria } from './Categoria';
 
-export const List = () => {
-  const { loading, categorias } = LISTACATEGORIAS();
+export const ListaCategorias = () => {
+  const { loading, categorias } = CATEGORIAS();
 
   return (
     <div className="lista">

@@ -30,7 +30,7 @@ export const CategoriaProductos = () => {
     };
 
     fetchProductos();
-  }, [currentPage]);
+  }, [currentPage, id]);
 
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
