@@ -4,6 +4,11 @@ import React, { useEffect, useState } from "react";
 import { LISTAPRODUCTOS } from "../../components/Productos";
 import { Producto } from "./producto";
 import "./shop.css";
+import {
+  Box,
+  Progress,
+  Text,
+} from "@chakra-ui/react";
 
 export const Shop = () => {
   const [productos, setProductos] = useState(null);
@@ -101,16 +106,38 @@ export const Shop = () => {
       {loading ? (
         <div className="loading-shop">Loading...</div>
       ) : (
-        <div className="shopContent">
-          <div className="shopTitle">
-            <h1>Highlights</h1>
+        <Box bgColor={"#fdfdfd"}>
+          <Box>
+            <Progress
+              colorScheme="blue"
+              hasStripe
+              height="42px"
+              value={100}
+              isAnimated
+            />
+            <Text
+              color={"white"}
+              fontSize={{ base: "80%", sm: "100%", lg: "100%" }}
+              position="absolute"
+              top={{ base: "117px", sm: "145px", md: "145px", lg: "90px" }}
+              left={{ base: "5%", sm: "20%", md: "30%", lg: "40%" }}
+            >
+               New arrivals la semana entrante con 30% off ❤️
+            </Text>
+
+          </Box>
+          
+          <div className="shopContent">
+            <div className="shopTitle">
+              <h1>Highlights</h1>
+            </div>
+            <div className="productos">
+              {Object.values(productos).map((product) => (
+                <Producto data={product} key={product.id} />
+              ))}
+            </div>
           </div>
-          <div className="productos">
-            {Object.values(productos).map((product) => (
-              <Producto data={product} key={product.id} />
-            ))}
-          </div>
-        </div>
+        </Box>
       )}
       <div className="pageLinks">{renderPageLinks()}</div>
     </div>
