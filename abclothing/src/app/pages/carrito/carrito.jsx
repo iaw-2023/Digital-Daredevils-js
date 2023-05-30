@@ -18,10 +18,6 @@ export const Carrito = () => {
   const handleTextChange = (event) => {
     setText(event.target.value);
   };
-  const handleUpload = () => {
-    console.log('Texto subido:', text);
-  };
-
 
   useEffect(() => {
     const fetchTotalCarrito = async () => {
@@ -91,7 +87,9 @@ export const Carrito = () => {
                                       borderRadius: '4px',
                                       padding: '8px',
                                       resize: 'vertical',
-                                      fontSize: '14px'
+                                      fontSize: '14px',
+                                      width: "100%",
+                                      height: "50%"
                                     }}
                                   />
                                 </div>
@@ -100,10 +98,14 @@ export const Carrito = () => {
                                       <button
                                         onClick={() => setShowModal(false)}
                                       >
-                                        Close
+                                        Cerrar
                                       </button>
-                                      <button onClick={handleUpload} style={{ marginTop: '8px' }}>
-                                        Subir
+                                      <button 
+                                        onClick={() => {
+                                          checkout(text);
+                                        }}
+                                        style={{ marginTop: '8px' }}>
+                                          Enviar Pedido
                                       </button>
                                 </div>
                         </div>
