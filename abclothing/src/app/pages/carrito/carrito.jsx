@@ -13,6 +13,16 @@ export const Carrito = () => {
   const [totalCarrito, setTotalCarrito] = useState(0);
   const [totalCarritoLoading, setTotalCarritoLoading] = useState(true);
 
+  const [showModal, setShowModal] = useState(false);
+  const [text, setText] = useState('')
+  const handleTextChange = (event) => {
+    setText(event.target.value);
+  };
+  const handleUpload = () => {
+    console.log('Texto subido:', text);
+  };
+
+
   useEffect(() => {
     const fetchTotalCarrito = async () => {
       setTotalCarritoLoading(true);
@@ -35,38 +45,71 @@ export const Carrito = () => {
   } else {
     return (
       <div className="carrito">
-        <div className="title">
-          Prendas en el carrito
-        </div>
-        {!productosCarrito ? null :
+          <div className="title">
+            Prendas en el carrito
+          </div>
+            {!productosCarrito ? null :
           Object.values(productosCarrito).map((producto) => {
             if (producto.amount !== 0) {
               return <ItemCarrito data={producto} key={producto.id} />;
             }
             return null;
-          })
-        }
-        {totalCarrito > 0 ? (
-          <div className="checkout">
-            <div className="subtotal">
-              <h2>Subtotal: ${totalCarrito.toLocaleString()}</h2>
-            </div>
-            <div className="buttons">
-              <button onClick={() => navigate("/")}>Seguir comprando</button>
-              <button
-                onClick={() => {
-                  checkout();
-                  navigate("/checkout");
-                }}
-              >
-                Checkout
-              </button>
-            </div>
-          </div>
-        ) : (
-          <h1>Tu carrito está vacío</h1>
-        )}
-      </div>
+          })}
+
+          {totalCarrito > 0 ? (
+              <div className="checkout">
+                <div className="subtotal">
+                  <h2>Subtotal: ${totalCarrito.toLocaleString()}</h2>
+                </div>
+                <div className="buttons">
+                  <button onClick={() => navigate("/")}>Seguir comprando</button>
+                  <button
+                      onClick={() => setShowModal(true)}
+                  >
+                      Checkout 
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <h1>Tu carrito está vacío</h1>
+            )}
+            {showModal ? (
+              <div className="mensaje">
+                        <div className=" pedido ">
+                          se necesita E-mail de confirmacion
+                        </div>
+                        <div>
+                                <div>
+                                  <textarea
+                                    value={text}
+                                    onChange={handleTextChange}
+                                    placeholder="Ingresa tu texto aquí"
+                                    rows={1}
+                                    cols={50}
+                                    style={{
+                                      border: '1px solid #ccc',
+                                      borderRadius: '4px',
+                                      padding: '8px',
+                                      resize: 'vertical',
+                                      fontSize: '14px'
+                                    }}
+                                  />
+                                </div>
+                      
+                                <div className="close">
+                                      <button
+                                        onClick={() => setShowModal(false)}
+                                      >
+                                        Close
+                                      </button>
+                                      <button onClick={handleUpload} style={{ marginTop: '8px' }}>
+                                        Subir
+                                      </button>
+                                </div>
+                        </div>
+              </div>
+            ) : null}
+    </div>
     );
   }
 };
