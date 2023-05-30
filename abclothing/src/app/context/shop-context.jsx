@@ -8,9 +8,10 @@ export const ShopContext = createContext(null);
 
 export const ShopContextProvider = (props) => {
   const navigate = useNavigate();
-
+  const [email, setEmail] = useState("");
   const [productosCarrito, setProductosCarrito] = useState({});
-  
+
+
   const getTotalCarrito = async () => {
     let cantidadTotal = 0;
     if (productosCarrito !== undefined){
@@ -51,10 +52,10 @@ export const ShopContextProvider = (props) => {
   };
 
 
-  const checkout = async () => {
-    if (itemsCarrito !== undefined) {
+  const checkout = async (email) => {
+    if (productosCarrito !== undefined) {
       const pedidoRequest = {
-        cliente: "juancito@gmail.com",
+        cliente: email,
         fecha: new Date().toISOString(),
         productos: Object.entries(productosCarrito)
           .filter(([itemId, producto]) => producto.amount > 0)
@@ -86,6 +87,7 @@ export const ShopContextProvider = (props) => {
     quitarDelCarrito,
     getTotalCarrito,
     checkout,
+    email,
   };
 
   return (
