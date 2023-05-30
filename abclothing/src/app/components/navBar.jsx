@@ -33,7 +33,7 @@ export const Navbar = () => {
     return (
         <Box className="navbar-container">
           <Flex
-            height={{ base: "3.2rem", md: "4.94rem" }}
+            height="4.94rem" 
             px={{ base: "1rem", md: "3rem" }}
             justify={"space-between"}
             gap={{ base: "0.5rem", sm: "1rem", md: "2rem", lg: "2rem" }}
@@ -50,8 +50,8 @@ export const Navbar = () => {
                   src="/abLogo.png"
                   alt="logo"
                   margin="auto"
-                  width={{ base: "90%", sm: "60%", md: "60%", lg: "100%" }}
-                  height={{ base: "2rem", md: "100%" }}
+                  width="270px"
+                  height="70px"
                 />
               </Box>
             </Link>
