@@ -3,7 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { LISTAPRODUCTOS } from "../../components/Productos";
 import { Producto } from "./producto";
+import HomeSlider from "../../components/HomeSlider";
 import "./shop.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import {
   Box,
   Progress,
@@ -124,9 +127,10 @@ export const Shop = () => {
             >
                New arrivals la semana entrante con 30% off ❤️
             </Text>
-
           </Box>
-          
+          <div className="sliderContainer">
+            <HomeSlider />
+          </div>
           <div className="shopContent">
             <div className="shopTitle">
               <h1>Highlights</h1>
