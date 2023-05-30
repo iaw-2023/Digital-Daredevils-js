@@ -9,7 +9,7 @@ export const Categoria = (props) => {
   return (
     <div className="hoverlist" key={id}>
       <ul>
-        <Link to={`/categorias/${id}`}>
+        <Link to={`/categorias/${id}/${nombre}`}>
           <p className="category-heading">{nombre}</p>
         </Link>
       </ul>

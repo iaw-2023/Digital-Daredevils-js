@@ -8,6 +8,7 @@ import { Contacto } from "./contacto";
 import { Carrito } from "./carrito/carrito";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ProductDetails } from "./productDetails/productDetails";
+import { CategoriaProductos } from "../components/Categorias/CategoriaProductos"
 import { ShopContextProvider } from "../context/shop-context";
 import { ShopSearch } from "./shop/shopSearch";
 
@@ -24,6 +25,7 @@ function App(){
               <Route path="/contacto" element={<Contacto />} />
               <Route path="/carrito" element={<Carrito />} />
               <Route path="/productos/:id" element={<ProductDetails />} />
+              <Route path="/categorias/:id/:nombre" element={<CategoriaProductos />} />
             </Routes>
             <footer>
               <a href="https://github.com/iaw-2023/Digital-Daredevils-js/">
