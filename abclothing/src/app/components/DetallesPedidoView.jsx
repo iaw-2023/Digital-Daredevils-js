@@ -5,6 +5,7 @@ import { Table, Thead, Tbody, Tr, Th, Td, Divider } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { DETALLESPEDIDO } from "./Pedidos";
 import "./detallesPedidoView.css";
+import LoadingSpinner from "./LoadingSpinner";
 
 const Detalle = (props) => {
     const { modelo, marca, talle, precio, cantidad } = props.data;
@@ -55,7 +56,7 @@ export const DetallesPedido = () => {
         <div className="shop">
         
         {loading ? (
-            <div className="loading-shop">Loading detallesPedido...</div>
+            <LoadingSpinner/>
         ) : (
             <div className="shopContent">
                 <div className="shopTitle">

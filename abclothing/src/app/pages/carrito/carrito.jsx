@@ -4,6 +4,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../../context/shop-context";
 import { ItemCarrito } from "./itemCarrito";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "@/app/components/LoadingSpinner";
 import "./carrito.css";
 
 export const Carrito = () => {
@@ -33,9 +34,7 @@ export const Carrito = () => {
   if (totalCarritoLoading) {
     return (
       <div className="carrito">
-        <div className="loading-carrito">
-          Loading...
-        </div>
+        <LoadingSpinner/>
       </div>
     );
   } else {

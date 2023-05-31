@@ -1,6 +1,7 @@
 import React from "react";
 import { CATEGORIAS } from './Categorias';
 import { Categoria } from './Categoria';
+import LoadingSpinner from "../LoadingSpinner";
 
 export const ListaCategorias = () => {
   const { loading, categorias } = CATEGORIAS();
@@ -9,7 +10,7 @@ export const ListaCategorias = () => {
     <div className="lista">
     
         {loading ? (
-          <div className="loading"></div>
+          <LoadingSpinner/>
         ) : (
           <div className="categorias">
             {Object.values(categorias).map((caract) => (

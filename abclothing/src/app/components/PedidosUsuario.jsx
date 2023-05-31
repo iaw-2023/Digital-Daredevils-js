@@ -4,6 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { ShopContext } from "../context/shop-context";
 import { PEDIDOS } from "./Pedidos";
 import { Pedido } from "./Pedido";
+import LoadingSpinner from "./LoadingSpinner";
 import "../pages/shop/shop.css";
 
 export const PedidosUsuario = () => {
@@ -31,7 +32,7 @@ export const PedidosUsuario = () => {
       <div className="shop">
         
         {loading ? (
-          <div className="loading-shop">Loading pedidos...</div>
+          <LoadingSpinner/>
         ) : (
           <div className="shopContent">
             <div className="shopTitle">

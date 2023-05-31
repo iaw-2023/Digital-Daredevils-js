@@ -16,6 +16,7 @@
   import { Link } from "react-router-dom";
   import { CATEGORIAS } from "./Categorias/Categorias";
   import { GiHamburgerMenu } from "react-icons/gi";
+  import LoadingSpinner from "./LoadingSpinner";
   import "./Sidebar.css";
 
   function SideBar() {
@@ -40,7 +41,7 @@
     }, []);
 
     if (loading) {
-      return <h1>Loading in Sidebar...</h1>;
+      return <LoadingSpinner/>;
     }
 
     return (

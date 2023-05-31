@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Producto } from "../../pages/shop/producto";
 import { PRODUCTOSBYCATEGORIA } from "./Categorias";
+import LoadingSpinner from "../LoadingSpinner";
 import "../../pages/shop/shop.css";
 
 export const CategoriaProductos = () => {
@@ -102,7 +103,7 @@ export const CategoriaProductos = () => {
     <div className="shop">
       
       {loading ? (
-        <div className="loading-shop">Loading...</div>
+        <LoadingSpinner/>
       ) : (
         <div className="shopContent">
           <div className="shopTitle">

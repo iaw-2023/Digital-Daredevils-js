@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { ShopContext } from "../../context/shop-context";
 import { PRODUCTOBYID } from '../../components/Productos';
 import Image from 'next/image';
+import LoadingSpinner from "@/app/components/LoadingSpinner";
 import "./productDetails.css";
 
 export const ProductDetails = () => {
@@ -39,7 +40,7 @@ export const ProductDetails = () => {
   }
   
   if (loading) {
-    return <p>Loading in productDetails.jsx...</p>;
+    return <LoadingSpinner/>;
   }
   else {
     if (!producto) {

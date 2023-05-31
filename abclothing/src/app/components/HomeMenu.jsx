@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CATEGORIAS } from "./Categorias/Categorias";
 import { Categoria } from "./Categorias/Categoria";
+import LoadingSpinner from "./LoadingSpinner";
 import "./HomeMenu.css"
 
 const HomeMenu = () => {
@@ -26,7 +27,7 @@ const HomeMenu = () => {
     }, []);
 
     if (loading){
-        <h1>Loading in HomeMenu.jsx...</h1>
+        <LoadingSpinner/>
     }
     else{
         return (

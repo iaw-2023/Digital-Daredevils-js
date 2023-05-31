@@ -12,6 +12,7 @@ import {
   Progress,
   Text,
 } from "@chakra-ui/react";
+import LoadingSpinner from "@/app/components/LoadingSpinner";
 import { ToastContainer } from "react-toastify";
 
 export const Shop = () => {
@@ -108,7 +109,7 @@ export const Shop = () => {
     <div className="shop">
       
       {loading ? (
-        <div className="loading-shop">Loading...</div>
+        <LoadingSpinner/>
       ) : (
         <Box bgColor={"#fdfdfd"}>
           <Box>

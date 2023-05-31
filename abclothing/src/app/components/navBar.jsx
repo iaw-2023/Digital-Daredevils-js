@@ -19,6 +19,7 @@ import HomeMenu from "./HomeMenu";
 import SearchBar from "./searchBar";
 import SideBar from "./Sidebar";
 import { ShopContext } from "../context/shop-context";
+import LoadingSpinner from "./LoadingSpinner";
 import "./navBar.css";
 
 export const Navbar = () => {
@@ -26,7 +27,7 @@ export const Navbar = () => {
   const { productosCarrito, email } = useContext(ShopContext);
 
   if (!productosCarrito){
-    return <h1>Loading in navbar wtf...</h1>;
+    return <LoadingSpinner/>;
   }
   else {
     const totalCarrito = Object.values(productosCarrito).reduce((total, producto) => total + producto.amount, 0);
