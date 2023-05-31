@@ -15,7 +15,6 @@ import {
   Menu,
 } from "@chakra-ui/react";
 import { BsBag, BsPerson } from "react-icons/bs";
-import { AiOutlineHeart } from "react-icons/ai";
 import HomeMenu from "./HomeMenu";
 import SearchBar from "./searchBar";
 import SideBar from "./Sidebar";
@@ -23,7 +22,7 @@ import { ShopContext } from "../context/shop-context";
 import "./navBar.css";
 
 export const Navbar = () => {
-  const { productosCarrito } = useContext(ShopContext);
+  const { productosCarrito, email } = useContext(ShopContext);
 
   if (!productosCarrito){
     return <h1>Loading in navbar wtf...</h1>;
@@ -74,27 +73,15 @@ export const Navbar = () => {
                      <BsPerson fontSize={"1.3rem"} />
                   </MenuButton>
                   <MenuList>
-                    <MenuGroup title="Profile">
+                    <MenuGroup title="Perfil">
                       <MenuItem color="beige.400">
-                        Hey, {"UserEmailHere"}
+                        Hola, {email? email : "crack"}!
                       </MenuItem>
-                      <MenuItem>My Account</MenuItem>
-                      <MenuItem>Order History</MenuItem>
-                      <MenuItem>My Address</MenuItem>
-                      <MenuItem>Payments</MenuItem>
-                      <MenuItem>Reviews</MenuItem>
+                      <MenuItem>Mis pedidos</MenuItem>
                     </MenuGroup>
                   </MenuList>
                 </Menu>
               </Popover>
-    
-              <Link to="#">
-                <Flex flexDir={"column"} align={"center"}>
-                  <Text>
-                    <AiOutlineHeart fontSize={"1.3rem"} />
-                  </Text>
-                </Flex>
-              </Link>
     
               <Link to="/carrito">
                 <Flex flexDir={"column"} align={"center"} pos="relative">

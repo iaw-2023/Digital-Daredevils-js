@@ -1,78 +1,63 @@
-"use client";
-
 import React from "react";
-import styled from "styled-components";
-
-const ContactWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  color:black;
-  font-size: 20px;
-`;
-
-
-const Title = styled.h1`
-  font-size: 48px;
-  margin-top: 90px;
-  margin-bottom: 20px;
-  text-align: center;
-  color:black;
-`;
-
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Input = styled.input`
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-`;
-
-const TextArea = styled.textarea`
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #000000;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: all 0.3s ease-in-out;
-
-  &:hover {
-    background-color: #9C9C9C;
-  }
-`;
+import { Box, Button, FormControl, FormLabel, Heading, Input, Textarea, VStack } from "@chakra-ui/react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Contacto = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // implement form submission logic here
+    // Implement form submission logic here
+    toast.success("Gracias por su mensaje ❤️, lo contactaremos con una pronta respuesta", {
+      position: "bottom-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 1,
+      theme: "light",
+    });
   };
 
   return (
-    <ContactWrapper>
-      <Title>Contactanos</Title>
-      <Form onSubmit={handleSubmit}>
-        <label htmlFor="name">Nombre:</label>
-        <Input type="text" id="name" name="name" required />
-        <label htmlFor="email">Email:</label>
-        <Input type="email" id="email" name="email" required />
-        <label htmlFor="message">Mensaje:</label>
-        <TextArea id="message" name="message" required></TextArea>
-        <Button type="submit">Enviar</Button>
-      </Form>
-    </ContactWrapper>
+    <Box maxW="600px" mx="auto" p={4}>
+      <Heading as="h1" textAlign="center" mb={8}>
+        Contáctanos
+      </Heading>
+      <form onSubmit={handleSubmit}>
+        <VStack spacing={4} align="stretch">
+          <FormControl id="name">
+            <FormLabel>Nombre:</FormLabel>
+            <Input type="text" placeholder="Nombre" required />
+          </FormControl>
+
+          <FormControl id="email">
+            <FormLabel>Email:</FormLabel>
+            <Input type="email" placeholder="Correo electrónico" required />
+          </FormControl>
+
+          <FormControl id="message">
+            <FormLabel>Mensaje:</FormLabel>
+            <Textarea placeholder="Escribe tu mensaje aquí" rows={4} required />
+          </FormControl>
+
+          <Button type="submit" colorScheme="teal">
+            Enviar
+          </Button>
+        </VStack>
+      </form>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </Box>
   );
 };
