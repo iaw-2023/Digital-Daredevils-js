@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -13,8 +13,9 @@ import {
   MenuItem,
   MenuList,
   Menu,
+  Icon
 } from "@chakra-ui/react";
-import { BsBag, BsPerson } from "react-icons/bs";
+import { BsBagHeart, BsBag, BsEmojiSmile, BsPerson } from "react-icons/bs";
 import HomeMenu from "./HomeMenu";
 import SearchBar from "./searchBar";
 import SideBar from "./Sidebar";
@@ -22,6 +23,7 @@ import { ShopContext } from "../context/shop-context";
 import "./navBar.css";
 
 export const Navbar = () => {
+  const navigate = useNavigate(); 
   const { productosCarrito, email } = useContext(ShopContext);
 
   if (!productosCarrito){
@@ -73,11 +75,16 @@ export const Navbar = () => {
                      <BsPerson fontSize={"1.3rem"} />
                   </MenuButton>
                   <MenuList>
-                    <MenuGroup title="Perfil">
-                      <MenuItem color="beige.400">
-                        Hola, {email? email : "crack"}!
+                    <MenuGroup title="Perfil" color ="teal.500">
+                      <MenuItem icon={<BsEmojiSmile boxSize={4} />}
+                        style={{ pointerEvents: "none", cursor: "default" }}
+                        color="beige.400"
+                      >
+                        Hola, {email ? email : "crack"}!
                       </MenuItem>
-                      <MenuItem>Mis pedidos</MenuItem>
+                      <MenuItem icon={<BsBagHeart boxSize={4} />} onClick={() => navigate("/misPedidos")} color="beige.400">
+                        Mis pedidos
+                      </MenuItem>
                     </MenuGroup>
                   </MenuList>
                 </Menu>

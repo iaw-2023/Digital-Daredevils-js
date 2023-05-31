@@ -22,7 +22,7 @@ export const Contacto = () => {
   return (
     <Box maxW="600px" mx="auto" p={4}>
       <Heading as="h1" textAlign="center" mb={8}>
-        Contáctanos
+        Contactanos
       </Heading>
       <form onSubmit={handleSubmit}>
         <VStack spacing={4} align="stretch">

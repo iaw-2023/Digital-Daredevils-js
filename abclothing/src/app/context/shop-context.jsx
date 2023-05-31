@@ -53,6 +53,7 @@ export const ShopContextProvider = (props) => {
 
 
   const checkout = async (email) => {
+    setEmail(email);
     if (productosCarrito !== undefined) {
       const pedidoRequest = {
         cliente: email,

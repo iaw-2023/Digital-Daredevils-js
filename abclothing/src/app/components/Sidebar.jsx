@@ -96,9 +96,9 @@
                   </Text>
                 </Link>
 
-                <Link to="#" className="sidebar-categoria-link">
+                <Link to="/misPedidos" className="sidebar-categoria-link">
                   <Text textAlign="center" fontSize="1.5rem" >
-                    Perfil
+                    Mis pedidos
                   </Text>
                 </Link>
               </Flex>

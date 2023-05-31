@@ -11,6 +11,8 @@ import { ProductDetails } from "./productDetails/productDetails";
 import { CategoriaProductos } from "../components/Categorias/CategoriaProductos"
 import { ShopContextProvider } from "../context/shop-context";
 import { ShopSearch } from "./shop/shopSearch";
+import { DetallesPedido } from "../components/DetallesPedidoView";
+import { PedidosUsuario } from "../components/PedidosUsuario";
 
 function App(){
   return (
@@ -24,8 +26,10 @@ function App(){
               <Route path="/shopSearch" element={<ShopSearch />} />
               <Route path="/contacto" element={<Contacto />} />
               <Route path="/carrito" element={<Carrito />} />
+              <Route path="/misPedidos" element={<PedidosUsuario />} />
               <Route path="/productos/:id" element={<ProductDetails />} />
               <Route path="/categorias/:id/:nombre" element={<CategoriaProductos />} />
+              <Route path="/detallesPedido/:id" element={<DetallesPedido />} />
             </Routes>
             <footer>
               <a href="https://github.com/iaw-2023/Digital-Daredevils-js/">
