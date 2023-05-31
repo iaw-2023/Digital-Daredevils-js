@@ -16,8 +16,8 @@ const Detalle = (props) => {
         <Td>{marca}</Td>
         <Td>{talle}</Td>
         <Td>{cantidad}</Td>
-        <Td>{precio}</Td>
-        <Td>{subtotal}</Td>
+        <Td>${precio}</Td>
+        <Td>${subtotal}</Td>
       </Tr>
     );
 };
@@ -86,7 +86,7 @@ export const DetallesPedido = () => {
                     </Tbody>
                 </Table>
                 <p style={{ marginTop: "20px" }}>
-                    <b>Total:</b> {total}
+                    <b>Total:</b> ${total}
                 </p>       
             </div>
         )}
