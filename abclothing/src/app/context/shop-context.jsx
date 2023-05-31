@@ -4,13 +4,14 @@ import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GENERARPEDIDO } from "../components/Pedidos";
 import { toast } from "react-toastify";
+import LoadingSpinner from "../components/LoadingSpinner";
 import "react-toastify/dist/ReactToastify.css";
 
 export const ShopContext = createContext(null);
 
 const showSuccessMessage = () =>{
   toast.success('Pedido efectuado con éxito, muchas gracias!', {
-    position: "bottom-right",
+    position: "bottom-left",
     autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -38,6 +39,7 @@ export const ShopContextProvider = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [productosCarrito, setProductosCarrito] = useState({});
+  const [loading, setLoading] = useState(false);
 
 
   const getTotalCarrito = async () => {
@@ -94,10 +96,13 @@ export const ShopContextProvider = (props) => {
           })),
       };
       try {
+        setLoading(true);
         await GENERARPEDIDO(pedidoRequest);
+        setLoading(false);
         resetCart();
         showSuccessMessage();
       } catch (error) {
+        setLoading(false);
         showFailureMessage();
       }
       navigate("/");
@@ -120,7 +125,7 @@ export const ShopContextProvider = (props) => {
 
   return (
     <ShopContext.Provider value={contextValue}>
-      {props.children}
+      {loading ? <LoadingSpinner /> : props.children}
     </ShopContext.Provider>
   );
 };
