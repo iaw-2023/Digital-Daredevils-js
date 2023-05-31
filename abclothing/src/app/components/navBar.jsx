@@ -98,7 +98,9 @@ export const Navbar = () => {
                     <BsBag fontSize={"1.3rem"} />
                   </Text>
                   <Box className="bag-count" justify="center" align="center">
-                    <Text>{totalCarrito}</Text>
+                    <Text fontSize="sm" fontWeight="medium" color="white" bg="black.400" rounded="full" ml="auto">
+                      {totalCarrito}
+                    </Text>
                   </Box>
                 </Flex>
               </Link>
