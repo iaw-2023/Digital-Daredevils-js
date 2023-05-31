@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CATEGORIAS } from "./Categorias/Categorias";
@@ -60,7 +60,7 @@ const HomeMenu = () => {
                     _hover={{ color: "#0099ff" }}
                     fontSize="xl"
                 >
-                    <Link to="/categorias">Categorias</Link>
+                    <Text>Categorias</Text>
                     <Box
                         top="4rem"
                         className="drop-down-content"
