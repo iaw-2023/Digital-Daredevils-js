@@ -54,7 +54,9 @@ export const Carrito = () => {
           {totalCarrito > 0 ? (
               <div className="checkout">
                 <div className="subtotal">
-                  <h2>Subtotal: ${totalCarrito.toLocaleString()}</h2>
+                  <h2> Subtotal: ${Math.floor(totalCarrito).toLocaleString()}
+                  <sup className="fractional-part">{totalCarrito.toLocaleString().slice(-2)}</sup>
+                  </h2>
                 </div>
                 <div className="buttons">
                   <button onClick={() => navigate("/")}>Seguir comprando</button>
