@@ -50,6 +50,7 @@ export const DetallesPedido = () => {
         Object.values(detallesPedido).forEach((detallePedido) => {
             total += detallePedido.precio * detallePedido.cantidad;
         });
+        total = total.toFixed(2);
     }
 
     return (
@@ -63,7 +64,7 @@ export const DetallesPedido = () => {
                     <h1>Mis pedidos</h1>
                 </div>
                 <Divider my={4} />
-                <Table variant="striped" colorScheme="teal" size="sm">
+                <Table variant="striped" colorScheme="orange" size="sm">
                     <Thead>
                         <Tr>
                             <Th>Modelo</Th>
