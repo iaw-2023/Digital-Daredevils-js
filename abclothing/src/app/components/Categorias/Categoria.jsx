@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 import "./Categoria.css"
 
 export const Categoria = (props) => {
-  const { id, nombre} = props.data;
+  const { id, nombre } = props.data;
 
   return (
     <div className="hoverlist" key={id}>
       <ul>
-        <Link to={`/categorias/${id}/${nombre}`}>
-          <p className="category-heading">{nombre}</p>
-        </Link>
+        <li>
+          <Link to={`/categorias/${id}/${nombre}`}>
+            <p className="category-heading">{nombre}</p>
+          </Link>
+        </li>
       </ul>
-    </div> 
+    </div>
   );
 };
