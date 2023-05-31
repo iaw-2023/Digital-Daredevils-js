@@ -12,8 +12,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Menu,
-  Icon
+  Menu
 } from "@chakra-ui/react";
 import { BsBagHeart, BsBag, BsEmojiSmile, BsPerson } from "react-icons/bs";
 import HomeMenu from "./HomeMenu";
@@ -51,8 +50,10 @@ export const Navbar = () => {
                   src="/abLogo.png"
                   alt="logo"
                   margin="auto"
-                  width="270px"
-                  height="70px"
+                  width={{ base: "160px", md: "270px" }}
+                  height={{ base: "40px", md: "70px" }}
+                  maxWidth="100%"
+                  objectFit="cover"
                 />
               </Box>
             </Link>

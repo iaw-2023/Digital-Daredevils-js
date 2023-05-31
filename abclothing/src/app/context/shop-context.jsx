@@ -3,8 +3,36 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GENERARPEDIDO } from "../components/Pedidos";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ShopContext = createContext(null);
+
+const showSuccessMessage = () =>{
+  toast.success('Pedido efectuado con éxito, muchas gracias!', {
+    position: "bottom-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+}
+const showFailureMessage = () =>{
+  toast.error('Hubo un problema al realizar el pedido, lo lamentamos!', {
+    position: "bottom-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+}
+
 
 export const ShopContextProvider = (props) => {
   const navigate = useNavigate();
@@ -66,14 +94,13 @@ export const ShopContextProvider = (props) => {
           })),
       };
       try {
-        const pedidoResponse = await GENERARPEDIDO(pedidoRequest);
+        await GENERARPEDIDO(pedidoRequest);
         resetCart();
-        navigate("/");
-        // agregar feedback alert pedido creado (toast? :D)
+        showSuccessMessage();
       } catch (error) {
-        console.error("Error creating pedido:", error.message);
-        // agregar feedback alert pedido fallido (toast? :D)
+        showFailureMessage();
       }
+      navigate("/");
     }
   };
 

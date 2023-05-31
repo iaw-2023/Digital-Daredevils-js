@@ -12,6 +12,7 @@ import {
   Progress,
   Text,
 } from "@chakra-ui/react";
+import { ToastContainer } from "react-toastify";
 
 export const Shop = () => {
   const [productos, setProductos] = useState(null);
@@ -143,6 +144,18 @@ export const Shop = () => {
           </div>
         </Box>
       )}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="pageLinks">{renderPageLinks()}</div>
     </div>
   );
