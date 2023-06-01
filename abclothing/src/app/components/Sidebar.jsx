@@ -54,9 +54,6 @@
           <DrawerOverlay />
           <DrawerContent>
             <DrawerCloseButton color={"pink.600"} fontSize="3xl" />
-            <DrawerHeader width="28%">
-              <Image src="/abLogo.png" />
-            </DrawerHeader>
             <DrawerBody>
               <DrawerCloseButton />
               <Box p="1rem">
