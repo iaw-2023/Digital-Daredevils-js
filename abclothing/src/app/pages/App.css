@@ -3,7 +3,9 @@
   height: auto;
   min-height: 100vh;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: rgba(255, 255, 255, 0.915)
+  background-color: rgba(255, 255, 255, 0.915);
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -12,7 +14,7 @@ body {
 }
 
 footer {
-  margin: 50px;
+  margin-top: auto;
   display: flex;
   justify-content: center;
   align-items: center;

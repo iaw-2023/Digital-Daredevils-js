@@ -6,6 +6,7 @@
   font-family: sans-serif;
   margin-left: 0;
   width: 90%;
+ 
 }
 
 .hoverlist {
@@ -33,6 +34,7 @@
 .dropDown {
   font-weight: 1400;
   position: relative;
+  
 }
 
 .dropDown:hover > .drop-down-content {
@@ -56,6 +58,7 @@
   padding: 10px;
   box-sizing: border-box;
   display: none; 
+  border-radius: 15px;
 }
 
 .dropDown:hover > .drop-down-content {
