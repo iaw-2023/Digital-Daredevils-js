@@ -8,7 +8,7 @@ import { Contacto } from "./contacto";
 import { Carrito } from "./carrito/carrito";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ProductDetails } from "./productDetails/productDetails";
-import { CategoriaProductos } from "../components/categorias/CategoriaProductos"
+import { ShopCategoria } from "./shop/shopCategoria"
 import { ShopContextProvider } from "../context/shop-context";
 import { ShopSearch } from "./shop/shopSearch";
 import { DetallesPedido } from "./detallesPedido/DetallesPedidoView";
@@ -28,7 +28,7 @@ function App(){
               <Route path="/carrito" element={<Carrito />} />
               <Route path="/misPedidos" element={<MisPedidos />} />
               <Route path="/productos/:id" element={<ProductDetails />} />
-              <Route path="/categorias/:id/:nombre" element={<CategoriaProductos />} />
+              <Route path="/categorias/:id/:nombre" element={<ShopCategoria />} />
               <Route path="/detallesPedido/:id" element={<DetallesPedido />} />
             </Routes>
             <footer>

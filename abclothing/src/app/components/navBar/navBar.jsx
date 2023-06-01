@@ -15,7 +15,7 @@ import {
   Menu
 } from "@chakra-ui/react";
 import { BsBagHeart, BsBag, BsEmojiSmile, BsPerson } from "react-icons/bs";
-import HomeMenu from "../Menu/Menu";
+import HomeMenu from "../menu/Menu";
 import SearchBar from "../searchBar/searchBar";
 import SideBar from "../sideBar/Sidebar";
 import { ShopContext } from "../../context/shop-context";

@@ -120,9 +120,9 @@ export const ShopSearch = () => {
               ))
             )}
           </div>
+          <div className="pageLinks">{renderPageLinks()}</div>
         </div>
       )}
-      <div className="pageLinks">{renderPageLinks()}</div>
     </div>
   );
 };
