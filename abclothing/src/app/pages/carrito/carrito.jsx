@@ -38,6 +38,12 @@ export const Carrito = () => {
       </div>
     );
   } else {
+    const formattedTotal = totalCarrito.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    const fractionalPart = formattedTotal.slice(-2);
+
     return (
       <div className="carrito">
         <div className="title">Prendas en el carrito</div>
@@ -54,7 +60,9 @@ export const Carrito = () => {
             <div className="subtotal">
               <h2>
                 Subtotal: ${Math.floor(totalCarrito).toLocaleString()}
-                <sup className="fractional-part">{totalCarrito.toLocaleString().slice(-2)}</sup>
+                <sup className="fractional-part">
+                  {fractionalPart === "00" ? "00" : fractionalPart.padStart(2, "0")}
+                </sup>
               </h2>
             </div>
             <div className="buttons">
@@ -69,6 +77,7 @@ export const Carrito = () => {
         <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">
           <ModalOverlay />
           <ModalContent borderRadius="15px" boxShadow="0px 3px 10px rgba(0, 0, 0, 0.2)">
+            <ModalCloseButton />
             <ModalBody textAlign="center">
               <Flex direction="column" alignItems="center" justifyContent="center" py="4">
                 <Flex alignItems="center">
