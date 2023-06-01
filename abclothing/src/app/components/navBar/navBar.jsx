@@ -102,13 +102,13 @@ export const Navbar = () => {
                   </MenuButton>
                   <MenuList>
                     <MenuGroup title="Perfil" color ="teal.500">
-                      <MenuItem icon={<BsEmojiSmile boxSize={4} />}
+                      <MenuItem icon={<BsEmojiSmile size={20} />}
                         style={{ pointerEvents: "none", cursor: "default" }}
                         color="beige.400"
                       >
                         Hola, {email ? email : "crack"}!
                       </MenuItem>
-                      <MenuItem icon={<BsBagHeart boxSize={4} />} onClick={() => historialAcces()} color="beige.400">
+                      <MenuItem icon={<BsBagHeart size={20} />} onClick={() => historialAcces()} color="beige.400">
                         Mis pedidos
                       </MenuItem>
                     </MenuGroup>
