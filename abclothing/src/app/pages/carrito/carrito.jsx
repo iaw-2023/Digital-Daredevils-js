@@ -3,7 +3,8 @@ import { ShopContext } from "../../context/shop-context";
 import { ItemCarrito } from "./itemCarrito";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "@/app/components/LoadingSpinner";
-import Modal from "react-modal";
+import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Button, ButtonGroup, Input, Flex } from "@chakra-ui/react";
+import { HiOutlineEnvelope } from "react-icons/hi2";
 import "./carrito.css";
 
 export const Carrito = () => {
@@ -39,9 +40,7 @@ export const Carrito = () => {
   } else {
     return (
       <div className="carrito">
-        <div className="title">
-          Prendas en el carrito
-        </div>
+        <div className="title">Prendas en el carrito</div>
         {!productosCarrito ? null :
           Object.values(productosCarrito).map((producto) => {
             if (producto.amount !== 0) {
@@ -67,62 +66,48 @@ export const Carrito = () => {
           <h1>Tu carrito está vacío</h1>
         )}
 
-        <Modal
-          isOpen={showModal}
-          onRequestClose={() => setShowModal(false)}
-          contentLabel="Checkout Modal"
-          style={{
-            overlay: {
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              zIndex: 9999,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            },
-            content: {
-              position: "relative",
-              top: "auto",
-              left: "auto",
-              right: "auto",
-              bottom: "auto",
-              width: "50%",
-              height: "50%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "white",
-              borderRadius: "25px",
-              boxShadow: "0px 3px 15px rgba(0, 0, 0, 0.2)",
-            },
-          }}
-        >
-          <div className="mensaje">
-            <div className="pedido">Ingrese correo para la compra</div>
-            <div>
-              <div>
-                <textarea
+        <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">
+          <ModalOverlay />
+          <ModalContent borderRadius="15px" boxShadow="0px 3px 10px rgba(0, 0, 0, 0.2)">
+            <ModalBody textAlign="center">
+              <Flex direction="column" alignItems="center" justifyContent="center" py="4">
+                <Flex alignItems="center">
+                  <HiOutlineEnvelope style={{ fontSize: "2rem", marginRight: "1rem" }} />
+                  <span style={{ fontWeight: "bold", fontFamily: "Inter, sans-serif", fontSize: "1.5rem" }}>Ingrese correo para la compra</span>
+                </Flex>
+                <Input
+                  type="email"
                   value={text}
                   onChange={handleTextChange}
                   placeholder="e.g.: riverplate@gmail.com"
-                  rows={1}
-                  cols={50}
-                  className="texto"
+                  size="lg"
+                  mt="4"
+                  focusBorderColor="teal"
+                  boxShadow="0px 3px 10px rgba(0, 0, 0, 0.2)"
                 />
-              </div>
-              <div className="close">
-                <button onClick={() => setShowModal(false)}>Cerrar</button>
-                <button
-                  onClick={() => {
-                    checkout(text);
-                  }}
-                  style={{ marginTop: "8px" }}
-                >
-                  Enviar pedido
-                </button>
-              </div>
-            </div>
-          </div>
+              </Flex>
+              <Flex justifyContent="center" mt="4">
+                <ButtonGroup gap='4'>
+                  <Button
+                    colorScheme="teal"
+                    variant='outline'
+                    borderRadius="base"
+                    onClick={() => setShowModal(false)}
+                    mr="4"
+                  >
+                    Cerrar
+                  </Button>
+                  <Button
+                    colorScheme="teal"
+                    borderRadius="base"
+                    onClick={() => checkout(text)}
+                  >
+                    Enviar pedido
+                  </Button>
+                </ButtonGroup>
+              </Flex>
+            </ModalBody>
+          </ModalContent>
         </Modal>
       </div>
     );
