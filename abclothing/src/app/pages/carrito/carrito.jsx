@@ -3,6 +3,7 @@ import { ShopContext } from "../../context/shop-context";
 import { ItemCarrito } from "./itemCarrito";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "@/app/components/LoadingSpinner";
+import Modal from "react-modal";
 import "./carrito.css";
 
 export const Carrito = () => {
@@ -13,7 +14,7 @@ export const Carrito = () => {
   const [totalCarritoLoading, setTotalCarritoLoading] = useState(true);
 
   const [showModal, setShowModal] = useState(false);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const handleTextChange = (event) => {
     setText(event.target.value);
   };
@@ -32,7 +33,7 @@ export const Carrito = () => {
   if (totalCarritoLoading) {
     return (
       <div className="carrito">
-        <LoadingSpinner/>
+        <LoadingSpinner />
       </div>
     );
   } else {
@@ -66,45 +67,66 @@ export const Carrito = () => {
           <h1>Tu carrito está vacío</h1>
         )}
 
-        {showModal ? (
-          <div className="modal-background">
-            <div className="mensaje" style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-              <div className="pedido">Ingrese correo para la compra</div>
+        <Modal
+          isOpen={showModal}
+          onRequestClose={() => setShowModal(false)}
+          contentLabel="Checkout Modal"
+          style={{
+            overlay: {
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 9999,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            },
+            content: {
+              position: "relative",
+              top: "auto",
+              left: "auto",
+              right: "auto",
+              bottom: "auto",
+              width: "50%",
+              height: "50%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "white",
+              borderRadius: "25px",
+              boxShadow: "0px 3px 15px rgba(0, 0, 0, 0.2)",
+            },
+          }}
+        >
+          <div className="mensaje">
+            <div className="pedido">Ingrese correo para la compra</div>
+            <div>
               <div>
-                <div>
-                  <textarea
-                    value={text}
-                    onChange={handleTextChange}
-                    placeholder="e.g.: riverplate@gmail.com"
-                    rows={1}
-                    cols={50}
-                    style={{
-                      border: '1px solid #ccc',
-                      borderRadius: '4px',
-                      padding: '8px',
-                      resize: 'vertical',
-                      fontSize: '14px',
-                      width: '100%',
-                      height: '50%'
-                    }}
-                  />
-                </div>
-                <div className="close">
-                  <button onClick={() => setShowModal(false)}>Cerrar</button>
-                  <button
-                    onClick={() => {
-                      checkout(text);
-                    }}
-                    style={{ marginTop: '8px' }}
-                  >
-                    Enviar pedido
-                  </button>
-                </div>
+                <textarea
+                  value={text}
+                  onChange={handleTextChange}
+                  placeholder="e.g.: riverplate@gmail.com"
+                  rows={1}
+                  cols={50}
+                  className="texto"
+                />
+              </div>
+              <div className="close">
+                <button onClick={() => setShowModal(false)}>Cerrar</button>
+                <button
+                  onClick={() => {
+                    checkout(text);
+                  }}
+                  style={{ marginTop: "8px" }}
+                >
+                  Enviar pedido
+                </button>
               </div>
             </div>
           </div>
-        ) : null}
+        </Modal>
       </div>
     );
   }
 };
+
+export default Carrito;

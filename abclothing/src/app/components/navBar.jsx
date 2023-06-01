@@ -55,6 +55,7 @@ export const Navbar = () => {
                   height={{ base: "40px", md: "70px" }}
                   maxWidth="100%"
                   objectFit="cover"
+                  borderRadius="md"
                 />
               </Box>
             </Link>
