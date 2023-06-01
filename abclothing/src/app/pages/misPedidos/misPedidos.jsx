@@ -28,13 +28,6 @@ export const MisPedidos = () => {
     }
   }, [email]);
 
-  if (!email) {
-    return (
-      <Box className="loading-shop" p={4}>
-        Debe ingresar un email primero (ingrese al menos un pedido)
-      </Box>
-    );
-  }
 
   return (
     <Box className="shop" p={4}>

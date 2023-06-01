@@ -20,11 +20,34 @@ import SearchBar from "../searchBar/searchBar";
 import SideBar from "../sideBar/Sidebar";
 import { ShopContext } from "../../context/shop-context";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import { toast } from "react-toastify";
 import "./navBar.css";
 
 export const Navbar = () => {
   const navigate = useNavigate(); 
   const { productosCarrito, email } = useContext(ShopContext);
+
+  const showFailureMessage = () =>{
+    toast.error('Se debe realizar un pedido minimamente para acceder al historial <3', {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
+  const historialAcces = () =>{
+    if (!email) {
+      showFailureMessage();
+    }
+    else{
+      navigate("/misPedidos");
+    }
+  }
+
 
   if (!productosCarrito){
     return <LoadingSpinner/>;
@@ -85,7 +108,7 @@ export const Navbar = () => {
                       >
                         Hola, {email ? email : "crack"}!
                       </MenuItem>
-                      <MenuItem icon={<BsBagHeart boxSize={4} />} onClick={() => navigate("/misPedidos")} color="beige.400">
+                      <MenuItem icon={<BsBagHeart boxSize={4} />} onClick={() => historialAcces()} color="beige.400">
                         Mis pedidos
                       </MenuItem>
                     </MenuGroup>
