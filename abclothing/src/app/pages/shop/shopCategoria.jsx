@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Producto } from "../../pages/shop/producto";
-import { PRODUCTOSBYCATEGORIA } from "./Categorias";
-import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import { Producto } from "./producto";
+import { PRODUCTOSBYCATEGORIA } from "../../components/categorias/Categorias";
+import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 import "../../pages/shop/shop.css";
 
-export const CategoriaProductos = () => {
+export const ShopCategoria = () => {
   const [productos, setProductos] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -20,13 +20,14 @@ export const CategoriaProductos = () => {
     const fetchProductos = async () => {
       try {
         setLoading(true);
-        const response = await(PRODUCTOSBYCATEGORIA(id));
+        const response = await PRODUCTOSBYCATEGORIA(id);
         setProductos(response.data);
         setLastPage(response.last_page);
-        setLoading(false);
       } catch (error) {
-        setLoading(false);
         console.error(error);
+      }
+      finally {
+        setLoading(false);
       }
     };
 
@@ -39,7 +40,7 @@ export const CategoriaProductos = () => {
 
   const renderPageLinks = () => {
     const pageLinks = [];
-    const pageRange = 2; // Number of pages to show before and after the current page
+    const pageRange = 2;
     const totalPages = lastPage;
   
     // Calculate the starting and ending page numbers to display
@@ -118,9 +119,9 @@ export const CategoriaProductos = () => {
               ))
             )}
           </div>
+          <div className="pageLinks">{renderPageLinks()}</div>
         </div>
       )}
-      <div className="pageLinks">{renderPageLinks()}</div>
     </div>
   );
 };

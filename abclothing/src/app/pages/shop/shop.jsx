@@ -143,10 +143,11 @@ export const Shop = () => {
               ))}
             </div>
           </div>
+          <div className="pageLinks">{renderPageLinks()}</div>
         </Box>
       )}
       <ToastContainer
-        position="bottom-right"
+        position="bottom-left"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -157,7 +158,6 @@ export const Shop = () => {
         pauseOnHover
         theme="light"
       />
-      <div className="pageLinks">{renderPageLinks()}</div>
     </div>
   );
 };
