@@ -1,24 +1,21 @@
-"use client";
-
 import React from "react";
 import { Link } from "react-router-dom";
+import { Box, Text } from "@chakra-ui/react";
 
 export const Pedido = (props) => {
   const { id, email, fecha } = props.data;
 
   return (
-    <div className="pedido">
+    <Box className="pedido" p={4} borderWidth={1} borderRadius="md" mb={4}>
       <Link to={`/detallesPedido/${id}`} className="product-link">
-        <div className="description">
-          <p>
-            <b>{id}</b>
-            <b>{email}</b>
-          </p>
-          <p>
+        <Box className="description">
+          <Text fontWeight="bold">{id}</Text>
+          <Text fontWeight="bold">{email}</Text>
+          <Text>
             <b>Fecha:</b> {fecha}
-          </p>
-        </div>
+          </Text>
+        </Box>
       </Link>
-    </div>
+    </Box>
   );
 };

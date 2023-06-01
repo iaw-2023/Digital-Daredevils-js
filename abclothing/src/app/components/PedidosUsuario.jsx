@@ -1,58 +1,65 @@
-"use client";
-
 import React, { useEffect, useState, useContext } from "react";
 import { ShopContext } from "../context/shop-context";
 import { PEDIDOS } from "./Pedidos";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import { Pedido } from "./Pedido";
 import LoadingSpinner from "./LoadingSpinner";
-import "../pages/shop/shop.css";
 
 export const PedidosUsuario = () => {
   const { email } = useContext(ShopContext);
   const [pedidos, setPedidos] = useState(null);
   const [loading, setLoading] = useState(true);
-  if (email){
-    useEffect(() => {
-      const fetchPedidos = async () => {
-        try {
-          setLoading(true);
-          const response = await PEDIDOS(email);
-          setPedidos(response.data);
-          setLoading(false);
-        } catch (error) {
-          setLoading(false);
-          console.error(error);
-        }
-      };
-  
+
+  useEffect(() => {
+    const fetchPedidos = async () => {
+      try {
+        setLoading(true);
+        const response = await PEDIDOS(email);
+        setPedidos(response.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.error(error);
+      }
+    };
+
+    if (email) {
       fetchPedidos();
-    }, [email]);
-  
+    }
+  }, [email]);
+
+  if (!email) {
     return (
-      <div className="shop">
-        
-        {loading ? (
-          <LoadingSpinner/>
-        ) : (
-          <div className="shopContent">
-            <div className="shopTitle">
-              <h1>Mis pedidos</h1>
-            </div>
-            <div className="pedidos">
-              {Object.values(pedidos).length === 0 ? (
-                <h1>No se encontraron pedidos asociados al cliente o el email era incorrecto.</h1>
-              ) : (
-                Object.values(pedidos).map((pedido) => (
-                  <Pedido data={pedido} key={pedido.id} />
-                ))
-              )}
-            </div>
-          </div>
-        )}
-      </div>
+      <Box className="loading-shop" p={4}>
+        Debe ingresar un email primero (ingrese al menos un pedido)
+      </Box>
     );
   }
-  else {
-    return <div className="loading-shop">Debe ingresar un email primero (ingrese al menos un pedido)</div>
-  }
+
+  return (
+    <Box className="shop" p={4}>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <Box className="shopContent">
+          <Box className="shopTitle" mb={4}>
+            <Heading as="h1" size="xl">
+              Mis pedidos
+            </Heading>
+          </Box>
+          <Box className="pedidos">
+            {Object.values(pedidos).length === 0 ? (
+              <Text fontSize="xl">
+                No se encontraron pedidos asociados al cliente o el email era incorrecto.
+              </Text>
+            ) : (
+              Object.values(pedidos).map((pedido) => (
+                <Pedido data={pedido} key={pedido.id} />
+              ))
+            )}
+          </Box>
+        </Box>
+      )}
+    </Box>
+  );
 };
