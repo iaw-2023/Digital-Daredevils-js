@@ -61,7 +61,7 @@ export const DetallesPedido = () => {
         ) : (
             <div className="shopContent">
                 <div className="shopTitle">
-                    <h1>Mis pedidos</h1>
+                    <h1>Pedido #{id}</h1>
                 </div>
                 <Divider my={4} />
                 <Table variant="striped" colorScheme="orange" size="sm">
@@ -76,14 +76,15 @@ export const DetallesPedido = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {Object.values(detallesPedido).length === 0 ? (
-                            <Tr>
-                                <Td colSpan="6">No se encontró un detalle para ese pedido.</Td>
-                            </Tr>
+                        {
+                            Object.values(detallesPedido).length === 0 ? (
+                                <Tr>
+                                    <Td colSpan="6">No se encontró un detalle para ese pedido.</Td>
+                                </Tr>
                         ) : (
-                        Object.values(detallesPedido).map((detallePedido) => (
-                            <Detalle data={detallePedido} key={detallePedido.id} />
-                        ))
+                            Object.values(detallesPedido).map((detallePedido) => (
+                                <Detalle data={detallePedido} key={detallePedido.id} />
+                            ))
                         )}
                     </Tbody>
                 </Table>
