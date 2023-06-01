@@ -13,7 +13,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
-import { ToastContainer } from "react-toastify";
 
 export const Shop = () => {
   const [productos, setProductos] = useState(null);
@@ -147,18 +146,6 @@ export const Shop = () => {
           <div className="pageLinks">{renderPageLinks()}</div>
         </Box>
       )}
-      <ToastContainer
-        position="bottom-left"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </div>
   );
 };

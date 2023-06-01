@@ -28,8 +28,8 @@ export const Navbar = () => {
   const { productosCarrito, email } = useContext(ShopContext);
 
   const showFailureMessage = () =>{
-    toast.error('Se debe realizar un pedido minimamente para acceder al historial <3', {
-      position: "bottom-right",
+    toast.error('Se debe realizar un pedido mínimamente para acceder al historial de pedidos <3', {
+      position: "bottom-left",
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
