@@ -2,9 +2,9 @@
 
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GENERARPEDIDO } from "../components/Pedidos";
+import { GENERARPEDIDO } from "../components/pedidos/Pedidos";
 import { toast } from "react-toastify";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
 import "react-toastify/dist/ReactToastify.css";
 
 export const ShopContext = createContext(null);

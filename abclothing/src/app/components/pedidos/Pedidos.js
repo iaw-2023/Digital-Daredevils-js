@@ -1,6 +1,6 @@
 "use client";
 
-import { PEDIDOS_API_ENDPOINT, DETALLES_PEDIDO_API_ENDPOINT } from '../ApiConstants';
+import { PEDIDOS_API_ENDPOINT, DETALLES_PEDIDO_API_ENDPOINT } from '../../ApiConstants';
 
 export async function GENERARPEDIDO(pedidoRequest) {
     try {

@@ -2,17 +2,17 @@
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Navbar } from "../components/navBar";
+import { Navbar } from "../components/navBar/navBar";
 import { Shop } from "./shop/shop";
 import { Contacto } from "./contacto";
 import { Carrito } from "./carrito/carrito";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ProductDetails } from "./productDetails/productDetails";
-import { CategoriaProductos } from "../components/Categorias/CategoriaProductos"
+import { CategoriaProductos } from "../components/categorias/CategoriaProductos"
 import { ShopContextProvider } from "../context/shop-context";
 import { ShopSearch } from "./shop/shopSearch";
-import { DetallesPedido } from "../components/DetallesPedidoView";
-import { PedidosUsuario } from "../components/PedidosUsuario";
+import { DetallesPedido } from "./detallesPedido/DetallesPedidoView";
+import { MisPedidos } from "./misPedidos/misPedidos";
 
 function App(){
   return (
@@ -26,7 +26,7 @@ function App(){
               <Route path="/shopSearch" element={<ShopSearch />} />
               <Route path="/contacto" element={<Contacto />} />
               <Route path="/carrito" element={<Carrito />} />
-              <Route path="/misPedidos" element={<PedidosUsuario />} />
+              <Route path="/misPedidos" element={<MisPedidos />} />
               <Route path="/productos/:id" element={<ProductDetails />} />
               <Route path="/categorias/:id/:nombre" element={<CategoriaProductos />} />
               <Route path="/detallesPedido/:id" element={<DetallesPedido />} />

@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../../context/shop-context";
 import { ItemCarrito } from "./itemCarrito";
 import { useNavigate } from "react-router-dom";
-import LoadingSpinner from "@/app/components/LoadingSpinner";
+import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
 import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Button, ButtonGroup, Input, Flex } from "@chakra-ui/react";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import "./carrito.css";

@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, Divider } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import { DETALLESPEDIDO } from "./Pedidos";
+import { DETALLESPEDIDO } from "../../components/pedidos/Pedidos";
 import "./detallesPedidoView.css";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 
 const Detalle = (props) => {
     const { modelo, marca, talle, precio, cantidad } = props.data;

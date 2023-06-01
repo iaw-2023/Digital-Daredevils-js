@@ -1,10 +1,10 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CATEGORIAS } from "./Categorias/Categorias";
-import { Categoria } from "./Categorias/Categoria";
-import LoadingSpinner from "./LoadingSpinner";
-import "./HomeMenu.css"
+import { CATEGORIAS } from "../categorias/Categorias";
+import { Categoria } from "../categorias/Categoria";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import "./Menu.css"
 
 const HomeMenu = () => {
     const [categorias, setCategorias] = useState(null);

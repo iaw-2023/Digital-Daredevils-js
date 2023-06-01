@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { PRODUCTOSBYQUERY } from "../../components/Productos";
+import { PRODUCTOSBYQUERY } from "../../components/productos/Productos";
 import { Producto } from "./producto";
 import { useLocation } from "react-router-dom";
-import LoadingSpinner from "@/app/components/LoadingSpinner";
+import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
 import "./shop.css";
 
 export const ShopSearch = () => {

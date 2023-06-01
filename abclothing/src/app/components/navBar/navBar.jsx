@@ -15,11 +15,11 @@ import {
   Menu
 } from "@chakra-ui/react";
 import { BsBagHeart, BsBag, BsEmojiSmile, BsPerson } from "react-icons/bs";
-import HomeMenu from "./HomeMenu";
-import SearchBar from "./searchBar";
-import SideBar from "./Sidebar";
-import { ShopContext } from "../context/shop-context";
-import LoadingSpinner from "./LoadingSpinner";
+import HomeMenu from "../Menu/Menu";
+import SearchBar from "../searchBar/searchBar";
+import SideBar from "../sideBar/Sidebar";
+import { ShopContext } from "../../context/shop-context";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import "./navBar.css";
 
 export const Navbar = () => {

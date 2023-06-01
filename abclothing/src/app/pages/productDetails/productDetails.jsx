@@ -3,9 +3,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../../context/shop-context";
-import { PRODUCTOBYID } from '../../components/Productos';
+import { PRODUCTOBYID } from '../../components/productos/Productos';
 import Image from 'next/image';
-import LoadingSpinner from "@/app/components/LoadingSpinner";
+import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
 import "./productDetails.css";
 
 export const ProductDetails = () => {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import { ShopContext } from "../context/shop-context";
-import { PEDIDOS } from "./Pedidos";
+import { ShopContext } from "../../context/shop-context";
+import { PEDIDOS } from "../../components/pedidos/Pedidos";
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { Pedido } from "./Pedido";
-import LoadingSpinner from "./LoadingSpinner";
+import { Pedido } from "../../components/pedidos/Pedido";
+import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 
-export const PedidosUsuario = () => {
+export const MisPedidos = () => {
   const { email } = useContext(ShopContext);
   const [pedidos, setPedidos] = useState(null);
   const [loading, setLoading] = useState(true);

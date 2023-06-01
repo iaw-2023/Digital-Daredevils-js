@@ -1,7 +1,7 @@
 import React from "react";
 import { CATEGORIAS } from './Categorias';
 import { Categoria } from './Categoria';
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 
 export const ListaCategorias = () => {
   const { loading, categorias } = CATEGORIAS();

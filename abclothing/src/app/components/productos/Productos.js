@@ -1,6 +1,6 @@
 "use client";
 
-import { PRODUCTOS_API_ENDPOINT, PRODUCTOSQUERY_API_ENDPOINT } from '../ApiConstants';
+import { PRODUCTOS_API_ENDPOINT, PRODUCTOSQUERY_API_ENDPOINT } from '../../ApiConstants';
 
 export async function LISTAPRODUCTOS(page) {
   const response = await fetch(PRODUCTOS_API_ENDPOINT + "?page=" + page);

@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { LISTAPRODUCTOS } from "../../components/Productos";
+import { LISTAPRODUCTOS } from "../../components/productos/Productos";
 import { Producto } from "./producto";
-import HomeSlider from "../../components/HomeSlider";
+import HomeSlider from "../../components/homeSlider/HomeSlider";
 import "./shop.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,7 +12,7 @@ import {
   Progress,
   Text,
 } from "@chakra-ui/react";
-import LoadingSpinner from "@/app/components/LoadingSpinner";
+import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
 import { ToastContainer } from "react-toastify";
 
 export const Shop = () => {
