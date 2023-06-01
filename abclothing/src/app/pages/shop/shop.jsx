@@ -29,10 +29,11 @@ export const Shop = () => {
         const response = await LISTAPRODUCTOS(currentPage);
         setProductos(response.data);
         setLastPage(response.last_page);
-        setLoading(false);
       } catch (error) {
-        setLoading(false);
         console.error(error);
+      }
+      finally {
+        setLoading(false);
       }
     };
 

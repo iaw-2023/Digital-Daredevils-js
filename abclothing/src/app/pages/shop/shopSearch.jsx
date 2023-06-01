@@ -25,10 +25,11 @@ export const ShopSearch = () => {
         const response = await PRODUCTOSBYQUERY(searchQuery);
         setProductos(response.data);
         setLastPage(response.last_page);
-        setLoading(false);
       } catch (error) {
-        setLoading(false);
         console.error(error);
+      }
+      finally {
+        setLoading(false);
       }
     };
 

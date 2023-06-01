@@ -15,17 +15,17 @@ export const ProductDetails = () => {
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     const fetchProducto = async () => {
       try {
         setLoading(true);
         const response = await PRODUCTOBYID(id);
         setProducto(response);
-        setLoading(false);
       } catch (error) {
-        setLoading(false);
         console.error(error);
+      }
+      finally {
+        setLoading(false);
       }
     };
 

@@ -30,10 +30,11 @@
           setLoading(true);
           const response = await CATEGORIAS();
           setCategorias(response.data);
-          setLoading(false);
         } catch (error) {
-          setLoading(false);
           console.log("Error fetching categorias:", error);
+        }
+        finally {
+          setLoading(false);
         }
       };
 

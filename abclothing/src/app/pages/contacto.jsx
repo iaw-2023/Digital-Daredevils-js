@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Button, FormControl, FormLabel, Heading, Input, Textarea, VStack } from "@chakra-ui/react";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export const Contacto = () => {
   const handleSubmit = (e) => {

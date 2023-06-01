@@ -16,10 +16,11 @@ export const MisPedidos = () => {
         setLoading(true);
         const response = await PEDIDOS(email);
         setPedidos(response.data);
-        setLoading(false);
       } catch (error) {
-        setLoading(false);
         console.error(error);
+      }
+      finally {
+        setLoading(false);
       }
     };
 

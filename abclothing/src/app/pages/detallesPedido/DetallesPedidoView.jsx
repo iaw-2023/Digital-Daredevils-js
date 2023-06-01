@@ -30,15 +30,16 @@ export const DetallesPedido = () => {
 
     useEffect(() => {
         const fetchDetallesPedido = async () => {
-        try {
-            setLoading(true);
-            const response = await DETALLESPEDIDO(id);
-            setDetallesPedido(response);
-            setLoading(false);
-        } catch (error) {
-            setLoading(false);
-            console.error(error);
-        }
+            try {
+                setLoading(true);
+                const response = await DETALLESPEDIDO(id);
+                setDetallesPedido(response);
+            } catch (error) {
+                console.error(error);
+            }
+            finally {
+                setLoading(false);    
+            }
         };
 
         fetchDetallesPedido();

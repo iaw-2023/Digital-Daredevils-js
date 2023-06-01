@@ -98,14 +98,15 @@ export const ShopContextProvider = (props) => {
       try {
         setLoading(true);
         await GENERARPEDIDO(pedidoRequest);
-        setLoading(false);
         resetCart();
         showSuccessMessage();
       } catch (error) {
-        setLoading(false);
         showFailureMessage();
       }
-      navigate("/");
+      finally {
+        setLoading(false);
+        navigate("/");
+      }  
     }
   };
 
