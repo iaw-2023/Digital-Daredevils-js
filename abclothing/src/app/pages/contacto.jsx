@@ -1,20 +1,19 @@
 import React from "react";
 import { Box, Button, FormControl, FormLabel, Heading, Input, Textarea, VStack } from "@chakra-ui/react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 export const Contacto = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Implement form submission logic here
-    toast.success("Gracias por su mensaje ❤️, lo contactaremos con una pronta respuesta", {
-      position: "bottom-right",
-      autoClose: 1000,
+    toast.success('Gracias por su mensaje ❤️, lo contactaremos con una pronta respuesta', {
+      position: "bottom-left",
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: 1,
-      theme: "light",
+      progress: undefined,
+      theme:"light",
     });
   };
 
@@ -45,18 +44,6 @@ export const Contacto = () => {
           </Button>
         </VStack>
       </form>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </Box>
   );
 };

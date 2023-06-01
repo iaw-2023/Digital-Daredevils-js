@@ -13,12 +13,25 @@ import { ShopContextProvider } from "../context/shop-context";
 import { ShopSearch } from "./shop/shopSearch";
 import { DetallesPedido } from "./detallesPedido/DetallesPedidoView";
 import { MisPedidos } from "./misPedidos/misPedidos";
+import { ToastContainer } from "react-toastify";
 
 function App(){
   return (
     <div className="App">
       <Router>
         <ChakraProvider>
+          <ToastContainer
+            position="bottom-left"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
           <ShopContextProvider>
             <Navbar />
             <Routes>
