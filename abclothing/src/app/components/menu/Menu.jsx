@@ -65,7 +65,7 @@ const HomeMenu = () => {
                     <Box
                         top="4rem"
                         className="drop-down-content"
-                        left="-2rem"
+                        
                         overflow="hidden"
                         bg="white"
                         pos={"absolute"}
@@ -73,7 +73,6 @@ const HomeMenu = () => {
                         transition={"all 0.3s"}
                         height={"0vh"}
                         marginTop="14px"
-                        border= '1px solid #ccc'
                     >   
                         <Link to="#">
                             <div className="main-menu">

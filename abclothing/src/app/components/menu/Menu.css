@@ -40,11 +40,11 @@
 .dropDown:hover > .drop-down-content {
   width: fit-content;
   height: auto;
-  background-color: #fdfdfd;
+  background-color: #f7f4f4;
   box-shadow: 3px 7px 7px -5px rgba(170, 159, 170, 0.4);
   position: absolute;
   top: 60%;
-  left: 0; /* Add this line to align the dropdown container to the left */
+  left: -20px; /* Add this line to align the dropdown container to the left */
 }
 
 
@@ -52,13 +52,10 @@
   text-align: left;
   position: absolute;
   width: fit-content;
-  background-color: white;
-  border: 1px solid #ccc;
   margin-top: 14px;
   padding: 10px;
   box-sizing: border-box;
   display: none; 
-  border-radius: 15px;
 }
 
 .dropDown:hover > .drop-down-content {
