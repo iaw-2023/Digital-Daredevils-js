@@ -30,7 +30,7 @@ export const ProductDetails = () => {
     };
 
     fetchProducto();
-  }, []);
+  }, [id]);
 
 
   let cantidadItemsCarrito = 0;

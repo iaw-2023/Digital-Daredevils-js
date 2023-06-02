@@ -27,6 +27,7 @@ export default class HomeSlider extends Component {
                 margin={"auto"}
                 width={"100%"}
                 src="/SliderImage2.gif"
+                alt="Carrousel1"
               />
           </Box>
           <Box borderRadius={"8px"}>
@@ -35,6 +36,7 @@ export default class HomeSlider extends Component {
               margin={"auto"}
               width={"100%"}
               src="/SliderImage1.jpg"
+              alt="Carrousel2"
             />
           </Box>
           <Box borderRadius={"8px"}>
@@ -43,6 +45,7 @@ export default class HomeSlider extends Component {
               margin={"auto"}
               width={"100%"}
               src="/SliderImage3.jpg"
+              alt="Carrousel3"
             />
           </Box>
           <Box borderRadius={"8px"}>
@@ -51,6 +54,7 @@ export default class HomeSlider extends Component {
               margin={"auto"}
               width={"100%"}
               src="/SliderImage4.gif"
+              alt="Carrousel4"
             />
           </Box>
           <Box borderRadius={"8px"}>
@@ -59,6 +63,7 @@ export default class HomeSlider extends Component {
               margin={"auto"}
               width={"100%"}
               src="/SliderImage5.jpg"
+              alt="Carrousel5"
             />
           </Box>
         </Slider>

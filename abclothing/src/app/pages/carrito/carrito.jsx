@@ -36,7 +36,7 @@ export const Carrito = () => {
       setTotalCarritoLoading(false);
     };
     fetchTotalCarrito();
-  }, [productosCarrito]);
+  }, [productosCarrito, getTotalCarrito]);
 
   const handleInputEmailChange = (event) => {
     setInputEmail(event.target.value);

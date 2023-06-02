@@ -48,7 +48,7 @@ export const ShopSearch = () => {
       ) : (
         <div className="shopContent">
           <div className="shopTitle">
-            <h1>Resultados para '{searchQuery}'</h1>
+            <h1>Resultados para &apos;{searchQuery}&apos;</h1>
           </div>
           <div className="productos">
             <ProductosList productos={productos} />
