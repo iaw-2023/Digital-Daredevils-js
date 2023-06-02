@@ -3,25 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, Divider } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import { DETALLESPEDIDO } from "../../components/pedidos/Pedidos";
+import DetallesPedidoList from "../../components/detallesPedido/DetallesPedidoList";
+import { DETALLESPEDIDO } from "../../components/pedidos/PedidosFetch";
 import "./detallesPedidoView.css";
 import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
-
-const Detalle = (props) => {
-    const { modelo, marca, talle, precio, cantidad } = props.data;
-    const subtotal = cantidad * precio;
-  
-    return (
-      <Tr>
-        <Td>{modelo}</Td>
-        <Td>{marca}</Td>
-        <Td>{talle}</Td>
-        <Td>{cantidad}</Td>
-        <Td>${precio}</Td>
-        <Td>${subtotal}</Td>
-      </Tr>
-    );
-};
 
 export const DetallesPedido = () => {
     const { id } = useParams();
@@ -75,16 +60,7 @@ export const DetallesPedido = () => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {
-                                Object.values(detallesPedido).length === 0 ? (
-                                    <Tr>
-                                        <Td colSpan="6">No se encontró un detalle para ese pedido.</Td>
-                                    </Tr>
-                            ) : (
-                                Object.values(detallesPedido).map((detallePedido) => (
-                                    <Detalle data={detallePedido} key={detallePedido.id} />
-                                ))
-                            )}
+                            <DetallesPedidoList detallesPedido={detallesPedido} />
                         </Tbody>
                     </Table>
                     <p style={{ marginTop: "20px" }}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
-import { PEDIDOS } from "../../components/pedidos/Pedidos";
+import { PEDIDOS } from "../../components/pedidos/PedidosFetch";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { Pedido } from "../../components/pedidos/Pedido";
 import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";

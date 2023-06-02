@@ -2,7 +2,7 @@
 
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GENERARPEDIDO } from "../components/pedidos/Pedidos";
+import { GENERARPEDIDO } from "../components/pedidos/PedidosFetch";
 import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
 import { showSuccessMessage, showFailureMessage } from "../components/alerts/alerts";
 

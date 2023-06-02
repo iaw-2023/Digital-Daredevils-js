@@ -22,8 +22,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { BsBag, BsCart3 } from "react-icons/bs";
 import { BiPurchaseTagAlt } from "react-icons/bi";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
-import { toast } from "react-toastify";
 import { ShopContext } from "../../context/shop-context";
+import { showFailureMessage } from "../alerts/alerts";
 import "./Sidebar.css";
 
 function SideBar() {
@@ -51,21 +51,10 @@ function SideBar() {
     fetchCategorias();
   }, []);
 
-  const showFailureMessage = () =>{
-    toast.error('Se debe realizar un pedido mínimamente para acceder al historial de pedidos <3', {
-      position: "bottom-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  }
-  const historialAcces = () =>{
+
+  const handleMisPedidosAttempt = () =>{
     if (!email) {
-      showFailureMessage();
+      showFailureMessage('Se debe realizar un pedido mínimamente para acceder al historial de pedidos <3');
     }
     else{
       navigate("/misPedidos");
@@ -84,7 +73,7 @@ function SideBar() {
       <Drawer onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-        <DrawerCloseButton color={"black"} fontSize="3xl" colorScheme="orange" font-weight={ "light"} />
+          <DrawerCloseButton color={"black"} fontSize="3xl" colorScheme="orange" font-weight={ "light"} />
           <DrawerBody>
             <Flex justify="center" alignItems="center" p="1rem">
               <Image
@@ -162,7 +151,7 @@ function SideBar() {
                 fontSize="1.5rem"
                 fontWeight="normal"
                 leftIcon={<BiPurchaseTagAlt />}
-                onClick={() => historialAcces()}
+                onClick={() => handleMisPedidosAttempt()}
               >
                 Mis pedidos
               </Button>
