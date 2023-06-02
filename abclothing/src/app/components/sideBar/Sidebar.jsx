@@ -89,7 +89,7 @@ function SideBar() {
                 src="/abLogo.png"
                 alt="logo"
                 width="12rem"
-                height={{ base: "3rem", md: "100%" }}
+                height={"100%"}
                 borderRadius="md"
               />
             </Flex>
