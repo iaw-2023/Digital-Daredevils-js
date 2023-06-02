@@ -2,7 +2,7 @@
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Navbar } from "../components/navBar/navBar";
 import { Shop } from "./shop/shop";
 import { Contacto } from "./contacto";
@@ -25,7 +25,7 @@ function App(){
             position="bottom-left"
             autoClose={3000}
             hideProgressBar={false}
-            newestOnTop={false}
+            newestOnTop={true}
             closeOnClick
             rtl={false}
             pauseOnFocusLoss
@@ -46,9 +46,9 @@ function App(){
               <Route path="/detallesPedido/:id" element={<DetallesPedido />} />
             </Routes>
             <footer>
-              <a href="https://github.com/iaw-2023/Digital-Daredevils-js/">
-              <p>Created by Digital Daredevils</p>
-              </a>
+              <Link to="https://github.com/iaw-2023/Digital-Daredevils-js/">
+                <p>Created by Digital Daredevils ®</p>
+              </Link>
             </footer>
           </ShopContextProvider>
         </ChakraProvider>
