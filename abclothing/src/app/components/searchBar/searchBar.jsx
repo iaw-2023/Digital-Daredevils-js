@@ -16,13 +16,17 @@ function SearchBar() {
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSearch();
+      e.target.value = "";
+      setSearchValue(e.target.value);
     }
   };
 
   return (
     <Box borderRadius={"md"} pos="relative">
       <InputGroup className="input-group">
-        <InputLeftElement children={<BsSearch color="gray.300" />} />
+      <InputLeftElement>
+        <BsSearch color="gray.300" />
+      </InputLeftElement>
         <Input
           type="text"
           outline="none"

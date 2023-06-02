@@ -58,7 +58,9 @@ function SideBar() {
     }
     else{
       navigate("/misPedidos");
+      onClose();
     }
+
   }
 
   if (loading) {
@@ -73,7 +75,7 @@ function SideBar() {
       <Drawer onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-        <DrawerCloseButton color={"black"} fontSize="2xl" _hover={{ color: "orange" }}/>
+          <DrawerCloseButton color={"black"} fontSize="2xl" _hover={{ color: "orange" }}/>
           <DrawerBody>
             <Flex justify="center" alignItems="center" p="1rem">
               <Image
@@ -102,6 +104,7 @@ function SideBar() {
                 fontSize="1.5rem"
                 fontWeight="normal"
                 leftIcon={<BsBag />}
+                onClick={onClose}
               >
                 Shop
               </Button>
@@ -125,6 +128,7 @@ function SideBar() {
                         <Link
                           to={`/categorias/${categoria.id}/${categoria.nombre}`}
                           className="sidebar-categoria-link"
+                          onClick={onClose}
                         >
                           {categoria.nombre}
                         </Link>
@@ -141,6 +145,7 @@ function SideBar() {
                 fontSize="1.5rem"
                 fontWeight="normal"
                 leftIcon={<BsCart3 />}
+                onClick={onClose}
               >
                 Carrito
               </Button>
