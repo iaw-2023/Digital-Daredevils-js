@@ -7,7 +7,7 @@ import {
   DrawerOverlay,
   Flex,
   Image,
-  Text,
+  Divider,
   Menu,
   MenuButton,
   MenuList,
@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 import { CATEGORIAS } from "../categorias/Categorias";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsBag, BsCart3 } from "react-icons/bs";
-import { BiPurchaseTagAlt } from "react-icons/bi"
+import { BiPurchaseTagAlt } from "react-icons/bi";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import "./Sidebar.css";
 
@@ -65,14 +65,23 @@ function SideBar() {
                 borderRadius="md"
               />
             </Flex>
-
-            <Flex justify="center" pl="1rem" gap="5" flexDir="column" mx="2rem" mt="2rem">
+            <Divider />
+            <Flex
+              pl="0rem"
+              gap="5"
+              flexDir="column"
+              mx="2rem"
+              mt="2rem"
+              justify="center"
+              alignItems="center"
+            >
               <Button
                 as={Link}
                 to="/"
                 variant="ghost"
                 textAlign="center"
                 fontSize="1.5rem"
+                fontWeight="normal"
                 leftIcon={<BsBag />}
               >
                 Shop
@@ -84,6 +93,7 @@ function SideBar() {
                   leftIcon={<GiHamburgerMenu />}
                   textAlign="center"
                   fontSize="1.5rem"
+                  fontWeight="normal"
                   variant="ghost"
                   _hover={{ bg: "transparent" }}
                 >
@@ -110,7 +120,8 @@ function SideBar() {
                 variant="ghost"
                 textAlign="center"
                 fontSize="1.5rem"
-                leftIcon={<BsBag />}
+                fontWeight="normal"
+                leftIcon={<BsCart3 />}
               >
                 Carrito
               </Button>
@@ -121,10 +132,15 @@ function SideBar() {
                 variant="ghost"
                 textAlign="center"
                 fontSize="1.5rem"
+                fontWeight="normal"
                 leftIcon={<BiPurchaseTagAlt />}
               >
                 Mis pedidos
               </Button>
+              <Divider/>
+              <Flex justify="center" alignItems="center" mt="2rem">
+                <p style={{ fontSize: "0.8rem" }}>Created by Digital Daredevils ®</p>
+              </Flex>
             </Flex>
           </DrawerBody>
         </DrawerContent>
