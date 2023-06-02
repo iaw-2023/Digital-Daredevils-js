@@ -7,6 +7,17 @@ import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Button,
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import "./carrito.css";
 
+const formatTotalCarrito = (totalCarrito) => {
+  return totalCarrito.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+const parteEnteraDe = (totalCarrito) => {
+  return Math.floor(totalCarrito).toLocaleString();
+}
+
 export const Carrito = () => {
   const { productosCarrito, getTotalCarrito, checkout } = useContext(ShopContext);
   const navigate = useNavigate();
@@ -15,21 +26,21 @@ export const Carrito = () => {
   const [totalCarritoLoading, setTotalCarritoLoading] = useState(true);
 
   const [showModal, setShowModal] = useState(false);
-  const [text, setText] = useState("");
-  const handleTextChange = (event) => {
-    setText(event.target.value);
-  };
+  const [inputEmail, setInputEmail] = useState("");
 
   useEffect(() => {
-    const fetchTotalCarrito = async () => {
+    const fetchTotalCarrito = () => {
       setTotalCarritoLoading(true);
-      const total = await getTotalCarrito();
+      const total = getTotalCarrito();
       setTotalCarrito(total);
       setTotalCarritoLoading(false);
     };
-
     fetchTotalCarrito();
   }, [productosCarrito]);
+
+  const handleInputEmailChange = (event) => {
+    setInputEmail(event.target.value);
+  };
 
   if (totalCarritoLoading) {
     return (
@@ -38,30 +49,29 @@ export const Carrito = () => {
       </div>
     );
   } else {
-    const formattedTotal = totalCarrito.toLocaleString(undefined, {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
+    const formattedTotal = formatTotalCarrito(totalCarrito);
     const fractionalPart = formattedTotal.slice(-2);
     
     return (
       <div className="carrito">
-        {productosCarrito && Object.keys(productosCarrito).length !== 0 && (
-          <h2 className="title">Prendas en el carrito</h2>
+        {productosCarrito && Object.keys(productosCarrito).length !== 0 && totalCarrito > 0 && (
+          <>
+            <h2 className="title">Prendas en el carrito</h2>
+            {console.log(productosCarrito)}
+            {Object.values(productosCarrito).map((producto) => {
+              if (producto.amount !== 0) {
+                return <ItemCarrito data={producto} key={producto.id} />;
+              }
+              return null;
+            })}
+          </>
         )}
-
-        {Object.values(productosCarrito).map((producto) => {
-          if (producto.amount !== 0) {
-            return <ItemCarrito data={producto} key={producto.id} />;
-          }
-          return null;
-        })}
 
         {totalCarrito > 0 ? (
           <div className="checkout">
             <div className="subtotal">
               <h2>
-                Subtotal: ${Math.floor(totalCarrito).toLocaleString()}
+                Subtotal: ${parteEnteraDe(totalCarrito)}
                 <sup className="fractional-part">
                   {fractionalPart === "00" ? "00" : fractionalPart.padStart(2, "0")}
                 </sup>
@@ -74,23 +84,24 @@ export const Carrito = () => {
           </div>
         ) : (
           <Flex 
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          mt={8}
-          mb={4}
-          maxW={[ '100%']}
-          mx="auto">
-          <Image src="/sad_shopping_bag.png" alt="Sad Shopping Bag" className="sad-shopping-bag" mt={0} mb={4} maxW={[ '40%', '40%', '40%', '40%']} justifyContent="center" mx="auto" />
-          <Box bg="white" boxShadow="md" p={12} mt={8} mb={4} w='6xl' maxW={['80%', '80%', '80%', '80%']} mx="auto">
-            <Flex flexDirection="column" alignItems="center" justifyContent="center">
-              <Text fontSize={['lg', '3xl', '5xl']} fontWeight="bold" fontFamily="Inter, sans-serif" mt={2} mb={6} textAlign="center">
-                Tu carrito está <Box as="span" color="#da4352" className="highlight">vacío!</Box>
-              </Text>
-              <Text fontSize={['xs','sd','md', 'lg']} mb={2}>Añade items al carrito antes de proceder al checkout.</Text>
-              <Link to="/" className="shop-button" >Volver al shop</Link>
-            </Flex>
-          </Box>
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            mt={8}
+            mb={4}
+            maxW={[ '100%']}
+            mx="auto"
+          >
+            <Image src="/sad_shopping_bag.png" alt="Sad Shopping Bag" className="sad-shopping-bag" mt={0} mb={4} maxW='40%' justifyContent="center" mx="auto" />
+            <Box bg="white" boxShadow="md" p={12} mt={8} mb={4} w='6xl' maxW='80%' mx="auto">
+              <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                <Text fontSize={['lg', '3xl', '5xl']} fontWeight="bold" fontFamily="Inter, sans-serif" mt={2} mb={6} textAlign="center">
+                  Tu carrito está <Box as="span" color="#da4352" className="highlight">vacío!</Box>
+                </Text>
+                <Text fontSize={['xs','sd','md', 'lg']} mb={2}>Añade items al carrito antes de proceder al checkout.</Text>
+                <Link to="/" className="shop-button" >Volver al shop</Link>
+              </Flex>
+            </Box>
           </Flex>
         )}
 
@@ -108,8 +119,8 @@ export const Carrito = () => {
                 </Flex>
                 <Input
                   type="email"
-                  value={text}
-                  onChange={handleTextChange}
+                  value={inputEmail}
+                  onChange={handleInputEmailChange}
                   placeholder="e.g.: riverplate@gmail.com"
                   size="lg"
                   mt="4"
@@ -131,7 +142,7 @@ export const Carrito = () => {
                   <Button
                     colorScheme="teal"
                     borderRadius="base"
-                    onClick={() => checkout(text)}
+                    onClick={() => checkout(inputEmail)}
                   >
                     Enviar pedido
                   </Button>

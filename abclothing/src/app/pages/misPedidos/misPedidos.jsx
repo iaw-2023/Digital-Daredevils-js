@@ -23,12 +23,8 @@ export const MisPedidos = () => {
         setLoading(false);
       }
     };
-
-    if (email) {
-      fetchPedidos();
-    }
+    fetchPedidos();
   }, [email]);
-
 
   return (
     <Box className="shop" p={4}>

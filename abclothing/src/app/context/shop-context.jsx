@@ -3,36 +3,10 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GENERARPEDIDO } from "../components/pedidos/Pedidos";
-import { toast } from "react-toastify";
 import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
+import { showSuccessMessage, showFailureMessage } from "../components/alerts/alerts";
 
 export const ShopContext = createContext(null);
-
-const showSuccessMessage = () =>{
-  toast.success('Pedido efectuado con éxito, muchas gracias!', {
-    position: "bottom-left",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  });
-}
-const showFailureMessage = () =>{
-  toast.error('Hubo un problema al realizar el pedido, lo lamentamos!', {
-    position: "bottom-right",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  });
-}
-
 
 export const ShopContextProvider = (props) => {
   const navigate = useNavigate();
@@ -40,8 +14,7 @@ export const ShopContextProvider = (props) => {
   const [productosCarrito, setProductosCarrito] = useState({});
   const [loading, setLoading] = useState(false);
 
-
-  const getTotalCarrito = async () => {
+  const getTotalCarrito = () => {
     let cantidadTotal = 0;
     if (productosCarrito !== undefined){
       for (const itemId in productosCarrito) {
@@ -62,13 +35,10 @@ export const ShopContextProvider = (props) => {
     }
   };
 
- 
-
   const quitarDelCarrito = (producto) => {
     const nuevaCantidad = producto.amount - 1;
     actualizarCantidadItemsCarrito(nuevaCantidad, producto.id);
   };
-  
   
   const actualizarCantidadItemsCarrito = (nuevaCantidad, itemId) => {
     if (productosCarrito !== undefined) {
@@ -79,7 +49,6 @@ export const ShopContextProvider = (props) => {
       });
     }
   };
-
 
   const checkout = async (email) => {
     setEmail(email);
@@ -98,9 +67,9 @@ export const ShopContextProvider = (props) => {
         setLoading(true);
         await GENERARPEDIDO(pedidoRequest);
         resetCart();
-        showSuccessMessage();
+        showSuccessMessage('Pedido efectuado con éxito, muchas gracias!');
       } catch (error) {
-        showFailureMessage();
+        showFailureMessage('Hubo un problema al realizar el pedido, lo lamentamos!');
       }
       finally {
         setLoading(false);

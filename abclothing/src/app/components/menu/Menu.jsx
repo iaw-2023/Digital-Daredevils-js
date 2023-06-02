@@ -1,7 +1,7 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CATEGORIAS } from "../categorias/Categorias";
+import { CATEGORIAS } from "../categorias/CategoriasFetch";
 import { Categoria } from "../categorias/Categoria";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import "./Menu.css"

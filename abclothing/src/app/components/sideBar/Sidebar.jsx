@@ -16,7 +16,7 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { CATEGORIAS } from "../categorias/Categorias";
+import { CATEGORIAS } from "../categorias/CategoriasFetch";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsBag, BsCart3 } from "react-icons/bs";
 import { BiPurchaseTagAlt } from "react-icons/bi";
@@ -32,7 +32,7 @@ function SideBar() {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate(); 
-  const { productosCarrito, email } = useContext(ShopContext);
+  const { email } = useContext(ShopContext);
 
   useEffect(() => {
     const fetchCategorias = async () => {

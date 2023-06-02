@@ -45,7 +45,6 @@ export const DetallesPedido = () => {
         fetchDetallesPedido();
     }, [id]);
 
-
     let total = 0;
     if (!loading){
         Object.values(detallesPedido).forEach((detallePedido) => {
@@ -56,44 +55,43 @@ export const DetallesPedido = () => {
 
     return (
         <div className="shop">
-        
-        {loading ? (
-            <LoadingSpinner/>
-        ) : (
-            <div className="shopContent">
-                <div className="shopTitle">
-                    <h1>Pedido #{id}</h1>
+            {loading ? (
+                <LoadingSpinner/>
+            ) : (
+                <div className="shopContent">
+                    <div className="shopTitle">
+                        <h1>Pedido #{id}</h1>
+                    </div>
+                    <Divider my={4} />
+                    <Table variant="striped" colorScheme="orange" size="sm">
+                        <Thead>
+                            <Tr>
+                                <Th>Modelo</Th>
+                                <Th>Marca</Th>
+                                <Th>Talle</Th>
+                                <Th>Cantidad</Th>
+                                <Th>Precio</Th>
+                                <Th>Subtotal</Th>
+                            </Tr>
+                        </Thead>
+                        <Tbody>
+                            {
+                                Object.values(detallesPedido).length === 0 ? (
+                                    <Tr>
+                                        <Td colSpan="6">No se encontró un detalle para ese pedido.</Td>
+                                    </Tr>
+                            ) : (
+                                Object.values(detallesPedido).map((detallePedido) => (
+                                    <Detalle data={detallePedido} key={detallePedido.id} />
+                                ))
+                            )}
+                        </Tbody>
+                    </Table>
+                    <p style={{ marginTop: "20px" }}>
+                        <b>Total:</b> ${total}
+                    </p>       
                 </div>
-                <Divider my={4} />
-                <Table variant="striped" colorScheme="orange" size="sm">
-                    <Thead>
-                        <Tr>
-                            <Th>Modelo</Th>
-                            <Th>Marca</Th>
-                            <Th>Talle</Th>
-                            <Th>Cantidad</Th>
-                            <Th>Precio</Th>
-                            <Th>Subtotal</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {
-                            Object.values(detallesPedido).length === 0 ? (
-                                <Tr>
-                                    <Td colSpan="6">No se encontró un detalle para ese pedido.</Td>
-                                </Tr>
-                        ) : (
-                            Object.values(detallesPedido).map((detallePedido) => (
-                                <Detalle data={detallePedido} key={detallePedido.id} />
-                            ))
-                        )}
-                    </Tbody>
-                </Table>
-                <p style={{ marginTop: "20px" }}>
-                    <b>Total:</b> ${total}
-                </p>       
-            </div>
-        )}
+            )}
         </div>
     );
 };

@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Navbar } from "../components/navBar/navBar";
 import { Shop } from "./shop/shop";
-import { Contacto } from "./contacto";
+import { Contacto } from "./contacto/contacto";
 import { Carrito } from "./carrito/carrito";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ProductDetails } from "./productDetails/productDetails";

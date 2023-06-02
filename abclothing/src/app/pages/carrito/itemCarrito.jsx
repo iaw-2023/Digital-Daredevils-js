@@ -4,11 +4,9 @@ import React, { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
 import Image from 'next/image';
 
-
 export const ItemCarrito = (props) => {
   const { id, modelo, talle, precio, imagen_ruta } = props.data;
-  const { productosCarrito, agregarAlCarrito, quitarDelCarrito, actualizarCantidadItemsCarrito } =
-    useContext(ShopContext);
+  const { productosCarrito, agregarAlCarrito, quitarDelCarrito, actualizarCantidadItemsCarrito } = useContext(ShopContext);
 
   return (
     <div className="itemCarrito">
