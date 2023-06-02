@@ -73,18 +73,25 @@ export const Carrito = () => {
             </div>
           </div>
         ) : (
-          <div>
-            <Image src="/sad_shopping_bag.png" alt="Sad Shopping Bag" className="sad-shopping-bag" mt={0} mb={4} maxW={['15%', '20%', '35%', '40%']} justifyContent="center" mx="auto" />
-            <Box bg="white" boxShadow="md" p={12} mt={8} mb={4} w='6xl' maxW={['30%', '40%', '50%', '100%']} mx="auto">
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-              <Text fontSize={['3xl', '4xl', '5xl']} fontWeight="bold" fontFamily="Inter, sans-serif" mt={2} mb={6} textAlign="center">
+          <Flex 
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          mt={8}
+          mb={4}
+          maxW={[ '100%']}
+          mx="auto">
+          <Image src="/sad_shopping_bag.png" alt="Sad Shopping Bag" className="sad-shopping-bag" mt={0} mb={4} maxW={[ '40%', '40%', '40%', '40%']} justifyContent="center" mx="auto" />
+          <Box bg="white" boxShadow="md" p={12} mt={8} mb={4} w='6xl' maxW={['80%', '80%', '80%', '80%']} mx="auto">
+            <Flex flexDirection="column" alignItems="center" justifyContent="center">
+              <Text fontSize={['lg', '3xl', '5xl']} fontWeight="bold" fontFamily="Inter, sans-serif" mt={2} mb={6} textAlign="center">
                 Tu carrito está <Box as="span" color="#da4352" className="highlight">vacío!</Box>
               </Text>
-               <Text fontSize={['md', 'lg']} mb={2}>Añade items al carrito antes de proceder al checkout.</Text>
-              <Link to="/" className="shop-button">Volver al shop</Link>
-              </Flex>
-            </Box>
-          </div>
+              <Text fontSize={['xs','sd','md', 'lg']} mb={2}>Añade items al carrito antes de proceder al checkout.</Text>
+              <Link to="/" className="shop-button" >Volver al shop</Link>
+            </Flex>
+          </Box>
+          </Flex>
         )}
 
         <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">

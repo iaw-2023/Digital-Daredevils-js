@@ -5,7 +5,7 @@
   align-items: center;
   color: black;
   font-size: 30px;
-  margin-top: 50px;
+ 
 }
 
 .loading-carrito {
@@ -83,6 +83,12 @@
 }
 
 .checkout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+.empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -250,7 +256,7 @@
 }
 
 .sad-shopping-bag {
-  width: 40%;
+  
   height: auto;
   margin: 0 auto; /* Add this line to center the image horizontally */
   display: block; /* Add this line to remove any default spacing */
@@ -271,7 +277,8 @@
 }
 
 .shop-button {
-  width: 200px;
+  width: 100%;
+  max-width: 200px;
   height: 50px;
   font-size: 16px;
   background-color: #da4352;
