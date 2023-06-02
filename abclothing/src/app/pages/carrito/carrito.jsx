@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../../context/shop-context";
 import { ItemCarrito } from "./itemCarrito";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
-import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Button, ButtonGroup, Input, Flex } from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Button, ButtonGroup, Input, Image, Flex, Box, Text, Center } from "@chakra-ui/react";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import "./carrito.css";
 
@@ -43,17 +43,19 @@ export const Carrito = () => {
       maximumFractionDigits: 2
     });
     const fractionalPart = formattedTotal.slice(-2);
-
+    
     return (
       <div className="carrito">
-        <div className="title">Prendas en el carrito</div>
-        {!productosCarrito ? null :
-          Object.values(productosCarrito).map((producto) => {
-            if (producto.amount !== 0) {
-              return <ItemCarrito data={producto} key={producto.id} />;
-            }
-            return null;
-          })}
+        {productosCarrito && Object.keys(productosCarrito).length !== 0 && (
+          <h2 className="title">Prendas en el carrito</h2>
+        )}
+
+        {Object.values(productosCarrito).map((producto) => {
+          if (producto.amount !== 0) {
+            return <ItemCarrito data={producto} key={producto.id} />;
+          }
+          return null;
+        })}
 
         {totalCarrito > 0 ? (
           <div className="checkout">
@@ -71,7 +73,18 @@ export const Carrito = () => {
             </div>
           </div>
         ) : (
-          <h1>Tu carrito está vacío</h1>
+          <div>
+            <Image src="/sad_shopping_bag.png" alt="Sad Shopping Bag" className="sad-shopping-bag" mt={0} mb={4} maxW={['15%', '20%', '35%', '40%']} justifyContent="center" mx="auto" />
+            <Box bg="white" boxShadow="md" p={12} mt={8} mb={4} w='6xl' maxW={['30%', '40%', '50%', '100%']} mx="auto">
+              <Flex flexDirection="column" alignItems="center" justifyContent="center">
+              <Text fontSize={['3xl', '4xl', '5xl']} fontWeight="bold" fontFamily="Inter, sans-serif" mt={2} mb={6} textAlign="center">
+                Tu carrito está <Box as="span" color="#da4352" className="highlight">vacío!</Box>
+              </Text>
+               <Text fontSize={['md', 'lg']} mb={2}>Añade items al carrito antes de proceder al checkout.</Text>
+              <Link to="/" className="shop-button">Volver al shop</Link>
+              </Flex>
+            </Box>
+          </div>
         )}
 
         <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">
@@ -82,7 +95,9 @@ export const Carrito = () => {
               <Flex direction="column" alignItems="center" justifyContent="center" py="4">
                 <Flex alignItems="center">
                   <HiOutlineEnvelope style={{ fontSize: "2rem", marginRight: "1rem" }} />
-                  <span style={{ fontWeight: "bold", fontFamily: "Inter, sans-serif", fontSize: "1.5rem" }}>Ingrese correo para la compra</span>
+                  <Text fontWeight="bold" fontFamily="Inter, sans-serif" fontSize="1.5rem">
+                    Ingrese correo para la compra
+                  </Text>
                 </Flex>
                 <Input
                   type="email"
@@ -96,7 +111,7 @@ export const Carrito = () => {
                 />
               </Flex>
               <Flex justifyContent="center" mt="4">
-                <ButtonGroup gap='4'>
+                <ButtonGroup gap='4' style={{ padding: "10px 0" }}>
                   <Button
                     colorScheme="teal"
                     variant='outline'

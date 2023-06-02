@@ -5,6 +5,7 @@
   align-items: center;
   color: black;
   font-size: 30px;
+  margin-top: 50px;
 }
 
 .loading-carrito {
@@ -14,6 +15,7 @@
 
 .title {
   margin-top: 120px;
+  margin-bottom: 50px;
 }
 
 .itemCarrito {
@@ -237,4 +239,53 @@
     max-width: 90%;
     padding: 10px;
   }
+}
+
+.empty-carrito {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.sad-shopping-bag {
+  width: 40%;
+  height: auto;
+  margin: 0 auto; /* Add this line to center the image horizontally */
+  display: block; /* Add this line to remove any default spacing */
+}
+
+.empty-text {
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.highlight {
+  color: red;
+}
+
+.subtext {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.shop-button {
+  width: 200px;
+  height: 50px;
+  font-size: 16px;
+  background-color: #da4352;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.shop-button:hover {
+  background-color: #008080;
+  transform: scale(1.03);
 }
