@@ -25,11 +25,10 @@
   color: grey;
   cursor: pointer;
   font-size: 13px;
-  line-height: 0; /* Adjust the line height to reduce spacing between items */
-  margin-bottom: 5px; /* Reduce the margin between hover list items */
-  white-space: nowrap; /* Prevent line breaks within list items */
+  line-height: 0;
+  margin-bottom: 5px;
+  white-space: nowrap;
 }
-
 
 .dropDown {
   font-weight: 1400;
