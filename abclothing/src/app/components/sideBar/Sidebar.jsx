@@ -1,6 +1,7 @@
 import React, { useState, useEffect,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  DrawerCloseButton,
   Button,
   Drawer,
   DrawerBody,
@@ -83,6 +84,7 @@ function SideBar() {
       <Drawer onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
+        <DrawerCloseButton color={"black"} fontSize="3xl" colorScheme="orange" font-weight={ "light"} />
           <DrawerBody>
             <Flex justify="center" alignItems="center" p="1rem">
               <Image
