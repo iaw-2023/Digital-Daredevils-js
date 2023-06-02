@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Drawer,
@@ -20,12 +21,18 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { BsBag, BsCart3 } from "react-icons/bs";
 import { BiPurchaseTagAlt } from "react-icons/bi";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import { toast } from "react-toastify";
+import { ShopContext } from "../../context/shop-context";
 import "./Sidebar.css";
 
 function SideBar() {
+  
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [categorias, setCategorias] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate(); 
+  const { productosCarrito, email } = useContext(ShopContext);
 
   useEffect(() => {
     const fetchCategorias = async () => {
@@ -42,6 +49,27 @@ function SideBar() {
 
     fetchCategorias();
   }, []);
+
+  const showFailureMessage = () =>{
+    toast.error('Se debe realizar un pedido mínimamente para acceder al historial de pedidos <3', {
+      position: "bottom-left",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
+  const historialAcces = () =>{
+    if (!email) {
+      showFailureMessage();
+    }
+    else{
+      navigate("/misPedidos");
+    }
+  }
 
   if (loading) {
     return <LoadingSpinner />;
@@ -127,13 +155,12 @@ function SideBar() {
               </Button>
 
               <Button
-                as={Link}
-                to="/misPedidos"
                 variant="ghost"
                 textAlign="center"
                 fontSize="1.5rem"
                 fontWeight="normal"
                 leftIcon={<BiPurchaseTagAlt />}
+                onClick={() => historialAcces()}
               >
                 Mis pedidos
               </Button>
