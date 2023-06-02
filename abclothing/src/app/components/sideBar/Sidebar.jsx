@@ -73,7 +73,7 @@ function SideBar() {
       <Drawer onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton color={"black"} fontSize="3xl" colorScheme="orange" font-weight={ "light"} />
+        <DrawerCloseButton color={"black"} fontSize="2xl" _hover={{ color: "orange" }}/>
           <DrawerBody>
             <Flex justify="center" alignItems="center" p="1rem">
               <Image
