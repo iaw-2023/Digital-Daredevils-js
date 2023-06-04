@@ -63,7 +63,6 @@ export const ProductDetails = () => {
               <h1 className="product-name">{modelo}</h1>
               <div className="product-details">
                 <p><b>Marca:</b> {marca}</p>
-                <p><b>Modelo:</b> {modelo}</p>
                 <p><b>Talle:</b> {talle}</p>
                 <p><b>Precio:</b> ${precio}</p>
       
