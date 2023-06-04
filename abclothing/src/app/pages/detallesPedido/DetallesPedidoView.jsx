@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Table, Thead, Tbody, Tr, Th, Td, Divider } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Divider, Flex } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import DetallesPedidoList from "../../components/detallesPedido/DetallesPedidoList";
 import { DETALLESPEDIDO } from "../../components/pedidos/PedidosFetch";
@@ -48,21 +48,21 @@ export const DetallesPedido = () => {
                         <h1>Pedido #{id}</h1>
                     </div>
                     <Divider my={4} />
-                    <Table variant="striped" colorScheme="orange" size="sm">
-                        <Thead>
-                            <Tr>
-                                <Th>Modelo</Th>
-                                <Th>Marca</Th>
-                                <Th>Talle</Th>
-                                <Th>Cantidad</Th>
-                                <Th>Precio</Th>
-                                <Th>Subtotal</Th>
-                            </Tr>
-                        </Thead>
-                        <Tbody>
-                            <DetallesPedidoList detallesPedido={detallesPedido} />
-                        </Tbody>
-                    </Table>
+                        <Table variant="striped" colorScheme="orange" size="sm">
+                            <Thead>
+                                <Tr>
+                                    <Th>Modelo</Th>
+                                    <Th>Marca</Th>
+                                    <Th>Talle</Th>
+                                    <Th>Cantidad</Th>
+                                    <Th>Precio</Th>
+                                    <Th>Subtotal</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                <DetallesPedidoList detallesPedido={detallesPedido} />
+                            </Tbody>
+                        </Table>
                     <p style={{ marginTop: "20px" }}>
                         <b>Total:</b> ${total}
                     </p>       

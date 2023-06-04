@@ -57,7 +57,6 @@ export const Carrito = () => {
         {productosCarrito && Object.keys(productosCarrito).length !== 0 && totalCarrito > 0 && (
           <>
             <h2 className="title">Prendas en el carrito</h2>
-            {console.log(productosCarrito)}
             {Object.values(productosCarrito).map((producto) => {
               if (producto.amount !== 0) {
                 return <ItemCarrito data={producto} key={producto.id} />;
