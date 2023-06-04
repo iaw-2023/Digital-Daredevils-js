@@ -13,6 +13,8 @@ export default class HomeSlider extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
+      prevArrow: <></>,
+      nextArrow: <></>,
     };
     return (
       <Box

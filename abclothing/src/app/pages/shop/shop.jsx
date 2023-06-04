@@ -63,8 +63,8 @@ export const Shop = () => {
               color={"white"}
               fontSize={{ base: "80%", sm: "100%", lg: "100%" }}
               position="absolute"
-              top={{ base: "117px", sm: "145px", md: "145px", lg: "90px" }}
-              left={{ base: "5%", sm: "20%", md: "30%", lg: "40%" }}
+              top={{ base: "147px", sm: "145px", md: "145px", lg: "90px" }}
+              left={{ base: "17%", sm: "20%", md: "30%", lg: "40%" }}
             >
                New arrivals la semana entrante con 30% off ❤️
             </Text>
