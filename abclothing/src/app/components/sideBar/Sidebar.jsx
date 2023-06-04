@@ -19,7 +19,7 @@ import {
 import { Link } from "react-router-dom";
 import { CATEGORIAS } from "../categorias/CategoriasFetch";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { BsBag, BsCart3 } from "react-icons/bs";
+import { BsBag, BsCart3,BsTelephone } from "react-icons/bs";
 import { BiPurchaseTagAlt } from "react-icons/bi";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import { ShopContext } from "../../context/shop-context";
@@ -149,7 +149,18 @@ function SideBar() {
               >
                 Carrito
               </Button>
-
+              <Button
+                as={Link}
+                to="/contacto"
+                variant="ghost"
+                textAlign="center"
+                fontSize="1.5rem"
+                fontWeight="normal"
+                leftIcon={<BsTelephone />}
+                onClick={onClose}
+              >
+                Contacto
+              </Button>        
               <Button
                 variant="ghost"
                 textAlign="center"
