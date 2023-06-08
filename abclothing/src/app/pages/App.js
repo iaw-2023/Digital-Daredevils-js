@@ -26,7 +26,7 @@ function App() {
       <Router>
         <Auth0Provider domain={domain} clientId={clientId}
           authorizationParams={{
-            redirect_uri: "https://localhost:3000"
+            redirect_uri: "https://digital-daredevils-70dsrgwih-digitaldaredevils.vercel.app/"
           }}
         >
           <div className="App">
