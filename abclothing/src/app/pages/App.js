@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Navbar } from '../components/navBar/navBar';
 import { Shop } from './shop/shop';
 import { Contacto } from './contacto/contacto';
@@ -21,15 +21,10 @@ const domain = "dev-isj4pwd0ownme8e8.us.auth0.com" // aca deberia tomarlo del .e
 const clientId = "B9scjNlVuJcq5rlgxdLfxCnFzcFQAxxX"; // aca deberia tomarlo del .env cuando se digne a tomarlo
 function App() {
 
-  const handleRedirectCallback = (appState) => {
-    const navigate = useNavigate();
-    const returnUrl = appState?.returnTo || '/';
-    navigate(returnUrl);
-  };
   return (
     <>
       <Router>
-        <Auth0Provider domain={domain} clientId={clientId}  onRedirectCallback={handleRedirectCallback}
+        <Auth0Provider domain={domain} clientId={clientId}
           authorizationParams={{
             redirect_uri: "https://localhost:3000"
           }}
