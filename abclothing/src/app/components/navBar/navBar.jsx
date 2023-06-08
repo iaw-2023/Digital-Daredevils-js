@@ -15,7 +15,6 @@ import {
   Menu
 } from "@chakra-ui/react";
 import { BsBagHeart, BsBag, BsEmojiSmile, BsPerson } from "react-icons/bs";
-import { FaPersonThroughWindow } from "react-icons/fa6";
 import HomeMenu from "../menu/Menu";
 import SearchBar from "../searchBar/searchBar";
 import SideBar from "../sideBar/Sidebar";
@@ -105,7 +104,7 @@ export const Navbar = () => {
                         <MenuItem icon={<BsBagHeart size={20} />} onClick={() => handleMisPedidosAttempt()} color="beige.400">
                           Mis pedidos
                         </MenuItem>
-                        <MenuItem icon={<FaPersonThroughWindow size={20} />} color="beige.400">
+                        <MenuItem icon={<BsEmojiSmile size={20} />} color="beige.400">
                           <LogoutButton/>
                         </MenuItem>
                       </MenuGroup>
