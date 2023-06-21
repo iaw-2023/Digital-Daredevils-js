@@ -29,7 +29,7 @@ import "./navBar.css";
 export const Navbar = () => {
   const navigate = useNavigate(); 
   const { productosCarrito, email } = useContext(ShopContext);
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   const handleMisPedidosAttempt = () =>{
     if (!email) {
@@ -99,7 +99,7 @@ export const Navbar = () => {
                           style={{ pointerEvents: "none", cursor: "default" }}
                           color="beige.400"
                         >
-                          Hola, {email ? email : "crack"}!
+                          Hola, {user.name}!
                         </MenuItem>
                         <MenuItem icon={<BsBagHeart size={20} />} onClick={() => handleMisPedidosAttempt()} color="beige.400">
                           Mis pedidos
