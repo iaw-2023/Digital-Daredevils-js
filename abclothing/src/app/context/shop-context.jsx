@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from 'next/navigation';
 import { GENERARPEDIDO } from "../components/pedidos/PedidosFetch";
 import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
 import { showSuccessMessage, showFailureMessage } from "../components/alerts/alerts";
@@ -9,7 +9,7 @@ import { showSuccessMessage, showFailureMessage } from "../components/alerts/ale
 export const ShopContext = createContext(null);
 
 export const ShopContextProvider = (props) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [productosCarrito, setProductosCarrito] = useState({});
   const [loading, setLoading] = useState(false);
@@ -73,7 +73,7 @@ export const ShopContextProvider = (props) => {
       }
       finally {
         setLoading(false);
-        navigate("/");
+        router.push("/");
       }  
     }
   };

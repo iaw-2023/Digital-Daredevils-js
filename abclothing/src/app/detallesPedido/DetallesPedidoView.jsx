@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Divider, Flex } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import DetallesPedidoList from "../../components/detallesPedido/DetallesPedidoList";
-import { DETALLESPEDIDO } from "../../components/pedidos/PedidosFetch";
+import DetallesPedidoList from "../components/detallesPedido/DetallesPedidoList";
+import { DETALLESPEDIDO } from "../components/pedidos/PedidosFetch";
 import "./detallesPedidoView.css";
-import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
 
 export const DetallesPedido = () => {
     const { id } = useParams();

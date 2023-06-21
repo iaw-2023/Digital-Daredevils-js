@@ -2,8 +2,8 @@
 
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ShopContext } from "../../context/shop-context";
-import { PRODUCTOBYID } from '../../components/productos/ProductosFetch';
+import { ShopContext } from "../context/shop-context";
+import { PRODUCTOBYID } from '../components/productos/ProductosFetch';
 import Image from 'next/image';
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
 import "./productDetails.css";

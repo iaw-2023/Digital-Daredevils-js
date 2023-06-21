@@ -1,3 +1,5 @@
+"use client";
+
 import { Spinner, useBreakpointValue } from '@chakra-ui/react';
 
 const LoadingSpinner = () => {

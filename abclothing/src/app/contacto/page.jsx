@@ -1,8 +1,10 @@
+"use client";
+
 import React from "react";
 import { Box, Button, FormControl, FormLabel, Heading, Input, Textarea, VStack } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 
-export const Contacto = () => {
+const Contacto = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.success('Gracias por su mensaje ❤️, lo contactaremos con una pronta respuesta', {
@@ -47,3 +49,5 @@ export const Contacto = () => {
     </Box>
   );
 };
+
+export default Contacto;
