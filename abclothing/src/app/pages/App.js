@@ -26,8 +26,10 @@ function App() {
       <Router>
         <Auth0Provider domain={domain} clientId={clientId}
           authorizationParams={{
-            redirect_uri: "https://digital-daredevils-js-albanomazzino-digitaldaredevils.vercel.app/"
-          }}
+            redirect_uri: "http://localhost:3000",
+            audience:"https://digital-daredevils-laravel-digitaldaredevils.vercel.app/restApi/",
+            scope:"openid profile email"
+          }}  
         >
           <div className="App">
             <ChakraProvider>

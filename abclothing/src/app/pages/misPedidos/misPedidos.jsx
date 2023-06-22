@@ -1,20 +1,21 @@
-import React, { useEffect, useState, useContext } from "react";
-import { ShopContext } from "../../context/shop-context";
+import React, { useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { PEDIDOS } from "../../components/pedidos/PedidosFetch";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { Pedido } from "../../components/pedidos/Pedido";
 import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 
 export const MisPedidos = () => {
-  const { email } = useContext(ShopContext);
   const [pedidos, setPedidos] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const { getAccessTokenSilently, user } = useAuth0();
+  
   useEffect(() => {
     const fetchPedidos = async () => {
       try {
         setLoading(true);
-        const response = await PEDIDOS(email);
+        const accessToken = await getAccessTokenSilently();
+        const response = await PEDIDOS(accessToken, user.email);
         setPedidos(response.data);
       } catch (error) {
         console.error(error);
@@ -24,7 +25,7 @@ export const MisPedidos = () => {
       }
     };
     fetchPedidos();
-  }, [email]);
+  }, [user.email]);
 
   return (
     <Box className="shop" p={4}>

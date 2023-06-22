@@ -6,6 +6,7 @@ import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
 import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Button, ButtonGroup, Input, Image, Flex, Box, Text, Center } from "@chakra-ui/react";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import "./carrito.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const formatTotalCarrito = (totalCarrito) => {
   return totalCarrito.toLocaleString(undefined, {
@@ -25,9 +26,7 @@ export const Carrito = () => {
   const [totalCarrito, setTotalCarrito] = useState(0);
   const [totalCarritoLoading, setTotalCarritoLoading] = useState(true);
 
-  const [showModal, setShowModal] = useState(false);
-  const [inputEmail, setInputEmail] = useState("");
-
+  const { user, getAccessTokenSilently } = useAuth0();
   useEffect(() => {
     const fetchTotalCarrito = () => {
       setTotalCarritoLoading(true);
@@ -37,10 +36,6 @@ export const Carrito = () => {
     };
     fetchTotalCarrito();
   }, [productosCarrito, getTotalCarrito]);
-
-  const handleInputEmailChange = (event) => {
-    setInputEmail(event.target.value);
-  };
 
   if (totalCarritoLoading) {
     return (
@@ -78,7 +73,10 @@ export const Carrito = () => {
             </div>
             <div className="buttons">
               <button onClick={() => navigate("/")}>Seguir comprando</button>
-              <button onClick={() => setShowModal(true)}>Checkout</button>
+              <button onClick={async () => {
+                const accessToken = await getAccessTokenSilently();
+                checkout(accessToken, user.email)}
+            }>Checkout</button>
             </div>
           </div>
         ) : (
@@ -104,52 +102,6 @@ export const Carrito = () => {
           </Flex>
         )}
 
-        <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">
-          <ModalOverlay />
-          <ModalContent borderRadius="15px" boxShadow="0px 3px 10px rgba(0, 0, 0, 0.2)">
-            <ModalCloseButton />
-            <ModalBody textAlign="center">
-              <Flex direction="column" alignItems="center" justifyContent="center" py="4">
-                <Flex alignItems="center">
-                  <HiOutlineEnvelope style={{ fontSize: "2rem", marginRight: "1rem" }} />
-                  <Text fontWeight="bold" fontFamily="Inter, sans-serif" fontSize="1.5rem">
-                    Ingrese correo para la compra
-                  </Text>
-                </Flex>
-                <Input
-                  type="email"
-                  value={inputEmail}
-                  onChange={handleInputEmailChange}
-                  placeholder="e.g.: riverplate@gmail.com"
-                  size="lg"
-                  mt="4"
-                  focusBorderColor="teal"
-                  boxShadow="0px 3px 10px rgba(0, 0, 0, 0.2)"
-                />
-              </Flex>
-              <Flex justifyContent="center" mt="4">
-                <ButtonGroup gap='4' style={{ padding: "10px 0" }}>
-                  <Button
-                    colorScheme="teal"
-                    variant='outline'
-                    borderRadius="base"
-                    onClick={() => setShowModal(false)}
-                    mr="4"
-                  >
-                    Cerrar
-                  </Button>
-                  <Button
-                    colorScheme="teal"
-                    borderRadius="base"
-                    onClick={() => checkout(inputEmail)}
-                  >
-                    Enviar pedido
-                  </Button>
-                </ButtonGroup>
-              </Flex>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
       </div>
     );
   }

@@ -28,11 +28,11 @@ import "./navBar.css";
 
 export const Navbar = () => {
   const navigate = useNavigate(); 
-  const { productosCarrito, email } = useContext(ShopContext);
+  const { productosCarrito } = useContext(ShopContext);
   const { user, isAuthenticated } = useAuth0();
 
   const handleMisPedidosAttempt = () =>{
-    if (!email) {
+    if (!user.email) {
       showFailureMessage('Se debe realizar un pedido mínimamente para acceder al historial de pedidos <3');
     }
     else{

@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   DrawerCloseButton,
@@ -22,8 +22,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { BsBag, BsCart3,BsTelephone } from "react-icons/bs";
 import { BiPurchaseTagAlt } from "react-icons/bi";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
-import { ShopContext } from "../../context/shop-context";
 import { showFailureMessage } from "../alerts/alerts";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./Sidebar.css";
 
 function SideBar() {
@@ -33,7 +33,7 @@ function SideBar() {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate(); 
-  const { email } = useContext(ShopContext);
+  const { user } = useAuth0();
 
   useEffect(() => {
     const fetchCategorias = async () => {
@@ -53,7 +53,7 @@ function SideBar() {
 
 
   const handleMisPedidosAttempt = () =>{
-    if (!email) {
+    if (!user.email) {
       showFailureMessage('Se debe realizar un pedido mínimamente para acceder al historial de pedidos <3');
     }
     else{

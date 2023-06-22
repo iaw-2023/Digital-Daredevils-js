@@ -10,7 +10,6 @@ export const ShopContext = createContext(null);
 
 export const ShopContextProvider = (props) => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
   const [productosCarrito, setProductosCarrito] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -50,11 +49,10 @@ export const ShopContextProvider = (props) => {
     }
   };
 
-  const checkout = async (email) => {
-    setEmail(email);
+  const checkout = async (accessToken, userEmail) => {
     if (productosCarrito !== undefined) {
       const pedidoRequest = {
-        cliente: email,
+        cliente: userEmail,
         fecha: new Date().toISOString(),
         productos: Object.entries(productosCarrito)
           .filter(([itemId, producto]) => producto.amount > 0)
@@ -65,7 +63,7 @@ export const ShopContextProvider = (props) => {
       };
       try {
         setLoading(true);
-        await GENERARPEDIDO(pedidoRequest);
+        await GENERARPEDIDO(accessToken, pedidoRequest);
         resetCart();
         showSuccessMessage('Pedido efectuado con éxito, muchas gracias!');
       } catch (error) {
@@ -89,7 +87,6 @@ export const ShopContextProvider = (props) => {
     quitarDelCarrito,
     getTotalCarrito,
     checkout,
-    email,
   };
 
   return (

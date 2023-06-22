@@ -6,10 +6,12 @@ import { useParams } from "react-router-dom";
 import DetallesPedidoList from "../../components/detallesPedido/DetallesPedidoList";
 import { DETALLESPEDIDO } from "../../components/pedidos/PedidosFetch";
 import "./detallesPedidoView.css";
+import { useAuth0 } from "@auth0/auth0-react";
 import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 
 export const DetallesPedido = () => {
     const { id } = useParams();
+    const { getAccessTokenSilently, user } = useAuth0();
     const [detallesPedido, setDetallesPedido] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -17,7 +19,8 @@ export const DetallesPedido = () => {
         const fetchDetallesPedido = async () => {
             try {
                 setLoading(true);
-                const response = await DETALLESPEDIDO(id);
+                const accessToken = await getAccessTokenSilently();
+                const response = await DETALLESPEDIDO(accessToken, id);
                 setDetallesPedido(response);
             } catch (error) {
                 console.error(error);
