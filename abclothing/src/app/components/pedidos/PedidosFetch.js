@@ -24,8 +24,8 @@ export async function GENERARPEDIDO(accessToken, pedidoRequest) {
     }
 }
 
-  export async function PEDIDOS(accessToken, email) {
-    const response = await fetch(PEDIDOS_API_ENDPOINT + "/" + email, {
+  export async function PEDIDOS(accessToken) {
+    const response = await fetch(PEDIDOS_API_ENDPOINT, {
       method: "GET",
       headers: {
         'Authorization': `Bearer ${accessToken}`,

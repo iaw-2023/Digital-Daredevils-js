@@ -15,8 +15,11 @@ import { DetallesPedido } from './detallesPedido/DetallesPedidoView';
 import { MisPedidos } from './misPedidos/misPedidos';
 import { ToastContainer } from 'react-toastify';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { initMercadoPago } from '@mercadopago/sdk-react';
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
+
+initMercadoPago('TEST-c0a7a684-e012-4148-befc-577a9878a3de'); // aca deberia tomarlo del .env cuando se digne a tomarlo
 const domain = "dev-isj4pwd0ownme8e8.us.auth0.com" // aca deberia tomarlo del .env cuando se digne a tomarlo
 const clientId = "B9scjNlVuJcq5rlgxdLfxCnFzcFQAxxX"; // aca deberia tomarlo del .env cuando se digne a tomarlo
 function App() {

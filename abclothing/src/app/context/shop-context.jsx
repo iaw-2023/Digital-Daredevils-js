@@ -49,10 +49,9 @@ export const ShopContextProvider = (props) => {
     }
   };
 
-  const checkout = async (accessToken, userEmail) => {
+  const checkout = async (accessToken, mercadopagoPaymentId) => {
     if (productosCarrito !== undefined) {
       const pedidoRequest = {
-        cliente: userEmail,
         fecha: new Date().toISOString(),
         productos: Object.entries(productosCarrito)
           .filter(([itemId, producto]) => producto.amount > 0)
@@ -60,6 +59,7 @@ export const ShopContextProvider = (props) => {
             id: parseInt(itemId),
             cantidad: producto.amount,
           })),
+        mercadopagoPaymentId : mercadopagoPaymentId,
       };
       try {
         setLoading(true);

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Table, Thead, Tbody, Tr, Th, Divider, Flex } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Divider } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import DetallesPedidoList from "../../components/detallesPedido/DetallesPedidoList";
 import { DETALLESPEDIDO } from "../../components/pedidos/PedidosFetch";
@@ -11,7 +11,7 @@ import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 
 export const DetallesPedido = () => {
     const { id } = useParams();
-    const { getAccessTokenSilently, user } = useAuth0();
+    const { getAccessTokenSilently } = useAuth0();
     const [detallesPedido, setDetallesPedido] = useState(null);
     const [loading, setLoading] = useState(true);
 

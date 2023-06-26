@@ -8,14 +8,14 @@ import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 export const MisPedidos = () => {
   const [pedidos, setPedidos] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { getAccessTokenSilently, user } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   
   useEffect(() => {
     const fetchPedidos = async () => {
       try {
         setLoading(true);
         const accessToken = await getAccessTokenSilently();
-        const response = await PEDIDOS(accessToken, user.email);
+        const response = await PEDIDOS(accessToken);
         setPedidos(response.data);
       } catch (error) {
         console.error(error);
@@ -25,7 +25,7 @@ export const MisPedidos = () => {
       }
     };
     fetchPedidos();
-  }, [user.email]);
+  }, []);
 
   return (
     <Box className="shop" p={4}>

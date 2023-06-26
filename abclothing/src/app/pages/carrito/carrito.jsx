@@ -3,21 +3,12 @@ import { ShopContext } from "../../context/shop-context";
 import { ItemCarrito } from "./itemCarrito";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
-import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Button, ButtonGroup, Input, Image, Flex, Box, Text, Center } from "@chakra-ui/react";
+import {Image, Flex, Box, Text } from "@chakra-ui/react";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import "./carrito.css";
 import { useAuth0 } from "@auth0/auth0-react";
-
-const formatTotalCarrito = (totalCarrito) => {
-  return totalCarrito.toLocaleString(undefined, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
-}
-
-const parteEnteraDe = (totalCarrito) => {
-  return Math.floor(totalCarrito).toLocaleString();
-}
+import { CardPayment } from '@mercadopago/sdk-react';
+import { MERCADOPAGO_API_ENDPOINT } from '../../ApiConstants';
 
 export const Carrito = () => {
   const { productosCarrito, getTotalCarrito, checkout } = useContext(ShopContext);
@@ -25,8 +16,9 @@ export const Carrito = () => {
 
   const [totalCarrito, setTotalCarrito] = useState(0);
   const [totalCarritoLoading, setTotalCarritoLoading] = useState(true);
+  const [showCardPayment, setShowCardPayment] = useState(false);
 
-  const { user, getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   useEffect(() => {
     const fetchTotalCarrito = () => {
       setTotalCarritoLoading(true);
@@ -37,6 +29,56 @@ export const Carrito = () => {
     fetchTotalCarrito();
   }, [productosCarrito, getTotalCarrito]);
 
+  
+  const initialization = {
+    amount: 100,
+  };
+
+  const onSubmit = async (formData) => {   
+    setShowCardPayment(false);
+    const accessToken = await getAccessTokenSilently();
+    return new Promise((resolve, reject) => {
+      fetch(MERCADOPAGO_API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then(async (response) => {
+          resolve();
+          const mercadoPagoPaymentId = response.id
+          const paymentStatus = response.status
+          if (paymentStatus == "approved" ){
+            await checkout(accessToken, mercadoPagoPaymentId);
+          }
+        })
+        .catch((error) => {
+          // handle error response when trying to create payment
+          reject();
+        });
+    });
+  };
+
+  const onError = async (error) => {
+    // callback called for all Brick error cases
+    console.log(error);
+  };
+
+  const onReady = async () => {
+    
+  };
+
+  const handleCheckout = () => {
+    try {
+      setShowCardPayment(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (totalCarritoLoading) {
     return (
       <div className="carrito">
@@ -46,7 +88,7 @@ export const Carrito = () => {
   } else {
     const formattedTotal = formatTotalCarrito(totalCarrito);
     const fractionalPart = formattedTotal.slice(-2);
-    
+
     return (
       <div className="carrito">
         {productosCarrito && Object.keys(productosCarrito).length !== 0 && totalCarrito > 0 && (
@@ -73,11 +115,16 @@ export const Carrito = () => {
             </div>
             <div className="buttons">
               <button onClick={() => navigate("/")}>Seguir comprando</button>
-              <button onClick={async () => {
-                const accessToken = await getAccessTokenSilently();
-                checkout(accessToken, user.email)}
-            }>Checkout</button>
+              <button onClick={() => handleCheckout()}>Checkout</button>
             </div>
+            {showCardPayment && (
+              <CardPayment
+                initialization={initialization}
+                onSubmit={onSubmit}
+                onReady={onReady}
+                onError={onError}
+              />
+            )}
           </div>
         ) : (
           <Flex 
@@ -105,6 +152,18 @@ export const Carrito = () => {
       </div>
     );
   }
+};
+
+
+const formatTotalCarrito = (totalCarrito) => {
+  return totalCarrito.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+};
+
+const parteEnteraDe = (totalCarrito) => {
+  return Math.floor(totalCarrito).toLocaleString();
 };
 
 export default Carrito;
