@@ -1,15 +1,13 @@
 "use client";
 
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { ShopContext } from "../context/shop-context";
-import { PRODUCTOBYID } from '../components/productos/ProductosFetch';
+import { ShopContext } from "../../context/shop-context";
+import { PRODUCTOBYID } from '../../components/productos/ProductosFetch';
 import Image from 'next/image';
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
 import "./productDetails.css";
 
-export const ProductDetails = () => {
-  const { id } = useParams();
+const ProductDetails = ({ params }) => {
   const { agregarAlCarrito, productosCarrito } = useContext(ShopContext);
   
   const [producto, setProducto] = useState(null);
@@ -19,7 +17,7 @@ export const ProductDetails = () => {
     const fetchProducto = async () => {
       try {
         setLoading(true);
-        const response = await PRODUCTOBYID(id);
+        const response = await PRODUCTOBYID(params.id);
         setProducto(response);
       } catch (error) {
         console.error(error);
@@ -30,12 +28,12 @@ export const ProductDetails = () => {
     };
 
     fetchProducto();
-  }, [id]);
+  }, [params.id]);
 
 
   let cantidadItemsCarrito = 0;
-  if (productosCarrito && productosCarrito[id]) {
-    cantidadItemsCarrito = productosCarrito[id].amount;
+  if (productosCarrito && productosCarrito[params.id]) {
+    cantidadItemsCarrito = productosCarrito[params.id].amount;
   }
   
   if (loading) {
@@ -77,3 +75,5 @@ export const ProductDetails = () => {
     }
   }
 };
+
+export default ProductDetails;

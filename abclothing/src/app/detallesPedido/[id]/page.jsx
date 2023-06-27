@@ -1,15 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Table, Thead, Tbody, Tr, Th, Divider, Flex } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
-import DetallesPedidoList from "../components/detallesPedido/DetallesPedidoList";
-import { DETALLESPEDIDO } from "../components/pedidos/PedidosFetch";
+import { Table, Thead, Tbody, Tr, Th, Divider } from "@chakra-ui/react";
+import DetallesPedidoList from "../../components/detallesPedido/DetallesPedidoList";
+import { DETALLESPEDIDO } from "../../components/pedidos/PedidosFetch";
+import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 import "./detallesPedidoView.css";
-import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
 
-export const DetallesPedido = () => {
-    const { id } = useParams();
+const DetallesPedido = ( {params} ) => {
     const [detallesPedido, setDetallesPedido] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -17,7 +15,7 @@ export const DetallesPedido = () => {
         const fetchDetallesPedido = async () => {
             try {
                 setLoading(true);
-                const response = await DETALLESPEDIDO(id);
+                const response = await DETALLESPEDIDO(params.id);
                 setDetallesPedido(response);
             } catch (error) {
                 console.error(error);
@@ -28,7 +26,7 @@ export const DetallesPedido = () => {
         };
 
         fetchDetallesPedido();
-    }, [id]);
+    }, [params.id]);
 
     let total = 0;
     if (!loading){
@@ -45,7 +43,7 @@ export const DetallesPedido = () => {
             ) : (
                 <div className="shopContent">
                     <div className="shopTitle">
-                        <h1>Pedido #{id}</h1>
+                        <h1>Pedido #{params.id}</h1>
                     </div>
                     <Divider my={4} />
                         <Table variant="striped" colorScheme="orange" size="sm">
@@ -71,3 +69,5 @@ export const DetallesPedido = () => {
         </div>
     );
 };
+
+export default DetallesPedido;

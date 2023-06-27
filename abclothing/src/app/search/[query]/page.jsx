@@ -1,23 +1,20 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { PRODUCTOSBYQUERY } from "../components/productos/ProductosFetch";
-import ProductosList from "../components/productos/ProductosList";
-import { useLocation } from "react-router-dom";
+import { PRODUCTOSBYQUERY } from "../../components/productos/ProductosFetch";
+import ProductosList from "../../components/productos/ProductosList";
 import { renderPageLinks } from "@/app/components/pagination/pagination";
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
-import "./shop.css";
+import "../../shop/shop.css";
 
-export const ShopSearch = () => {
+const ShopSearch = ( {params} ) => {
   const [productos, setProductos] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
 
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const searchQuery = searchParams.get("query");
+  const searchQuery = params.query;
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -59,3 +56,5 @@ export const ShopSearch = () => {
     </div>
   );
 };
+
+export default ShopSearch;

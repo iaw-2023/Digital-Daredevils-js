@@ -11,7 +11,7 @@ function SearchBar() {
 
   const handleSearch = () => {
     if (searchValue.trim() !== "") {
-      router.push(`/shopSearch?query=${searchValue}`);
+      router.push(`/search/${searchValue}`);
     }
   };
 
