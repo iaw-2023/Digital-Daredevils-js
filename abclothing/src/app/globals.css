@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  flex: 1;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -43,4 +44,5 @@ footer {
   height: 60px;
   font-size: 20px;
   color:black;
+  flex-shrink: 0;
 }

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { LISTAPRODUCTOS } from "../components/productos/ProductosFetch";
 import HomeSlider from "../components/homeSlider/HomeSlider";
 import ProductosList from "../components/productos/ProductosList";
-import "./shop.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {

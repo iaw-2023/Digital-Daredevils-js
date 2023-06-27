@@ -2,7 +2,7 @@
 
 import React, { useContext } from "react";
 import Link from 'next/link';
-import { ShopContext } from "../../context/shop-context";
+import { ShopContext } from "../context/shop-context";
 import Image from 'next/image';
 
 export const Producto = (props) => {

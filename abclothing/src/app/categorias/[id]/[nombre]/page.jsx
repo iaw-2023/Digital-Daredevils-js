@@ -43,7 +43,7 @@ const ShopCategoria = ({ params }) => {
       ) : (
         <div className="shopContent">
           <div className="shopTitle">
-            <h1>{params.nombre}</h1>
+            <h1>{decodeURI(params.nombre)}</h1>
           </div>
           <div className="productos">
             <ProductosList productos={productos} />

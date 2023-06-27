@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext, useState, useEffect } from "react";
-import { ShopContext } from "../../context/shop-context";
+import { ShopContext } from "../../components/context/shop-context";
 import { PRODUCTOBYID } from '../../components/productos/ProductosFetch';
 import Image from 'next/image';
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
