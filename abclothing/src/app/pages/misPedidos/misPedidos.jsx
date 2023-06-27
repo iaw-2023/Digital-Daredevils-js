@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { PEDIDOS } from "../../components/pedidos/PedidosFetch";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Text, Divider } from "@chakra-ui/react";
 import { Pedido } from "../../components/pedidos/Pedido";
 import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 
@@ -38,10 +38,11 @@ export const MisPedidos = () => {
               Mis pedidos
             </Heading>
           </Box>
+          <Divider/>
           <Box className="pedidos">
             {Object.values(pedidos).length === 0 ? (
-              <Text fontSize="xl">
-                No se encontraron pedidos asociados al cliente o el email era incorrecto.
+              <Text fontSize="xl" marginTop={4}>
+                No se encontraron pedidos.
               </Text>
             ) : (
               Object.values(pedidos).map((pedido) => (

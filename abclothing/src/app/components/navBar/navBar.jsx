@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
+  Button,
   Flex,
   Image,
   Popover,
@@ -21,7 +22,6 @@ import SearchBar from "../searchBar/searchBar";
 import SideBar from "../sideBar/Sidebar";
 import { ShopContext } from "../../context/shop-context";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
-import LoginButton from "../login/login";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./navBar.css";
 
@@ -91,31 +91,43 @@ export const Navbar = () => {
             <Flex gap={{ base: "0.5rem", md: "1.5rem" }} align="center">
               <Popover>
                 <Menu>
-                  <MenuButton>
-                     <BsPerson fontSize={"1.3rem"} />
-                  </MenuButton>
-                  <MenuList>
+                  
+
                     {isAuthenticated ?
-                      <MenuGroup title="Perfil" color ="teal.500">
-                        <MenuItem icon={<BsEmojiSmile size={20} />}
-                          style={{ pointerEvents: "none", cursor: "default" }}
-                          color="beige.400"
-                        >
-                          Hola, {user.name}!
-                        </MenuItem>
-                        <MenuItem icon={<BsBagHeart size={20} />} onClick={() => handleMisPedidosAttempt()} color="beige.400">
-                          Mis pedidos
-                        </MenuItem>
-                        <MenuItem icon={<BiLogOut size={20} />} onClick={() => handleLogoutAttempt()} color="beige.400">
-                          Logout
-                        </MenuItem>
-                      </MenuGroup>
+                      <>
+                        <MenuButton>
+                          <BsPerson fontSize={"1.3rem"} />
+                        </MenuButton>
+                        <MenuList>
+                          <MenuGroup title="Perfil" color ="teal.500">
+                            <MenuItem icon={<BsEmojiSmile size={20} />}
+                              style={{ pointerEvents: "none", cursor: "default" }}
+                              color="beige.400"
+                            >
+                              Hola, {user.name}!
+                            </MenuItem>
+                            <MenuItem icon={<BsBagHeart size={20} />} onClick={() => handleMisPedidosAttempt()} color="beige.400">
+                              Mis pedidos
+                            </MenuItem>
+                            <MenuItem icon={<BiLogOut size={20} />} onClick={() => handleLogoutAttempt()} color="beige.400">
+                              Logout
+                            </MenuItem>
+                          </MenuGroup>
+                        </MenuList>
+                      </>
                     : 
-                    <MenuItem icon={<BiLogIn size={20} />} onClick={() => handleLoginAttempt()} color="beige.400">
-                      Login
-                    </MenuItem>
+                    <MenuButton as={Button} 
+                      leftIcon={<BiLogIn size={24} />} 
+                      onClick={() => handleLoginAttempt()} 
+                      colorScheme='beige' 
+                      color="black.400"
+                      fontSize="m"
+                      transition='all 0.2s' _hover={{ bg: 'blue.400' }}
+                    >
+                      Log in
+                    </MenuButton>
                     }
-                  </MenuList>
+                  
                 </Menu>
               </Popover>
     
