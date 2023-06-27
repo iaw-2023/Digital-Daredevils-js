@@ -15,29 +15,31 @@ import {
   Menu
 } from "@chakra-ui/react";
 import { BsBagHeart, BsBag, BsEmojiSmile, BsPerson } from "react-icons/bs";
+import { BiLogOut, BiLogIn } from "react-icons/bi";
 import HomeMenu from "../menu/Menu";
 import SearchBar from "../searchBar/searchBar";
 import SideBar from "../sideBar/Sidebar";
 import { ShopContext } from "../../context/shop-context";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
-import { showFailureMessage } from "../alerts/alerts";
 import LoginButton from "../login/login";
-import LogoutButton from "../login/logout";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./navBar.css";
 
 export const Navbar = () => {
   const navigate = useNavigate(); 
   const { productosCarrito } = useContext(ShopContext);
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, logout, loginWithRedirect } = useAuth0();
 
   const handleMisPedidosAttempt = () =>{
-    if (!user.email) {
-      showFailureMessage('Se debe realizar un pedido mínimamente para acceder al historial de pedidos <3');
-    }
-    else{
-      navigate("/misPedidos");
-    }
+    navigate("/misPedidos");
+  }
+
+  const handleLogoutAttempt = () =>{
+    logout({logoutParams: {returnTo:'http://localhost:3000/'}})
+  }
+
+  const handleLoginAttempt = () =>{
+    loginWithRedirect()
   }
 
   if (!productosCarrito){
@@ -104,12 +106,14 @@ export const Navbar = () => {
                         <MenuItem icon={<BsBagHeart size={20} />} onClick={() => handleMisPedidosAttempt()} color="beige.400">
                           Mis pedidos
                         </MenuItem>
-                        <MenuItem icon={<BsEmojiSmile size={20} />} color="beige.400">
-                          <LogoutButton/>
+                        <MenuItem icon={<BiLogOut size={20} />} onClick={() => handleLogoutAttempt()} color="beige.400">
+                          Logout
                         </MenuItem>
                       </MenuGroup>
                     : 
-                      <LoginButton/>
+                    <MenuItem icon={<BiLogIn size={20} />} onClick={() => handleLoginAttempt()} color="beige.400">
+                      Login
+                    </MenuItem>
                     }
                   </MenuList>
                 </Menu>

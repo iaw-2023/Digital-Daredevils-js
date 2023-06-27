@@ -4,11 +4,11 @@ import { ItemCarrito } from "./itemCarrito";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
 import {Image, Flex, Box, Text } from "@chakra-ui/react";
-import { HiOutlineEnvelope } from "react-icons/hi2";
 import "./carrito.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { CardPayment } from '@mercadopago/sdk-react';
 import { MERCADOPAGO_API_ENDPOINT } from '../../ApiConstants';
+import { showFailureMessage } from "../../components/alerts/alerts";
 
 export const Carrito = () => {
   const { productosCarrito, getTotalCarrito, checkout } = useContext(ShopContext);
@@ -17,8 +17,9 @@ export const Carrito = () => {
   const [totalCarrito, setTotalCarrito] = useState(0);
   const [totalCarritoLoading, setTotalCarritoLoading] = useState(true);
   const [showCardPayment, setShowCardPayment] = useState(false);
-
   const { getAccessTokenSilently } = useAuth0();
+
+
   useEffect(() => {
     const fetchTotalCarrito = () => {
       setTotalCarritoLoading(true);
@@ -31,11 +32,10 @@ export const Carrito = () => {
 
   
   const initialization = {
-    amount: 100,
+    amount: totalCarrito,
   };
 
-  const onSubmit = async (formData) => {   
-    setShowCardPayment(false);
+  const onSubmit = async (formData) => { 
     const accessToken = await getAccessTokenSilently();
     return new Promise((resolve, reject) => {
       fetch(MERCADOPAGO_API_ENDPOINT, {
@@ -54,11 +54,17 @@ export const Carrito = () => {
           if (paymentStatus == "approved" ){
             await checkout(accessToken, mercadoPagoPaymentId);
           }
+          else {
+            showFailureMessage('El pago fue rechazado');
+          }
         })
         .catch((error) => {
           // handle error response when trying to create payment
           reject();
-        });
+        })
+        .finally(() =>{
+          setShowCardPayment(false);
+        })
     });
   };
 
@@ -68,7 +74,7 @@ export const Carrito = () => {
   };
 
   const onReady = async () => {
-    
+
   };
 
   const handleCheckout = () => {
