@@ -1,25 +1,17 @@
 "use client";
 
 import React, { useContext, useState, useEffect } from "react";
-import { ShopContext } from "../context/shop-context";
+import { ShopContext } from "../components/context/shop-context";
 import { ItemCarrito } from "./itemCarrito";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
-import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Button, ButtonGroup, Input, Image, Flex, Box, Text, Center } from "@chakra-ui/react";
-import { HiOutlineEnvelope } from "react-icons/hi2";
+import {Image, Flex, Box, Text, Divider } from "@chakra-ui/react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { CardPayment } from '@mercadopago/sdk-react';
+import { MERCADOPAGO_API_ENDPOINT } from '../ApiConstants';
+import { showFailureMessage } from "../components/alerts/alerts";
 import "./carrito.css";
-
-const formatTotalCarrito = (totalCarrito) => {
-  return totalCarrito.toLocaleString(undefined, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
-}
-
-const parteEnteraDe = (totalCarrito) => {
-  return Math.floor(totalCarrito).toLocaleString();
-}
 
 export const Carrito = () => {
   const { productosCarrito, getTotalCarrito, checkout } = useContext(ShopContext);
@@ -27,9 +19,9 @@ export const Carrito = () => {
 
   const [totalCarrito, setTotalCarrito] = useState(0);
   const [totalCarritoLoading, setTotalCarritoLoading] = useState(true);
+  const [showCardPayment, setShowCardPayment] = useState(false);
+  const { isAuthenticated, getAccessTokenSilently, loginWithRedirect } = useAuth0();
 
-  const [showModal, setShowModal] = useState(false);
-  const [inputEmail, setInputEmail] = useState("");
 
   useEffect(() => {
     const fetchTotalCarrito = () => {
@@ -41,8 +33,65 @@ export const Carrito = () => {
     fetchTotalCarrito();
   }, [productosCarrito, getTotalCarrito]);
 
-  const handleInputEmailChange = (event) => {
-    setInputEmail(event.target.value);
+  
+  const initialization = {
+    amount: totalCarrito,
+  };
+
+  const onSubmit = async (formData) => { 
+    const accessToken = await getAccessTokenSilently();
+    return new Promise((resolve, reject) => {
+      fetch(MERCADOPAGO_API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then(async (response) => {
+          resolve();
+          const mercadoPagoPaymentId = response.id
+          const paymentStatus = response.status
+          if (paymentStatus == "approved" ){
+            await checkout(accessToken, mercadoPagoPaymentId);
+          }
+          else {
+            showFailureMessage('El pago fue rechazado');
+          }
+        })
+        .catch((error) => {
+          // handle error response when trying to create payment
+          reject();
+        })
+        .finally(() =>{
+          setShowCardPayment(false);
+        })
+    });
+  };
+
+  const onError = async (error) => {
+    // callback called for all Brick error cases
+    console.log(error);
+  };
+
+  const onReady = async () => {
+
+  };
+
+  const checkoutButtonOnClick = () => {
+    if (isAuthenticated){
+      try {
+        setShowCardPayment(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    else {
+      loginWithRedirect();
+    }
+    
   };
 
   if (totalCarritoLoading) {
@@ -54,12 +103,15 @@ export const Carrito = () => {
   } else {
     const formattedTotal = formatTotalCarrito(totalCarrito);
     const fractionalPart = formattedTotal.slice(-2);
-    
+
     return (
       <div className="carrito">
         {productosCarrito && Object.keys(productosCarrito).length !== 0 && totalCarrito > 0 && (
           <>
-            <h2 className="title">Prendas en el carrito</h2>
+            <div className="carrito-container">
+              <Text fontSize={["2xl", "3xl", "4xl"]} className='title'>Prendas en el carrito</Text>
+            </div>
+            <Divider className='title-divider' />
             {Object.values(productosCarrito).map((producto) => {
               if (producto.amount !== 0) {
                 return <ItemCarrito data={producto} key={producto.id} />;
@@ -67,6 +119,7 @@ export const Carrito = () => {
               return null;
             })}
           </>
+          
         )}
 
         {totalCarrito > 0 ? (
@@ -81,8 +134,16 @@ export const Carrito = () => {
             </div>
             <div className="buttons">
               <button onClick={() => router.push("/")}>Seguir comprando</button>
-              <button onClick={() => setShowModal(true)}>Checkout</button>
+              <button onClick={() => checkoutButtonOnClick()}>Checkout</button>
             </div>
+            {showCardPayment && (
+              <CardPayment
+                initialization={initialization}
+                onSubmit={onSubmit}
+                onReady={onReady}
+                onError={onError}
+              />
+            )}
           </div>
         ) : (
           <Flex 
@@ -107,55 +168,21 @@ export const Carrito = () => {
           </Flex>
         )}
 
-        <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">
-          <ModalOverlay />
-          <ModalContent borderRadius="15px" boxShadow="0px 3px 10px rgba(0, 0, 0, 0.2)">
-            <ModalCloseButton />
-            <ModalBody textAlign="center">
-              <Flex direction="column" alignItems="center" justifyContent="center" py="4">
-                <Flex alignItems="center">
-                  <HiOutlineEnvelope style={{ fontSize: "2rem", marginRight: "1rem" }} />
-                  <Text fontWeight="bold" fontFamily="Inter, sans-serif" fontSize="1.5rem">
-                    Ingrese correo para la compra
-                  </Text>
-                </Flex>
-                <Input
-                  type="email"
-                  value={inputEmail}
-                  onChange={handleInputEmailChange}
-                  placeholder="e.g.: riverplate@gmail.com"
-                  size="lg"
-                  mt="4"
-                  focusBorderColor="teal"
-                  boxShadow="0px 3px 10px rgba(0, 0, 0, 0.2)"
-                />
-              </Flex>
-              <Flex justifyContent="center" mt="4">
-                <ButtonGroup gap='4' style={{ padding: "10px 0" }}>
-                  <Button
-                    colorScheme="teal"
-                    variant='outline'
-                    borderRadius="base"
-                    onClick={() => setShowModal(false)}
-                    mr="4"
-                  >
-                    Cerrar
-                  </Button>
-                  <Button
-                    colorScheme="teal"
-                    borderRadius="base"
-                    onClick={() => checkout(inputEmail)}
-                  >
-                    Enviar pedido
-                  </Button>
-                </ButtonGroup>
-              </Flex>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
       </div>
     );
   }
+};
+
+
+const formatTotalCarrito = (totalCarrito) => {
+  return totalCarrito.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+};
+
+const parteEnteraDe = (totalCarrito) => {
+  return Math.floor(totalCarrito).toLocaleString();
 };
 
 export default Carrito;

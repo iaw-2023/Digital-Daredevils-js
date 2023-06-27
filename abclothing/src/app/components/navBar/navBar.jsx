@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
   Box,
+  Button,
   Flex,
   Image,
   Popover,
@@ -16,25 +17,30 @@ import {
   Menu
 } from "@chakra-ui/react";
 import { BsBagHeart, BsBag, BsEmojiSmile, BsPerson } from "react-icons/bs";
+import { BiLogOut, BiLogIn } from "react-icons/bi";
 import HomeMenu from "../menu/Menu";
 import SearchBar from "../searchBar/searchBar";
 import SideBar from "../sideBar/Sidebar";
-import { ShopContext } from "../../context/shop-context";
+import { ShopContext } from "../context/shop-context";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
-import { showFailureMessage } from "../alerts/alerts";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./navBar.css";
 
 export const Navbar = () => {
   const router = useRouter(); 
-  const { productosCarrito, email } = useContext(ShopContext);
+  const { productosCarrito } = useContext(ShopContext);
+  const { user, isAuthenticated, logout, loginWithRedirect } = useAuth0();
 
   const handleMisPedidosAttempt = () =>{
-    if (!email) {
-      showFailureMessage('Se debe realizar un pedido mínimamente para acceder al historial de pedidos <3');
-    }
-    else{
-      router.push("/misPedidos");
-    }
+    router.push("/misPedidos");
+  }
+
+  const handleLogoutAttempt = () =>{
+    logout({logoutParams: {returnTo:'http://localhost:3000/'}})
+  }
+
+  const handleLoginAttempt = () =>{
+    loginWithRedirect()
   }
 
   if (!productosCarrito){
@@ -86,22 +92,43 @@ export const Navbar = () => {
             <Flex gap={{ base: "0.5rem", md: "1.5rem" }} align="center">
               <Popover>
                 <Menu>
-                  <MenuButton>
-                     <BsPerson fontSize={"1.3rem"} />
-                  </MenuButton>
-                  <MenuList>
-                    <MenuGroup title="Perfil" color ="teal.500">
-                      <MenuItem icon={<BsEmojiSmile size={20} />}
-                        style={{ pointerEvents: "none", cursor: "default" }}
-                        color="beige.400"
-                      >
-                        Hola, {email ? email : "crack"}!
-                      </MenuItem>
-                      <MenuItem icon={<BsBagHeart size={20} />} onClick={() => handleMisPedidosAttempt()} color="beige.400">
-                        Mis pedidos
-                      </MenuItem>
-                    </MenuGroup>
-                  </MenuList>
+                  
+
+                    {isAuthenticated ?
+                      <>
+                        <MenuButton>
+                          <BsPerson fontSize={"1.3rem"} />
+                        </MenuButton>
+                        <MenuList>
+                          <MenuGroup title="Perfil" color ="teal.500">
+                            <MenuItem icon={<BsEmojiSmile size={20} />}
+                              style={{ pointerEvents: "none", cursor: "default" }}
+                              color="beige.400"
+                            >
+                              Hola, {user.name}!
+                            </MenuItem>
+                            <MenuItem icon={<BsBagHeart size={20} />} onClick={() => handleMisPedidosAttempt()} color="beige.400">
+                              Mis pedidos
+                            </MenuItem>
+                            <MenuItem icon={<BiLogOut size={20} />} onClick={() => handleLogoutAttempt()} color="beige.400">
+                              Logout
+                            </MenuItem>
+                          </MenuGroup>
+                        </MenuList>
+                      </>
+                    : 
+                    <MenuButton as={Button} 
+                      leftIcon={<BiLogIn size={24} />} 
+                      onClick={() => handleLoginAttempt()} 
+                      colorScheme='beige' 
+                      color="black.400"
+                      fontSize="m"
+                      transition='all 0.2s' _hover={{ bg: 'blue.400' }}
+                    >
+                      Log in
+                    </MenuButton>
+                    }
+                  
                 </Menu>
               </Popover>
     

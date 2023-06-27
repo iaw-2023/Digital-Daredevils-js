@@ -4,10 +4,13 @@ import React, { useEffect, useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Divider } from "@chakra-ui/react";
 import DetallesPedidoList from "../../components/detallesPedido/DetallesPedidoList";
 import { DETALLESPEDIDO } from "../../components/pedidos/PedidosFetch";
+import "./detallesPedidoView.css";
+import { useAuth0 } from "@auth0/auth0-react";
 import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 import "./detallesPedidoView.css";
 
 const DetallesPedido = ( {params} ) => {
+    const { getAccessTokenSilently } = useAuth0();
     const [detallesPedido, setDetallesPedido] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -15,7 +18,9 @@ const DetallesPedido = ( {params} ) => {
         const fetchDetallesPedido = async () => {
             try {
                 setLoading(true);
-                const response = await DETALLESPEDIDO(params.id);
+                const accessToken = await getAccessTokenSilently();
+                const response = await DETALLESPEDIDO(accessToken, params.id);
+
                 setDetallesPedido(response);
             } catch (error) {
                 console.error(error);

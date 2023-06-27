@@ -1,22 +1,24 @@
 "use client";
 
-import React, { useEffect, useState, useContext } from "react";
-import { ShopContext } from "../context/shop-context";
+import React, { useEffect, useState } from "react";
 import { PEDIDOS } from "../components/pedidos/PedidosFetch";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Text, Divider } from "@chakra-ui/react";
 import { Pedido } from "../components/pedidos/Pedido";
 import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
+import { useAuth0 } from "@auth0/auth0-react";
+import "../shop/shop.css";
 
-export const MisPedidos = () => {
-  const { email } = useContext(ShopContext);
+const MisPedidos = () => {
   const [pedidos, setPedidos] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const { getAccessTokenSilently } = useAuth0();
+  
   useEffect(() => {
     const fetchPedidos = async () => {
       try {
         setLoading(true);
-        const response = await PEDIDOS(email);
+        const accessToken = await getAccessTokenSilently();
+        const response = await PEDIDOS(accessToken);
         setPedidos(response.data);
       } catch (error) {
         console.error(error);
@@ -26,7 +28,7 @@ export const MisPedidos = () => {
       }
     };
     fetchPedidos();
-  }, [email]);
+  }, []);
 
   return (
     <Box className="shop" p={4}>
@@ -35,14 +37,15 @@ export const MisPedidos = () => {
       ) : (
         <Box className="shopContent">
           <Box className="shopTitle" mb={4}>
-            <Heading as="h1" size="xl">
+          <Heading as="h1" size={["lg", "xl"]}>
               Mis pedidos
             </Heading>
           </Box>
+          <Divider/>
           <Box className="pedidos">
             {Object.values(pedidos).length === 0 ? (
-              <Text fontSize="xl">
-                No se encontraron pedidos asociados al cliente o el email era incorrecto.
+              <Text fontSize={["md", "lg"]} marginTop={4}>
+                No se encontraron pedidos.
               </Text>
             ) : (
               Object.values(pedidos).map((pedido) => (
@@ -55,3 +58,5 @@ export const MisPedidos = () => {
     </Box>
   );
 };
+
+export default MisPedidos;
