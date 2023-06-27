@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { LISTAPRODUCTOS } from "../../components/productos/ProductosFetch";
-import HomeSlider from "../../components/homeSlider/HomeSlider";
-import ProductosList from "../../components/productos/ProductosList";
+import { LISTAPRODUCTOS } from "../components/productos/ProductosFetch";
+import HomeSlider from "../components/homeSlider/HomeSlider";
+import ProductosList from "../components/productos/ProductosList";
 import "./shop.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
 import { renderPageLinks } from "@/app/components/pagination/pagination";
+import "./shop.css";
 
 export const Shop = () => {
   const [productos, setProductos] = useState(null);

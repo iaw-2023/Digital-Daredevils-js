@@ -1,9 +1,11 @@
+"use client";
+
 import React, { useEffect, useState, useContext } from "react";
-import { ShopContext } from "../../context/shop-context";
-import { PEDIDOS } from "../../components/pedidos/PedidosFetch";
+import { ShopContext } from "../context/shop-context";
+import { PEDIDOS } from "../components/pedidos/PedidosFetch";
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { Pedido } from "../../components/pedidos/Pedido";
-import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
+import { Pedido } from "../components/pedidos/Pedido";
+import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
 
 export const MisPedidos = () => {
   const { email } = useContext(ShopContext);

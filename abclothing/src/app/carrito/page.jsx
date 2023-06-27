@@ -1,7 +1,10 @@
+"use client";
+
 import React, { useContext, useState, useEffect } from "react";
-import { ShopContext } from "../../context/shop-context";
+import { ShopContext } from "../context/shop-context";
 import { ItemCarrito } from "./itemCarrito";
-import { Link, useNavigate } from "react-router-dom";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
 import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Button, ButtonGroup, Input, Image, Flex, Box, Text, Center } from "@chakra-ui/react";
 import { HiOutlineEnvelope } from "react-icons/hi2";
@@ -20,7 +23,7 @@ const parteEnteraDe = (totalCarrito) => {
 
 export const Carrito = () => {
   const { productosCarrito, getTotalCarrito, checkout } = useContext(ShopContext);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const [totalCarrito, setTotalCarrito] = useState(0);
   const [totalCarritoLoading, setTotalCarritoLoading] = useState(true);
@@ -77,7 +80,7 @@ export const Carrito = () => {
               </h2>
             </div>
             <div className="buttons">
-              <button onClick={() => navigate("/")}>Seguir comprando</button>
+              <button onClick={() => router.push("/")}>Seguir comprando</button>
               <button onClick={() => setShowModal(true)}>Checkout</button>
             </div>
           </div>
@@ -98,7 +101,7 @@ export const Carrito = () => {
                   Tu carrito está <Box as="span" color="#da4352" className="highlight">vacío!</Box>
                 </Text>
                 <Text fontSize={['xs','sd','md', 'lg']} mb={2}>Añade items al carrito antes de proceder al checkout.</Text>
-                <Link to="/" className="shop-button" >Volver al shop</Link>
+                <Link href="/" className="shop-button" >Volver al shop</Link>
               </Flex>
             </Box>
           </Flex>

@@ -1,8 +1,10 @@
+"use client";
+
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { CATEGORIAS } from "../categorias/CategoriasFetch";
-import CategoriasList from "../categorias/CategoriasList";
+import Link from 'next/link';
+import { CATEGORIAS } from "../../categorias/CategoriasFetch";
+import CategoriasList from "../../categorias/CategoriasList";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import "./Menu.css"
 
@@ -28,7 +30,7 @@ const HomeMenu = () => {
   }, []);
 
   if (loading){
-    <LoadingSpinner/>
+    return <LoadingSpinner/>
   }
   else{
     return (
@@ -49,7 +51,7 @@ const HomeMenu = () => {
           _hover={{ color: "#0099ff" }}
           fontSize="xl"
         >
-          <Link to="/contacto">Contacto</Link>
+          <Link href="/contacto">Contacto</Link>
         </Flex>
         
         <Flex

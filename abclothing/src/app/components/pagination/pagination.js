@@ -1,3 +1,5 @@
+"use client";
+
 export const renderPageLinks = (currentPage, lastPage, handlePageClick) => {
   const pageLinks = [];
   const pageRange = 2;

@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState, useEffect,useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from 'next/navigation';
 import {
   DrawerCloseButton,
   Button,
@@ -16,8 +18,8 @@ import {
   MenuItem,
   useDisclosure
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { CATEGORIAS } from "../categorias/CategoriasFetch";
+import Link from 'next/link';
+import { CATEGORIAS } from "../../categorias/CategoriasFetch";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsBag, BsCart3,BsTelephone } from "react-icons/bs";
 import { BiPurchaseTagAlt } from "react-icons/bi";
@@ -32,7 +34,7 @@ function SideBar() {
   const [categorias, setCategorias] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const navigate = useNavigate(); 
+  const router = useRouter(); 
   const { email } = useContext(ShopContext);
 
   useEffect(() => {
@@ -57,7 +59,7 @@ function SideBar() {
       showFailureMessage('Se debe realizar un pedido mínimamente para acceder al historial de pedidos <3');
     }
     else{
-      navigate("/misPedidos");
+      router.push("/misPedidos");
       onClose();
     }
 
@@ -98,7 +100,7 @@ function SideBar() {
             >
               <Button
                 as={Link}
-                to="/"
+                href="/"
                 variant="ghost"
                 textAlign="center"
                 fontSize="1.5rem"
@@ -126,7 +128,7 @@ function SideBar() {
                     Object.values(categorias).map((categoria) => (
                       <MenuItem key={categoria.id}>
                         <Link
-                          to={`/categorias/${categoria.id}/${categoria.nombre}`}
+                          href={`/categorias/${categoria.id}/${categoria.nombre}`}
                           className="sidebar-categoria-link"
                           onClick={onClose}
                         >
@@ -139,7 +141,7 @@ function SideBar() {
 
               <Button
                 as={Link}
-                to="/carrito"
+                href="/carrito"
                 variant="ghost"
                 textAlign="center"
                 fontSize="1.5rem"
@@ -151,7 +153,7 @@ function SideBar() {
               </Button>
               <Button
                 as={Link}
-                to="/contacto"
+                href="/contacto"
                 variant="ghost"
                 textAlign="center"
                 fontSize="1.5rem"

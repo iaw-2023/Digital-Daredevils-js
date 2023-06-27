@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import {
   Box,
   Flex,
@@ -24,7 +25,7 @@ import { showFailureMessage } from "../alerts/alerts";
 import "./navBar.css";
 
 export const Navbar = () => {
-  const navigate = useNavigate(); 
+  const router = useRouter(); 
   const { productosCarrito, email } = useContext(ShopContext);
 
   const handleMisPedidosAttempt = () =>{
@@ -32,7 +33,7 @@ export const Navbar = () => {
       showFailureMessage('Se debe realizar un pedido mínimamente para acceder al historial de pedidos <3');
     }
     else{
-      navigate("/misPedidos");
+      router.push("/misPedidos");
     }
   }
 
@@ -56,7 +57,7 @@ export const Navbar = () => {
             <Box display={{ lg: "none" }}>
               <SideBar />
             </Box>
-            <Link to="/">
+            <Link href="/">
               <Box className="logo">
                 <Image
                   src="/abLogo.png"
@@ -104,7 +105,7 @@ export const Navbar = () => {
                 </Menu>
               </Popover>
     
-              <Link to="/carrito">
+              <Link href="/carrito">
                 <Flex flexDir={"column"} align={"center"} pos="relative">
                   <Text>
                     <BsBag fontSize={"1.3rem"} />

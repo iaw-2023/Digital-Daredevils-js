@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext } from "react";
-import { ShopContext } from "../../context/shop-context";
+import { ShopContext } from "../context/shop-context";
 import Image from 'next/image';
 
 export const ItemCarrito = (props) => {

@@ -1,15 +1,17 @@
+"use client";
+
 import React, { useState } from "react";
 import { Box, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from 'next/navigation';
 
 function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleSearch = () => {
     if (searchValue.trim() !== "") {
-      navigate(`/shopSearch?query=${searchValue}`);
+      router.push(`/search/${searchValue}`);
     }
   };
 
