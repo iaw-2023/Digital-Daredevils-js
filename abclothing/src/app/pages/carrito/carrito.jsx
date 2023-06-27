@@ -17,7 +17,7 @@ export const Carrito = () => {
   const [totalCarrito, setTotalCarrito] = useState(0);
   const [totalCarritoLoading, setTotalCarritoLoading] = useState(true);
   const [showCardPayment, setShowCardPayment] = useState(false);
-  const { getAccessTokenSilently } = useAuth0();
+  const { isAuthenticated, getAccessTokenSilently, loginWithRedirect } = useAuth0();
 
 
   useEffect(() => {
@@ -77,12 +77,18 @@ export const Carrito = () => {
 
   };
 
-  const handleCheckout = () => {
-    try {
-      setShowCardPayment(true);
-    } catch (error) {
-      console.log(error);
+  const checkoutButtonOnClick = () => {
+    if (isAuthenticated){
+      try {
+        setShowCardPayment(true);
+      } catch (error) {
+        console.log(error);
+      }
     }
+    else {
+      loginWithRedirect();
+    }
+    
   };
 
   if (totalCarritoLoading) {
@@ -121,7 +127,7 @@ export const Carrito = () => {
             </div>
             <div className="buttons">
               <button onClick={() => navigate("/")}>Seguir comprando</button>
-              <button onClick={() => handleCheckout()}>Checkout</button>
+              <button onClick={() => checkoutButtonOnClick()}>Checkout</button>
             </div>
             {showCardPayment && (
               <CardPayment
