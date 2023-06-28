@@ -20,12 +20,14 @@ const ShopContextProvider = dynamic(() => import('./components/context/shop-cont
 
 export default function ClientSideLayout({ children , AUTH0_DOMAIN, AUTH0_CLIENT_ID, MERCADOPAGO_ACCESS_TOKEN}) {
     initMercadoPago(MERCADOPAGO_ACCESS_TOKEN); 
+    const redirectUri = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+
     return (
         <html lang="en">
             <body className={inter.className}>
                 <Auth0Provider domain={AUTH0_DOMAIN} clientId={AUTH0_CLIENT_ID}
                     authorizationParams={{
-                        redirect_uri: "http://localhost:3000",
+                        redirect_uri: redirectUri,
                         audience:"https://digital-daredevils-laravel-digitaldaredevils.vercel.app/restApi/",
                         scope:"openid profile email"
                     }}  
