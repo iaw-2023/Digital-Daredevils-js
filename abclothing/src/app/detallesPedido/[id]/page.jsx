@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 import { Table, Thead, Tbody, Tr, Th, Divider } from "@chakra-ui/react";
 import DetallesPedidoList from "../../components/detallesPedido/DetallesPedidoList";
 import { DETALLESPEDIDO } from "../../components/pedidos/PedidosFetch";
@@ -8,11 +9,16 @@ import "./detallesPedidoView.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 import "./detallesPedidoView.css";
+import { redirectIfNotAuthenticated } from "@/app/components/login/authenticationHelper";
 
 const DetallesPedido = ( {params} ) => {
-    const { getAccessTokenSilently } = useAuth0();
+    const { getAccessTokenSilently, isAuthenticated } = useAuth0();
     const [detallesPedido, setDetallesPedido] = useState(null);
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
+
+    redirectIfNotAuthenticated(isAuthenticated, router);
+    if (!isAuthenticated) return;
 
     useEffect(() => {
         const fetchDetallesPedido = async () => {
