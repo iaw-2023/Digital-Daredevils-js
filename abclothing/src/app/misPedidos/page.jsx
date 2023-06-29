@@ -6,7 +6,7 @@ import { Box, Heading, Text, Divider } from "@chakra-ui/react";
 import { Pedido } from "../components/pedidos/Pedido";
 import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
 import { useAuth0 } from "@auth0/auth0-react";
-import "../shop/shop.css";
+import "../components/shop/shop.css";
 
 const MisPedidos = () => {
   const [pedidos, setPedidos] = useState(null);

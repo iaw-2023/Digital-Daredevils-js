@@ -5,7 +5,7 @@ import { PRODUCTOSBYQUERY } from "../../components/productos/ProductosFetch";
 import ProductosList from "../../components/productos/ProductosList";
 import { renderPageLinks } from "@/app/components/pagination/pagination";
 import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
-import "../../shop/shop.css";
+import "../../components/shop/shop.css";
 
 const ShopSearch = ( {params} ) => {
   const [productos, setProductos] = useState(null);

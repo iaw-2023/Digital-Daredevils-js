@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { LISTAPRODUCTOS } from "../components/productos/ProductosFetch";
-import HomeSlider from "../components/homeSlider/HomeSlider";
-import ProductosList from "../components/productos/ProductosList";
+import { LISTAPRODUCTOS } from "../productos/ProductosFetch";
+import HomeSlider from "../homeSlider/HomeSlider";
+import ProductosList from "../productos/ProductosList";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {

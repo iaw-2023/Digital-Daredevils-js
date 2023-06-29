@@ -1,8 +1,7 @@
 "use client";
 
 import React from 'react';
-import Head from 'next/head';
-import { Shop } from './shop/shop';
+import { Shop } from './components/shop/shop';
 export default function Home() {
   return (
     <React.StrictMode>

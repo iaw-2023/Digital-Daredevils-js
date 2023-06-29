@@ -5,7 +5,7 @@ import ProductosList from "../../../components/productos/ProductosList";
 import { PRODUCTOSBYCATEGORIA } from "../../CategoriasFetch";
 import LoadingSpinner from "../../../components/loadingSpinner/LoadingSpinner";
 import { renderPageLinks } from "@/app/components/pagination/pagination";
-import "../../../shop/shop.css";
+import "../../../components/shop/shop.css";
 
 const ShopCategoria = ({ params }) => {
   const [productos, setProductos] = useState(null);
