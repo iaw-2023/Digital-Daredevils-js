@@ -20,7 +20,7 @@ const ShopSearch = ( {params} ) => {
     const fetchProductos = async () => {
       try {
         setLoading(true);
-        const response = await PRODUCTOSBYQUERY(searchQuery);
+        const response = await PRODUCTOSBYQUERY(searchQuery, currentPage);
         setProductos(response.data);
         setLastPage(response.last_page);
       } catch (error) {

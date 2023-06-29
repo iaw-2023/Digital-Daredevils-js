@@ -18,7 +18,7 @@ const ShopCategoria = ({ params }) => {
     const fetchProductos = async () => {
       try {
         setLoading(true);
-        const response = await PRODUCTOSBYCATEGORIA(params.id);
+        const response = await PRODUCTOSBYCATEGORIA(params.id, currentPage);
         setProductos(response.data);
         setLastPage(response.last_page);
       } catch (error) {

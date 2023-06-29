@@ -7,7 +7,7 @@ export async function CATEGORIAS() {
   return response.json();
 }
 
-export async function PRODUCTOSBYCATEGORIA(idCategoria) {
-  const response = await fetch(CATEGORIAS_API_ENDPOINT + idCategoria + "/" + "productos");
+export async function PRODUCTOSBYCATEGORIA(idCategoria, page) {
+  const response = await fetch(CATEGORIAS_API_ENDPOINT + idCategoria + "/productos" + "?page=" + page);
   return response.json();
 }

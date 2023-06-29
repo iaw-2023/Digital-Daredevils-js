@@ -12,7 +12,7 @@ export async function PRODUCTOBYID(id) {
   return response.json();
 }
 
-export async function PRODUCTOSBYQUERY(query) {
-  const response = await fetch(PRODUCTOSQUERY_API_ENDPOINT + "/" + query);
+export async function PRODUCTOSBYQUERY(query, page) {
+  const response = await fetch(PRODUCTOSQUERY_API_ENDPOINT + "/" + query + "?page=" + page);
   return response.json();
 }
