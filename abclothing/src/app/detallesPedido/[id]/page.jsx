@@ -17,7 +17,6 @@ const DetallesPedido = ( {params} ) => {
 
     if (!isAuthenticated) {
         loginWithRedirect(); 
-        return;
       }
 
     useEffect(() => {
@@ -36,7 +35,7 @@ const DetallesPedido = ( {params} ) => {
         };
 
         fetchDetallesPedido();
-    }, [params.id]);
+    }, [params.id, getAccessTokenSilently]);
 
     let total = 0;
     if (!loading){

@@ -14,8 +14,7 @@ const MisPedidos = () => {
   const { isAuthenticated, getAccessTokenSilently, loginWithRedirect } = useAuth0();
   
   if (!isAuthenticated) {
-    loginWithRedirect(); 
-    return;
+    loginWithRedirect();
   }
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const MisPedidos = () => {
       }
     };
     fetchPedidos();
-  }, []);
+  }, [getAccessTokenSilently]);
 
   return (
     <Box className="shop" p={4}>
