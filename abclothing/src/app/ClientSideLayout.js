@@ -24,6 +24,7 @@ export default function ClientSideLayout({ children , AUTH0_DOMAIN, AUTH0_CLIENT
 
     return (
         <html lang="en">
+
             <body className={inter.className}>
                 <Auth0Provider domain={AUTH0_DOMAIN} clientId={AUTH0_CLIENT_ID}
                     authorizationParams={{

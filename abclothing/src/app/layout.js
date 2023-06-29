@@ -6,6 +6,7 @@ export const metadata = {
   title: 'AB Clothing Store',
   description: 'made by Digital Daredevils.',
   icon: <link rel="icon" href="/favicon.ico" />,
+  manifest:<link rel="manifest" href="/manifest.json" />,
 }
 
 export default function RootLayout({ children }) {
