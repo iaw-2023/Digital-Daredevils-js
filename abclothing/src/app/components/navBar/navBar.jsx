@@ -36,7 +36,7 @@ export const Navbar = () => {
   }
 
   const handleLogoutAttempt = () =>{
-    logout({logoutParams: {returnTo:'http://localhost:3000/'}})
+    logout()
   }
 
   const handleLoginAttempt = () =>{

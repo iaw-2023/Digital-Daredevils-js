@@ -20,7 +20,7 @@ const ShopContextProvider = dynamic(() => import('./components/context/shop-cont
 
 export default function ClientSideLayout({ children , AUTH0_DOMAIN, AUTH0_CLIENT_ID, MERCADOPAGO_ACCESS_TOKEN}) {
     initMercadoPago(MERCADOPAGO_ACCESS_TOKEN); 
-    const redirectUri = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+    const redirectUri = typeof window !== 'undefined' ? window.location.origin : 'https://digital-daredevils-js.vercel.app/';
 
     return (
         <html lang="en">

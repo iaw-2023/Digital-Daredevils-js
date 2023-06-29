@@ -1,6 +1,6 @@
 import React from 'react';
 import './globals.css'
-import ClientSideLayout from './ClientSideLayout';
+import ClientSideLayout from './clientSideLayout';
 
 export const metadata = {
   title: 'AB Clothing Store',

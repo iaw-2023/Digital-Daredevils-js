@@ -9,16 +9,16 @@ import "./detallesPedidoView.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 import "./detallesPedidoView.css";
-import { redirectIfNotAuthenticated } from "@/app/components/login/authenticationHelper";
 
 const DetallesPedido = ( {params} ) => {
-    const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+    const { getAccessTokenSilently, isAuthenticated, loginWithRedirect } = useAuth0();
     const [detallesPedido, setDetallesPedido] = useState(null);
     const [loading, setLoading] = useState(true);
-    const router = useRouter();
 
-    redirectIfNotAuthenticated(isAuthenticated, router);
-    if (!isAuthenticated) return;
+    if (!isAuthenticated) {
+        loginWithRedirect(); 
+        return;
+      }
 
     useEffect(() => {
         const fetchDetallesPedido = async () => {
@@ -26,7 +26,6 @@ const DetallesPedido = ( {params} ) => {
                 setLoading(true);
                 const accessToken = await getAccessTokenSilently();
                 const response = await DETALLESPEDIDO(accessToken, params.id);
-
                 setDetallesPedido(response);
             } catch (error) {
                 console.error(error);
@@ -41,6 +40,11 @@ const DetallesPedido = ( {params} ) => {
 
     let total = 0;
     if (!loading){
+        if (detallesPedido.status == 401){
+            showFailureMessage('Acceso no autorizado, por favor, logueése.');
+            return;
+        }
+
         Object.values(detallesPedido).forEach((detallePedido) => {
             total += detallePedido.precio * detallePedido.cantidad;
         });

@@ -38,6 +38,10 @@ export const Carrito = () => {
     amount: totalCarrito,
   };
 
+  const closePopup = () => {
+    setShowCardPayment(false);
+  };
+
   const onSubmit = async (formData) => { 
     const accessToken = await getAccessTokenSilently();
     return new Promise((resolve, reject) => {
@@ -62,7 +66,6 @@ export const Carrito = () => {
           }
         })
         .catch((error) => {
-          // handle error response when trying to create payment
           reject();
         })
         .finally(() =>{
@@ -72,7 +75,6 @@ export const Carrito = () => {
   };
 
   const onError = async (error) => {
-    // callback called for all Brick error cases
     console.log(error);
   };
 
@@ -137,12 +139,16 @@ export const Carrito = () => {
               <button onClick={() => checkoutButtonOnClick()}>Checkout</button>
             </div>
             {showCardPayment && (
-              <CardPayment
-                initialization={initialization}
-                onSubmit={onSubmit}
-                onReady={onReady}
-                onError={onError}
-              />
+              <div className="popup-overlay" onClick={closePopup}>
+                <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+                  <CardPayment
+                    initialization={initialization}
+                    onSubmit={onSubmit}
+                    onReady={onReady}
+                    onError={onError}
+                  />
+                </div>
+              </div>
             )}
           </div>
         ) : (
