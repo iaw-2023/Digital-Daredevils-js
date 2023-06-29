@@ -36,7 +36,7 @@ export const Navbar = () => {
   }
 
   const handleLogoutAttempt = () =>{
-    logout()
+    logout({logoutParams: {returnTo:'https://digital-daredevils-js.vercel.app/'}})
   }
 
   const handleLoginAttempt = () =>{
