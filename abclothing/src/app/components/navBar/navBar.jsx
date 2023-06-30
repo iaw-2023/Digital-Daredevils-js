@@ -14,7 +14,8 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Menu
+  Menu, 
+  Tooltip,
 } from "@chakra-ui/react";
 import { BsBagHeart, BsBag, BsEmojiSmile, BsPerson } from "react-icons/bs";
 import { BiLogOut, BiLogIn } from "react-icons/bi";
@@ -28,7 +29,7 @@ import "./navBar.css";
 
 export const Navbar = () => {
   const router = useRouter(); 
-  const { productosCarrito } = useContext(ShopContext);
+  const { productosCarrito, dolarBlue } = useContext(ShopContext);
   const { user, isAuthenticated, logout, loginWithRedirect } = useAuth0();
 
   const handleMisPedidosAttempt = () =>{
@@ -144,6 +145,13 @@ export const Navbar = () => {
                   </Box>
                 </Flex>
               </Link>
+              <Box ml="1rem">
+                <Tooltip label={`Cotización dólar actual $ ${dolarBlue}`} placement="bottom">
+                  <Text fontSize="md" fontWeight="medium" isTruncated>
+                    u$s
+                  </Text>
+                </Tooltip>
+              </Box>
             </Flex>
           </Flex>
           <Box padding={"8px"} display={{ lg: "none" }} width="90%" margin="auto">

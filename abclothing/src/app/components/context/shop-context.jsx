@@ -1,9 +1,10 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { GENERARPEDIDO } from "../pedidos/PedidosFetch";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import { FETCH_DOLAR_API } from "../dolarApi/DolarFetch";
 import { showSuccessMessage, showFailureMessage } from "../alerts/alerts";
 
 export const ShopContext = createContext(null);
@@ -12,6 +13,21 @@ export const ShopContextProvider = (props) => {
   const router = useRouter();
   const [productosCarrito, setProductosCarrito] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const [dolarBlue, setDolarBlueValue] = useState(1);
+ 
+  useEffect(() => {
+    const fetchDolarBlue = async () => {
+      try {
+        const fetchDolarApi = await FETCH_DOLAR_API();
+        setDolarBlueValue(fetchDolarApi.blue.value_avg);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchDolarBlue();
+  }, []);
 
   const getTotalCarrito = () => {
     let cantidadTotal = 0;
@@ -87,6 +103,7 @@ export const ShopContextProvider = (props) => {
     quitarDelCarrito,
     getTotalCarrito,
     checkout,
+    dolarBlue,
   };
 
   return (
