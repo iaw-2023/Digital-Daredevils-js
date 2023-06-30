@@ -45,7 +45,7 @@ const ShopSearch = ( {params} ) => {
       ) : (
         <div className="shopContent">
           <div className="shopTitle">
-            <h1>Resultados para &apos;{searchQuery}&apos;</h1>
+            <h1>Resultados para &apos;{decodeURI(searchQuery)}&apos;</h1>
           </div>
           <div className="productos">
             <ProductosList productos={productos} />

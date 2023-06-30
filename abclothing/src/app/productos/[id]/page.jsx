@@ -8,7 +8,7 @@ import LoadingSpinner from "@/app/components/loadingSpinner/LoadingSpinner";
 import "./productDetails.css";
 
 const ProductDetails = ({ params }) => {
-  const { agregarAlCarrito, productosCarrito } = useContext(ShopContext);
+  const { agregarAlCarrito, productosCarrito, dolarBlue } = useContext(ShopContext);
   
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -45,6 +45,7 @@ const ProductDetails = ({ params }) => {
     }
     else {
       const { modelo, marca, imagen_ruta, precio, talle } = producto;
+      const precioEnDolares = (precio / dolarBlue).toFixed(2);
       return (
         <div className="product-container">
           <div className="item">
@@ -62,7 +63,12 @@ const ProductDetails = ({ params }) => {
               <div className="product-details">
                 <p><b>Marca:</b> {marca}</p>
                 <p><b>Talle:</b> {talle}</p>
-                <p><b>Precio:</b> ${precio}</p>
+                <p>
+                  <b>Precio:</b> ${precio} 
+                  <span style={{ color: "rgba(28, 84, 45, 0.8)", marginLeft: "10px"}}>
+                    <b>(u$s {precioEnDolares})</b>
+                  </span>
+                </p> 
       
                 <button className="agregarAlCarritoBttn" onClick={() => agregarAlCarrito(producto)}>
                   Agregar al carrito {cantidadItemsCarrito > 0 && <> ({cantidadItemsCarrito})</>}
