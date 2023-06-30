@@ -1,0 +1,134 @@
+.shopTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 50px;
+  color: black;
+}
+
+.loading-shop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  color: black;
+}
+
+.productos {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+@media (max-width: 1320px) {
+  .productos {
+    justify-content: center;
+  }
+}
+
+.producto {
+  width: 320px;
+  height: auto;
+  margin: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background: white;
+}
+
+@media (max-width: 600px) {
+  .productos {
+    padding: 10px;
+  }
+
+  .producto {
+    margin: 10px;
+  }
+}
+
+.producto img {
+  width: 100%;
+  height: auto;
+}
+
+.producto .description {
+  margin-left: 25px;
+  text-align: flex-start;
+  font-size: 15px;
+}
+
+.producto .description p {
+  margin: 4px 0;
+}  
+
+.producto:hover {
+  transform: scale(1.05);
+  transition: 0.2s ease-in;
+  cursor: pointer;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+}
+
+.agregarAlCarritoBttn {
+  background-color: #b0c7c8;
+  font-size: 13px;
+  min-width: 100px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+.agregarAlCarritoBttn:hover {
+  background-color: rgb(156, 156, 156);
+  color: white;
+  cursor: pointer;
+}
+
+.agregarAlCarritoBttn:active {
+  transform: scale(1.05);
+  background-color: rgb(138, 138, 138);
+}
+
+.product-link {
+  color:rgb(70, 70, 70);
+  text-decoration: none;
+}
+
+.pageLinks {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pageLinks a {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-right: 4px;
+  color: #333;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.pageLinks a.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.shop {
+  border-top: 1px solid #ccc;
+}
+
+.sliderContainer {
+  margin-bottom: 20px;
+}

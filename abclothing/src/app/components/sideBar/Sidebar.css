@@ -1,0 +1,21 @@
+.sidebar-categorias {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-categoria-link {
+  font-size: smaller;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.5s ease;
+  margin-bottom: 5px;
+  font-size: 13px;
+  line-height: 23px;
+  white-space: nowrap;
+}
+
+.sidebar-categoria-link:hover {
+  color: #f89f17; /* Change the color to orange (#f89f17) */
+  font-size: 14px; /* Increase the font size to 14px */
+}
